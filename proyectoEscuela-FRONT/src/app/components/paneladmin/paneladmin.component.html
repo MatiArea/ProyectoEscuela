@@ -1,0 +1,46 @@
+<app-barrainferior></app-barrainferior>
+<div class="container-fluid">
+    <div class="row">
+        <div class="barra-lateral col-2">
+            <div class="logo">
+
+                <h2><i class="fas fa-edit"></i>Panel</h2>
+            </div>
+            <nav class="menu d-flex d-sm-block justify-content-center flex-wrap">
+
+
+
+                <li><i class="fas fa-home"></i><span>Inicio</span></li>
+
+                <li (click)=" mostrar1 = !mostrar1 "><i class="fas fa-user"></i><span>Usuarios</span><i class="fas fa-angle-down derecha "></i></li>
+                <ul>
+                    <li routerLink="/altausuario" *ngIf="mostrar1"><i class="fas fa-user"></i><span>Alta Usuario</span></li>
+                    <li *ngIf="mostrar1"><i class="fas fa-user"></i><span>Modificar Usuario</span></li>
+                    <li *ngIf="mostrar1"><i class="fas fa-user"></i><span>Baja Usuario</span></li>
+                    <li *ngIf="mostrar1"><i class="fas fa-user"></i><span>Lista Usuarios</span></li>
+                </ul>
+
+                <li><i class="fas fa-clipboard-list"></i><span>Asistencia</span></li>
+
+                <li (click)=" mostrar2 = !mostrar2 "><i class="fas fa-comment"></i><span>Notificaciones</span><i class="fas fa-angle-down derecha"></i></li>
+                <ul>
+                    <li *ngIf="mostrar2"><i class="fas fa-comment"></i><span>Enviar Notificacion</span></li>
+                </ul>
+
+                <li><i class="fas fa-wrench"></i><span>Configuracion</span></li>
+
+                <li routerLink="/login"><i class=" fas fa-sign-out-alt "></i><span>Cerrar Sesión</span></li>
+
+
+
+
+            </nav>
+        </div>
+
+        <div class="margin-auto col-9 principal">
+
+        </div>
+
+
+    </div>
+</div>

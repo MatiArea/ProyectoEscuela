@@ -1,0 +1,63 @@
+.barra-lateral {
+    background: #262a34;
+    color: #fff;
+    min-width: 300px;
+    min-height: 100vh;
+    padding: 0;
+}
+
+.barra-lateral li {
+    color: #fff;
+}
+
+.barra-lateral .logo {
+    background: #0275db;
+    margin-bottom: 2px;
+}
+
+.barra-lateral .logo h2 {
+    font-size: 30px;
+    padding: 20px;
+    text-align: center;
+    font-weight: 300;
+    margin: 0;
+}
+
+.barra-lateral .menu li {
+    display: block;
+    padding: 20px;
+    font-weight: 500;
+    border-bottom: 1 px solid rgba(255, 255, .1);
+}
+
+.barra-lateral .menu li:hover {
+    background: #35ae6b;
+    text-decoration: none;
+}
+
+.barra-lateral .menu li i {
+    margin-right: 20px;
+}
+
+li {
+    text-decoration: none;
+    list-style: none;
+}
+
+ul {
+    text-decoration: none;
+    list-style: none;
+    margin: 0px;
+}
+
+.derecha {
+    float: right;
+}
+
+.barra-lateral span {
+    cursor: default;
+}
+
+.principal {
+    margin: auto;
+}
