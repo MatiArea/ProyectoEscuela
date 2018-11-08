@@ -1,0 +1,14 @@
+.barrainferior {
+    background: #262a34;
+    height: 50px;
+    color: #fff;
+    border-bottom: 2px solid #fff;
+}
+
+.navbar {
+    font-size: 25px;
+}
+
+.barrainferior i {
+    cursor: pointer;
+}

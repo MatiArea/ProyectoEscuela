@@ -54,8 +54,8 @@ ul {
     float: right;
 }
 
-.barra-lateral span {
-    cursor: default;
+.barra-lateral li {
+    cursor: pointer;
 }
 
 .principal {

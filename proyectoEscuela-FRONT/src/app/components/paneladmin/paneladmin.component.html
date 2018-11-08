@@ -14,7 +14,7 @@
 
                 <li (click)=" mostrar1 = !mostrar1 "><i class="fas fa-user"></i><span>Usuarios</span><i class="fas fa-angle-down derecha "></i></li>
                 <ul>
-                    <li routerLink="/altausuario" *ngIf="mostrar1"><i class="fas fa-user"></i><span>Alta Usuario</span></li>
+                    <li routerLink="/paneladmin/altausuario" *ngIf="mostrar1"><i class="fas fa-user"></i><span>Alta Usuario</span></li>
                     <li *ngIf="mostrar1"><i class="fas fa-user"></i><span>Modificar Usuario</span></li>
                     <li *ngIf="mostrar1"><i class="fas fa-user"></i><span>Baja Usuario</span></li>
                     <li *ngIf="mostrar1"><i class="fas fa-user"></i><span>Lista Usuarios</span></li>
@@ -38,7 +38,7 @@
         </div>
 
         <div class="margin-auto col-9 principal">
-
+            <router-outlet></router-outlet>
         </div>
 
 

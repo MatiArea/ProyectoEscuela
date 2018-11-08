@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-
+import { HttpClientModule } from '@angular/common/http';
 //rutas
 
 import { APP_ROUTING } from './app.routes';
@@ -14,6 +14,8 @@ import { LoginComponent } from './components/login/login.component';
 import { PaneladminComponent } from './components/paneladmin/paneladmin.component';
 import { AltausuarioComponent } from './components/usuario/altausuario/altausuario.component';
 import { BarrainferiorComponent } from './components/barrainferior/barrainferior.component';
+import { PruebaComponent } from './components/prueba/prueba.component';
+
 
 
 @NgModule({
@@ -23,12 +25,14 @@ import { BarrainferiorComponent } from './components/barrainferior/barrainferior
     PaneladminComponent,
     AltausuarioComponent,
     BarrainferiorComponent,
+    PruebaComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     AppRoutingModule,
-    APP_ROUTING
+    APP_ROUTING,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
