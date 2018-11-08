@@ -15,6 +15,7 @@ import { PaneladminComponent } from './components/paneladmin/paneladmin.componen
 import { AltausuarioComponent } from './components/usuario/altausuario/altausuario.component';
 import { BarrainferiorComponent } from './components/barrainferior/barrainferior.component';
 import { PruebaComponent } from './components/prueba/prueba.component';
+import { EnviarnotificacionComponent } from './components/usuario/enviarnotificacion/enviarnotificacion.component';
 
 
 
@@ -26,6 +27,7 @@ import { PruebaComponent } from './components/prueba/prueba.component';
     AltausuarioComponent,
     BarrainferiorComponent,
     PruebaComponent,
+    EnviarnotificacionComponent,
   ],
   imports: [
     BrowserModule,
