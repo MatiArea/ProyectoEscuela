@@ -16,7 +16,8 @@ import { AltausuarioComponent } from './components/usuario/altausuario/altausuar
 import { BarrainferiorComponent } from './components/barrainferior/barrainferior.component';
 import { PruebaComponent } from './components/prueba/prueba.component';
 import { EnviarnotificacionComponent } from './components/usuario/enviarnotificacion/enviarnotificacion.component';
-
+import { LoginGuard } from '../app/guards/login.guard';
+import { UnloginGuard } from '../app/guards/unlogin.guard';
 
 
 @NgModule({
@@ -36,7 +37,7 @@ import { EnviarnotificacionComponent } from './components/usuario/enviarnotifica
     APP_ROUTING,
     HttpClientModule
   ],
-  providers: [],
+  providers: [LoginGuard,UnloginGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

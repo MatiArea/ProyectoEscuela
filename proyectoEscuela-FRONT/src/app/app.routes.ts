@@ -4,16 +4,18 @@ import { PaneladminComponent } from './components/paneladmin/paneladmin.componen
 import { AltausuarioComponent } from './components/usuario/altausuario/altausuario.component';
 import { PruebaComponent } from './components/prueba/prueba.component';
 import { EnviarnotificacionComponent } from './components/usuario/enviarnotificacion/enviarnotificacion.component';
+import { LoginGuard } from './guards/login.guard';
+import { UnloginGuard } from './guards/unlogin.guard';
 
 const APP_ROUTES: Routes = [
-    { path: 'login', component: LoginComponent},
-    { path: 'paneladmin', component: PaneladminComponent,
+    { path: 'login', component: LoginComponent,canActivate:[UnloginGuard]},
+    { path: 'paneladmin', component: PaneladminComponent,canActivate:[LoginGuard],
         children: [
             { path: 'altausuario', component: AltausuarioComponent},
             { path: 'enviarnotificacion', component: EnviarnotificacionComponent}
         ]
     },
-    { path: 'prueba', component: PruebaComponent},
+    { path: 'prueba', component: PruebaComponent,},
     { path: '', component: LoginComponent}
 
 ];

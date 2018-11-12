@@ -9,11 +9,13 @@ export class PaneladminComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
-  }
 
   mostrar1= false;
   mostrar2= false;
+
+  ngOnInit() {
+  }
+
 
 
 }

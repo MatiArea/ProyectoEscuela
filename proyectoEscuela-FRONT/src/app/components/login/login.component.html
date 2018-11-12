@@ -4,13 +4,14 @@
             <div class="card card-login">
                 <div class="card-body">
                     <h5 class="card-title text-center"><i class="fas fa-school mr-3"></i>Sistema Escuela</h5>
-                    <form>
+
+                    <form (ngSubmit)="login(formulario)" #formulario="ngForm">
                         <div class="form-label-group">
                             <div class="input-group mb-2">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text"><i class="fas fa-envelope"></i></div>
                                 </div>
-                                <input type="email" class="form-control" id="inlineFormInputGroup" placeholder="Correo Electronico">
+                                <input class="form-control" type="email" placeholder="Correo Electronico" name="email" ngModel>
                             </div>
 
                         </div>
@@ -20,14 +21,16 @@
                                 <div class="input-group-prepend">
                                     <div class="input-group-text"><i class="fas fa-key"></i></div>
                                 </div>
-                                <input type="email" class="form-control" id="inlineFormInputGroup" placeholder="Contraseña">
+                                <input class="form-control" type="password" placeholder="Contraseña" name="password" ngModel>
                             </div>
                         </div>
 
 
-                        <button [routerLink]="['/paneladmin']" class="btn btn-lg btn-primary btn-block text-uppercase mt-3" id="ingresar" type="submit">Ingresar</button>
+                        <button class="btn btn-lg btn-primary btn-block text-uppercase mt-3" id="ingresar" type="submit">Ingresar</button>
                         <hr class="my-4">
                     </form>
+
+
                 </div>
             </div>
         </div>
