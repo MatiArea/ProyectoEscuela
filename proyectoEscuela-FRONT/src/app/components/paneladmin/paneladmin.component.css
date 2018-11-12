@@ -61,3 +61,7 @@ ul {
 .principal {
     margin: auto;
 }
+
+.activado {
+    background: #35ae6b;
+}

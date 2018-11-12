@@ -10,24 +10,24 @@
 
 
 
-                <li><i class="fas fa-home"></i><span>Inicio</span></li>
+                <li routerLinkActive="activado"><i class="fas fa-home"></i><span>Inicio</span></li>
 
-                <li (click)=" mostrar1 = !mostrar1 "><i class="fas fa-user"></i><span>Usuarios</span><i class="fas fa-angle-down derecha "></i></li>
+                <li (click)=" mostrar1 = !mostrar1 " routerLinkActive="activado"><i class="fas fa-user"></i><span>Usuarios</span><i class="fas fa-angle-down derecha "></i></li>
                 <ul>
-                    <li routerLink="/paneladmin/altausuario" *ngIf="mostrar1"><i class="fas fa-user"></i><span>Alta Usuario</span></li>
-                    <li *ngIf="mostrar1"><i class="fas fa-user"></i><span>Modificar Usuario</span></li>
-                    <li *ngIf="mostrar1"><i class="fas fa-user"></i><span>Baja Usuario</span></li>
-                    <li *ngIf="mostrar1"><i class="fas fa-user"></i><span>Lista Usuarios</span></li>
+                    <li routerLink="/paneladmin/altausuario" *ngIf="mostrar1" routerLinkActive="activado"><i class="fas fa-user"></i><span>Alta Usuario</span></li>
+                    <li *ngIf="mostrar1" routerLinkActive="activado"><i class="fas fa-user"></i><span>Modificar Usuario</span></li>
+                    <li *ngIf="mostrar1" routerLinkActive="activado"><i class="fas fa-user"></i><span>Baja Usuario</span></li>
+                    <li *ngIf="mostrar1" routerLinkActive="activado"><i class="fas fa-user"></i><span>Lista Usuarios</span></li>
                 </ul>
 
-                <li><i class="fas fa-clipboard-list"></i><span>Asistencia</span></li>
+                <li routerLinkActive="activado"><i class="fas fa-clipboard-list"></i><span>Asistencia</span></li>
 
                 <li (click)=" mostrar2 = !mostrar2 "><i class="fas fa-comment"></i><span>Notificaciones</span><i class="fas fa-angle-down derecha"></i></li>
                 <ul>
-                    <li routerLink="/paneladmin/enviarnotificacion" *ngIf="mostrar2"><i class="fas fa-comment"></i><span>Enviar Notificacion</span></li>
+                    <li routerLink="/paneladmin/enviarnotificacion" *ngIf="mostrar2" routerLinkActive="activado"><i class="fas fa-comment"></i><span>Enviar Notificacion</span></li>
                 </ul>
 
-                <li><i class="fas fa-wrench"></i><span>Configuracion</span></li>
+                <li routerLinkActive="activado"><i class="fas fa-wrench"></i><span>Configuracion</span></li>
 
             </nav>
         </div>
