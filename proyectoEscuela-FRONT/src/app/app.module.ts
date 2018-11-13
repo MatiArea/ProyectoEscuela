@@ -2,7 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-//rutas
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+// rutas
 
 import { APP_ROUTING } from './app.routes';
 
@@ -31,6 +32,7 @@ import { UnloginGuard } from '../app/guards/unlogin.guard';
     EnviarnotificacionComponent,
   ],
   imports: [
+    NgbModule,
     BrowserModule,
     FormsModule,
     AppRoutingModule,

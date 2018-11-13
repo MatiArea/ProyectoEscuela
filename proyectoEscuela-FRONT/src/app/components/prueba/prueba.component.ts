@@ -1,26 +1,20 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Component } from '@angular/core';
+import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-prueba',
   templateUrl: './prueba.component.html',
-  styleUrls: ['./prueba.component.css']
+  // add NgbModalConfig and NgbModal to the component providers
+  providers: [NgbModalConfig, NgbModal]
 })
-export class PruebaComponent implements OnInit {
-
-  constructor( private http:HttpClient ) { 
+export class PruebaComponent {
+  constructor(config: NgbModalConfig, private modalService: NgbModal) {
+    // customize default values of modals used by this component tree
+    config.backdrop = 'static';
+    config.keyboard = false;
   }
 
-  ngOnInit() {
+  open(content) {
+    this.modalService.open(content);
   }
-
-  prueba () {
-
-    this.http.get('https://restcountries.eu/rest/v2/lang/es')
-      .subscribe( data => {
-        console.log( data );
-      } )
-
-  }
-
 }
