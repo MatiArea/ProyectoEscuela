@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container animacion fadeIn">
     <div class="row">
         <div class="mx-auto">
             <div class="card card-login">
@@ -24,8 +24,7 @@
                                 <input class="form-control" type="password" placeholder="Contraseña" name="password" ngModel>
                             </div>
                         </div>
-
-                        <div *ngIf="mostrarerror" class="form-label-group mt-3 text-center" id="error">
+                        <div *ngIf="mostrarerror" class="form-label-group mt-3 text-center animated flash" id="error">
                             <div class="mb-2">
                                 <label>El correo y/o la contraseña son incorrectos.</label>
                             </div>
@@ -41,4 +40,3 @@
             </div>
         </div>
     </div>
-</div>

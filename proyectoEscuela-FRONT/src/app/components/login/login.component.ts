@@ -19,6 +19,7 @@ export class LoginComponent {
     if (  form.value.email === 'ivan'  &&  form.value.password === 'ivan'  ) {
       localStorage.setItem( 'email', form.value.email );
       this.rotuer.navigate(['/paneladmin']);
+      this.mostrarerror=false;
       
     } else {
       this.mostrarerror=true;
