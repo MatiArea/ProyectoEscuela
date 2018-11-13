@@ -11,7 +11,7 @@ export class LoginComponent {
 
   constructor( private rotuer:Router ) { }
 
- 
+  mostrarerror=false;
 
   login( form: NgForm) {
     console.log( form.value );
@@ -20,6 +20,8 @@ export class LoginComponent {
       localStorage.setItem( 'email', form.value.email );
       this.rotuer.navigate(['/paneladmin']);
       
+    } else {
+      this.mostrarerror=true;
     }
   }
 

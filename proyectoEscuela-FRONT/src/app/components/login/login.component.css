@@ -33,3 +33,8 @@ ul {
 #ingresar {
     border: 2px solid black;
 }
+
+#error label {
+    color: red;
+    font-weight: bold;
+}
