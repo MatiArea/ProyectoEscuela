@@ -122,3 +122,16 @@ import { Entity, Column, PrimaryGeneratedColumn} from 'typeorm';
 
 }
 
+@Entity() export class responsable{
+  @PrimaryGeneratedColumn()
+  id : number;
+
+  @Column()
+  nombre : string;
+
+  @Column()
+  apellido: String;
+
+  @Column()
+  dni : number;
+}
