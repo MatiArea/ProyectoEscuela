@@ -1,19 +1,24 @@
-<ng-template #content let-c="close" let-d="dismiss">
-    <div class="modal-header">
+<div class="barrainferior animacion fadeIn">
+    <div class="navbar">
+        <div class="float-left">
+            <i class="fas fa-school"> Escuela Secundaria</i>
+        </div>
+        <div class="float-right " (click)="hola()">
+            <div id="notif">3</div>
+            <div class="dropdown">
+                <div role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-bell mr-4"></i>
+                </div>
 
-        <h4 class="modal-title text-danger" id="modal-basic-title">¡Mensaje de advertencia!</h4>
-        <h4><i class="fas fa-exclamation-triangle text-danger mt-2 ml-1"></i></h4>
-        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body">
-        <p class="font-weight-bold">¿Esta seguro que desea realizar esta operación?</p>
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-danger" (click)="c('Save click')">Si</button>
-        <button type="button" class="btn btn-outline-dark" (click)="c('Save click')">Cancelar</button>
-    </div>
-</ng-template>
+                <div (click)="hola()" class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <a (click)="hola()" class="dropdown-item" href="#">Notificacion 1</a>
+                    <a class="dropdown-item" href="#">Notificacion 2</a>
+                    <a class="dropdown-item" href="#">Notificacion 3</a>
+                </div>
+            </div>
 
-<button class="btn btn-lg btn-outline-primary" (click)="open(content)">Launch demo modal</button>
+            <i class="fas fa-user mr-2"></i><span>Ivan Chiabrera [ Admin ]</span>
+            <i (click)=unlogin() class="fas fa-sign-out-alt ml-2"></i>
+        </div>
+    </div>
+</div>

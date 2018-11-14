@@ -17,4 +17,8 @@ export class PruebaComponent {
   open(content) {
     this.modalService.open(content);
   }
+
+  hola() {
+    console.log('hola');
+  }
 }

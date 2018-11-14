@@ -18,4 +18,8 @@ export class BarrainferiorComponent implements OnInit {
     this.router.navigate(['login']);
 
   }
+
+  hola() {
+    console.log('hola');
+  }
 }
