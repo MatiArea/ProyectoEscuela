@@ -11,8 +11,8 @@ const APP_ROUTES: Routes = [
     { path: 'login', component: LoginComponent,canActivate:[UnloginGuard]},
     { path: 'paneladmin', component: PaneladminComponent,canActivate:[LoginGuard],
         children: [
-            { path: 'altausuario', component: AltausuarioComponent},
-            { path: 'enviarnotificacion', component: EnviarnotificacionComponent}
+            { path: 'altausuario', component: AltausuarioComponent,canActivate:[LoginGuard]},
+            { path: 'enviarnotificacion', component: EnviarnotificacionComponent,canActivate:[LoginGuard]}
         ]
     },
     { path: 'prueba', component: PruebaComponent,},
