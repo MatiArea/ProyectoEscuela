@@ -3,8 +3,22 @@
         <div class="float-left">
             <i class="fas fa-school"> Escuela Secundaria</i>
         </div>
-        <div class="float-right">
-            <i class="fas fa-bell mr-5"></i>
+        <div class="float-right ">
+            <div id="notif">5</div>
+            <div class="dropdown">
+                <div role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-bell mr-4"></i>
+                </div>
+
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <a class="dropdown-item">Notificacion 1</a>
+                    <a class="dropdown-item">Notificacion 2</a>
+                    <a class="dropdown-item">Notificacion 3</a>
+                    <a class="dropdown-item">Notificacion 4</a>
+                    <a class="dropdown-item">Notificacion 5</a>
+                </div>
+            </div>
+
             <i class="fas fa-user mr-2"></i><span>Ivan Chiabrera [ Admin ]</span>
             <i (click)=unlogin() class="fas fa-sign-out-alt ml-2"></i>
         </div>

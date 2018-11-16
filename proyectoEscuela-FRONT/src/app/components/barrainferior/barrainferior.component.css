@@ -12,3 +12,42 @@
 .barrainferior i {
     cursor: pointer;
 }
+
+#notif {
+    background: red;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    font-size: 15px;
+    display: inline-block;
+    margin-left: 10px;
+    position: absolute;
+    text-align: center;
+    z-index: 1;
+}
+
+.dropdown {
+    display: inline-block;
+}
+
+.dropdown-menu {
+    width: 300px;
+    height: 300px;
+    border: 2px solid gray;
+    cursor: pointer;
+    z-index: 1;
+    padding: 0px;
+
+}
+
+.dropdown-item {
+    border-bottom: 2px solid gray;
+    height: 60px;
+    cursor: pointer;
+    z-index: 2;
+    padding: 0px;
+}
+
+.dropdown-item:hover {
+    background: #E6E6E6;
+}
