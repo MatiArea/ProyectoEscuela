@@ -6,13 +6,15 @@ import { PruebaComponent } from './components/prueba/prueba.component';
 import { EnviarnotificacionComponent } from './components/usuario/enviarnotificacion/enviarnotificacion.component';
 import { LoginGuard } from './guards/login.guard';
 import { UnloginGuard } from './guards/unlogin.guard';
+import { NotasComponent } from './components/usuario/notas/notas.component';
 
 const APP_ROUTES: Routes = [
     { path: 'login', component: LoginComponent,canActivate:[UnloginGuard]},
     { path: 'paneladmin', component: PaneladminComponent,canActivate:[LoginGuard],
         children: [
             { path: 'altausuario', component: AltausuarioComponent,canActivate:[LoginGuard]},
-            { path: 'enviarnotificacion', component: EnviarnotificacionComponent,canActivate:[LoginGuard]}
+            { path: 'enviaraviso', component: EnviarnotificacionComponent,canActivate:[LoginGuard]},
+            { path: 'notas', component: NotasComponent,canActivate:[LoginGuard]}
         ]
     },
     { path: 'prueba', component: PruebaComponent,},

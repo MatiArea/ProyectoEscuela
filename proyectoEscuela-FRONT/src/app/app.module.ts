@@ -19,6 +19,7 @@ import { PruebaComponent } from './components/prueba/prueba.component';
 import { EnviarnotificacionComponent } from './components/usuario/enviarnotificacion/enviarnotificacion.component';
 import { LoginGuard } from '../app/guards/login.guard';
 import { UnloginGuard } from '../app/guards/unlogin.guard';
+import { NotasComponent } from './components/usuario/notas/notas.component';
 
 
 @NgModule({
@@ -30,6 +31,7 @@ import { UnloginGuard } from '../app/guards/unlogin.guard';
     BarrainferiorComponent,
     PruebaComponent,
     EnviarnotificacionComponent,
+    NotasComponent,
   ],
   imports: [
     NgbModule,
