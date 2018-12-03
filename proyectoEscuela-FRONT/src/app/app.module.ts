@@ -14,18 +14,31 @@ import { LoginComponent } from './pages/login/login.component';
 
 import { LoginGuard } from '../app/guards/login.guard';
 import { UnloginGuard } from '../app/guards/unlogin.guard';
+<<<<<<< HEAD
 import { AdminModule } from './pages/admin/admin.module';
 import { AlumnoModule } from './pages/alumno/alumno.module';
 import { SharedModule } from './shared/shared.module';
 
 
+=======
+import { NotasComponent } from './components/usuario/notas/notas.component';
+>>>>>>> a2dd117d2b088ae8b16e016e23a3c73b3872ec2c
 
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
+<<<<<<< HEAD
     
+=======
+    PaneladminComponent,
+    AltausuarioComponent,
+    BarrainferiorComponent,
+    PruebaComponent,
+    EnviarnotificacionComponent,
+    NotasComponent,
+>>>>>>> a2dd117d2b088ae8b16e016e23a3c73b3872ec2c
   ],
   imports: [
     NgbModule,
