@@ -1,0 +1,40 @@
+.card-login {
+    border-radius: 5px;
+}
+
+.card-login .card-title {
+    margin-bottom: 20px;
+    font-weight: 300;
+    font-size: 50px;
+}
+
+.card-login .card-body {
+    padding: 30px;
+}
+
+form .btn {
+    border-radius: 100px;
+    padding: 10px;
+    letter-spacing: 5px;
+}
+
+.form-label-group {
+    position: relative;
+}
+
+.card {
+    margin-top: 70px;
+}
+
+ul {
+    list-style-type: none;
+}
+
+#ingresar {
+    border: 2px solid black;
+}
+
+#error label {
+    color: red;
+    font-weight: bold;
+}

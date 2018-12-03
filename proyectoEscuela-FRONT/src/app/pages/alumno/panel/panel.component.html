@@ -1,0 +1,34 @@
+<app-barrainferior></app-barrainferior>
+<div class="container-fluid">
+    <div class="row">
+        <div class="barra-lateral col-2">
+            <div class="logo">
+
+                <h2><i class="fas fa-edit"></i>Panel</h2>
+            </div>
+            <nav class="menu d-flex d-sm-block justify-content-center flex-wrap">
+
+
+
+                <li routerLink="/panel"><i class="fas fa-home"></i><span>Inicio</span></li>
+
+                <li (click)=" mostrar2 = !mostrar2 "><i class="fas fa-comment"></i><span>Notificaciones</span><i class="fas fa-angle-down derecha"></i></li>
+                <ul>
+                    <li routerLink="/panel/avisos" *ngIf="mostrar2" routerLinkActive="activado"><i class="fas fa-comment"></i><span>Ver Avisos</span></li>
+                </ul>
+
+                <li (click)=" mostrar3 = !mostrar3 " routerLinkActive="activado"><i class="fas fa-id-badge"></i><span>Evaluaciones</span><i class="fas fa-angle-down derecha"></i></li>
+                <ul>
+                    <li routerLink="/panel/materias" *ngIf="mostrar3" routerLinkActive="activado"><i class="fas fa-id-badge"></i><span>Listado materias</span></li>
+                </ul>
+                <li routerLinkActive="activado"><i class="fas fa-wrench"></i><span>Configuracion</span></li>
+
+            </nav>
+        </div>
+
+        <div class="margin-auto col-9 principal ">
+            <router-outlet></router-outlet>
+        </div>
+
+    </div>
+</div>

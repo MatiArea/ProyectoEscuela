@@ -9,35 +9,34 @@ import { APP_ROUTING } from './app.routes';
 
 //
 
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './components/login/login.component';
-import { PaneladminComponent } from './components/paneladmin/paneladmin.component';
-import { AltausuarioComponent } from './components/usuario/altausuario/altausuario.component';
-import { BarrainferiorComponent } from './components/barrainferior/barrainferior.component';
-import { PruebaComponent } from './components/prueba/prueba.component';
-import { EnviarnotificacionComponent } from './components/usuario/enviarnotificacion/enviarnotificacion.component';
+import { LoginComponent } from './pages/login/login.component';
+
 import { LoginGuard } from '../app/guards/login.guard';
 import { UnloginGuard } from '../app/guards/unlogin.guard';
+import { AdminModule } from './pages/admin/admin.module';
+import { AlumnoModule } from './pages/alumno/alumno.module';
+import { SharedModule } from './shared/shared.module';
+
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    PaneladminComponent,
-    AltausuarioComponent,
-    BarrainferiorComponent,
-    PruebaComponent,
-    EnviarnotificacionComponent,
+    
   ],
   imports: [
     NgbModule,
     BrowserModule,
     FormsModule,
-    AppRoutingModule,
     APP_ROUTING,
-    HttpClientModule
+    HttpClientModule,
+    AdminModule,
+    AlumnoModule,
+    SharedModule
+
   ],
   providers: [LoginGuard,UnloginGuard],
   bootstrap: [AppComponent]
