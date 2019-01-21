@@ -19,12 +19,6 @@ import { AlumnoModule } from './pages/alumno/alumno.module';
 import { SharedModule } from './shared/shared.module';
 
 
-<<<<<<< HEAD
-@NgModule({
-  declarations: [
-    AppComponent,
-    LoginComponent,    
-=======
 
 
 @NgModule({
@@ -32,7 +26,6 @@ import { SharedModule } from './shared/shared.module';
     AppComponent,
     LoginComponent,
     
->>>>>>> f4cd0fff500f0c55db7f41c6908384ad2b7b74d9
   ],
   imports: [
     NgbModule,
