@@ -19,7 +19,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
     PanelComponent        
   ],
   imports: [
-      BrowserModule
+      BrowserModule,
       ALUMNO_ROUTES,
       SharedModule
       
