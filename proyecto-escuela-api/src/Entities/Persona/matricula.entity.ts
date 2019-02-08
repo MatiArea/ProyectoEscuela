@@ -1,8 +1,8 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany, OneToOne, ManyToOne, JoinColumn } from 'typeorm';
-import {Division} from "./division.entity";
-import {EvaluAlumno} from "./evaluAlumno.entity";
-import {Anio} from "./anio.entity";
-import { Alumno } from '../Persona/alumno.entity';
+import {Division} from "../Evaluacion/division.entity";
+import {EvaluAlumno} from "../Evaluacion/evaluAlumno.entity";
+import {Anio} from "../Evaluacion/anio.entity";
+import { Alumno } from './alumno.entity';
 import { ConceptoDetalle } from '../Facturacion/conceptoDetalle.entity';
 import { Cuota } from '../Facturacion/cuota.entity';
 

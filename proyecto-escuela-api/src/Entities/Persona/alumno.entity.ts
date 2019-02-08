@@ -2,7 +2,7 @@ import { Entity, Column, PrimaryGeneratedColumn, OneToMany, ManyToOne, JoinColum
 import { Domicilio } from '../Domicilio/domicilio.entity';
 import { Cuenta } from './cuenta.entity';
 import { Responsable } from './responsable.entity';
-import { Matricula } from '../Evaluacion/matricula.entity';
+import { Matricula } from './matricula.entity';
 import { Familiar } from './familiar.entity';
 
 @Entity() export class Alumno {

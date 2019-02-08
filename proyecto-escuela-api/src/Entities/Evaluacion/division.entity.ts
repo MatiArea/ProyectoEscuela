@@ -1,6 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToOne } from 'typeorm';
 import {Horario} from './horario.entity';
-import {Matricula} from './matricula.entity';
+import {Matricula} from '../Persona/matricula.entity';
 import {Anio} from './anio.entity';
 import {Evaluacion} from './evaluacion.entity';
 

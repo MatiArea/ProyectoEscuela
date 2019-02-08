@@ -7,13 +7,13 @@ import {Boletin} from "./boletin.entity";
     id: number;
 
     @Column('float')
-    nota: number;
+    nota1: number;
 
     @Column('float')
-    numeroTrimestre: number;
+    nota2: number;
 
-    @Column()
-    tipo: string;
+    @Column('float')
+    nota3: number;
 
     @ManyToOne(type => Boletin, boletin => boletin.notas)
     boletin: Boletin;

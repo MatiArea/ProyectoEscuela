@@ -1,5 +1,5 @@
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany, ManyToOne, OneToOne, JoinColumn} from 'typeorm';
-import { Matricula } from '../Evaluacion/matricula.entity';
+import { Matricula } from '../Persona/matricula.entity';
 import { Concepto } from './concepto.entity';
 
 
