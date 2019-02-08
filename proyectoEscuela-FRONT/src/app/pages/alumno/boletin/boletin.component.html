@@ -1,0 +1,25 @@
+<div class="contenedor animacion fadeIn">
+    <h1 class="text-center">Año 1 Curso A</h1>
+    <hr>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Materia</th>
+                <th scope="col">Trimestre 1</th>
+                <th scope="col">Trimestre 2</th>
+                <th scope="col">Trimestre 3</th>
+                <th scope="col">Promedio</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr *ngFor="let materia of materias">
+                <td>{{ materia.nombre }}</td>
+                <td>{{ materia.Nota1 }}</td>
+                <td>{{ materia.Nota2 }}</td>
+                <td>{{ materia.Nota3 }}</td>
+                <td>{{ materia.promedio }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

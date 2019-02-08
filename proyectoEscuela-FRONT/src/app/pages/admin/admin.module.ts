@@ -11,6 +11,10 @@ import { NotasComponent } from './notas/notas.component';
 import { PaneladminComponent } from './paneladmin/paneladmin.component';
 import { ADMIN_ROUTES } from './admin.routes';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { CrearevaluacionComponent } from './crearevaluacion/crearevaluacion.component';
+import { NotaComponent } from './nota/nota.component';
+import { CargarevaluacionComponent } from './cargarevaluacion/cargarevaluacion.component';
+import { CargadenotasComponent } from './cargadenotas/cargadenotas.component';
 
 
 
@@ -21,7 +25,11 @@ import { SharedModule } from 'src/app/shared/shared.module';
     ListadoaniosComponent,
     ListadomateriasComponent,
     NotasComponent,
-    PaneladminComponent    
+    PaneladminComponent,
+    CrearevaluacionComponent,
+    NotaComponent,
+    CargarevaluacionComponent,
+    CargadenotasComponent    
   ],
   imports: [
       BrowserModule,

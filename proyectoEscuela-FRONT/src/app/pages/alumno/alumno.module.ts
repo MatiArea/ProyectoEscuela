@@ -5,9 +5,12 @@ import { UnloginGuard } from 'src/app/guards/unlogin.guard';
 import { AppComponent } from 'src/app/app.component';
 import { ALUMNO_ROUTES } from './alumno.routes';
 import { AvisosComponent } from './avisos/avisos.component';
-import { MateriasComponent } from './materias/materias.component';
+import { BoletinComponent } from './boletin/boletin.component';
 import { PanelComponent } from './panel/panel.component';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { AvisoComponent } from './aviso/aviso.component';
+import { EvaluacionesComponent } from './evaluaciones/evaluaciones.component';
+import { MateriasComponent } from './materias/materias.component';
 
 
 
@@ -15,8 +18,11 @@ import { SharedModule } from 'src/app/shared/shared.module';
 @NgModule({
   declarations: [
     AvisosComponent,
-    MateriasComponent,
-    PanelComponent        
+    BoletinComponent,
+    PanelComponent,
+    AvisoComponent,
+    EvaluacionesComponent,
+    MateriasComponent        
   ],
   imports: [
       BrowserModule,
@@ -26,7 +32,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
   ],
   exports:[
     AvisosComponent,
-    MateriasComponent,
+    BoletinComponent,
     PanelComponent
     
 
