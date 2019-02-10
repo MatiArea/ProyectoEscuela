@@ -5,22 +5,20 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class UnloginGuard implements CanActivate {
-  
+export class RolAlumno implements CanActivate {
+
   constructor( private rotuer:Router ) { }
 
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
     
-      if ( localStorage.getItem( 'email' ) === null ) {
+      if ( localStorage.getItem( 'rol' ) === 'Alumno' ) {
         return true;
+        
       } else {
-        if ( localStorage.getItem( 'rol' ) === 'Profesor' || localStorage.getItem( 'rol' ) === 'Preceptor' ){
-        this.rotuer.navigate(['paneladmin']);
-       } else {
-        this.rotuer.navigate(['panel']);
-       }
+        this.rotuer.navigate(['error']);
+        return false;
       }
   }
 }

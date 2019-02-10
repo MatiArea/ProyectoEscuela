@@ -10,7 +10,7 @@
 
 
 
-                <li routerLink="/paneladmin"><i class="fas fa-home"></i><span>Inicio</span></li>
+                <li routerLink="/paneladmin/inicio"><i class="fas fa-home"></i><span>Inicio</span></li>
 
                 <li (click)=" mostrar2 = !mostrar2 "><i class="fas fa-comment"></i><span>Notificaciones</span><i class="fas fa-angle-down derecha"></i></li>
                 <ul>
@@ -23,11 +23,11 @@
                     <li routerLink="/paneladmin/cargarevaluacion" *ngIf="mostrar3" routerLinkActive="activado"><i class="fas fa-id-badge"></i><span>Cargar Evaluacion</span></li>
                     <li routerLink="/paneladmin/listadomaterias" *ngIf="mostrar3" routerLinkActive="activado"><i class="fas fa-id-badge"></i><span>Listado Evaluaciones</span></li>
                 </ul>
+                <li routerLink="/paneladmin/divisiones" *ngIf="verificarPreceptor()" (click)=" mostrar4 = !mostrar4 " routerLinkActive="activado"><i class="fas fa-graduation-cap"></i><span>Boletin</span></li>
 
 
             </nav>
         </div>
-
         <div class="margin-auto col-9 principal">
             <router-outlet></router-outlet>
         </div>

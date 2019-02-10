@@ -2,17 +2,26 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BarrainferiorComponent } from './barrainferior/barrainferior.component';
 import { AppComponent } from '../app.component';
+import { ErrorComponent } from './error/error.component';
+import { SHARED_ROUTES } from './shared.routes';
+import { InicioComponent } from './inicio/inicio.component';
+
+
 
 @NgModule({
   declarations: [
-    BarrainferiorComponent
+    BarrainferiorComponent,
+    ErrorComponent,
+    InicioComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    SHARED_ROUTES
         
  ],
   exports:[
-    BarrainferiorComponent
+    BarrainferiorComponent,
+    InicioComponent
    
   ],
   providers: [],

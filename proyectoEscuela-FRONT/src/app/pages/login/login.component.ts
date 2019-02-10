@@ -19,7 +19,7 @@ export class LoginComponent {
     if ( form.value.email === 'ivan'  &&  form.value.password === 'ivan') {
       localStorage.setItem( 'email', form.value.email );
       localStorage.setItem( 'rol', 'Preceptor' );
-      this.rotuer.navigate(['/paneladmin']);
+      this.rotuer.navigate(['/paneladmin/inicio']);
       this.mostrarerror=false;
       
     } else {
@@ -29,7 +29,17 @@ export class LoginComponent {
     if ( form.value.email === 'matias'  &&  form.value.password === 'matias') {
       localStorage.setItem( 'email', form.value.email );
       localStorage.setItem( 'rol', 'Alumno' );
-      this.rotuer.navigate(['/panel']);
+      this.rotuer.navigate(['/panel/inicio']);
+      this.mostrarerror=false;
+      
+    } else {
+      this.mostrarerror=true;
+    }
+
+    if ( form.value.email === 'martin'  &&  form.value.password === 'martin') {
+      localStorage.setItem( 'email', form.value.email );
+      localStorage.setItem( 'rol', 'Profesor' );
+      this.rotuer.navigate(['/paneladmin/inicio']);
       this.mostrarerror=false;
       
     } else {

@@ -15,6 +15,9 @@ import { CrearevaluacionComponent } from './crearevaluacion/crearevaluacion.comp
 import { NotaComponent } from './nota/nota.component';
 import { CargarevaluacionComponent } from './cargarevaluacion/cargarevaluacion.component';
 import { CargadenotasComponent } from './cargadenotas/cargadenotas.component';
+import { ListadodivComponent } from './listadodiv/listadodiv.component';
+import { ListadoalumnosComponent } from './listadoalumnos/listadoalumnos.component';
+import { MateriasalumnoComponent } from './materiasalumno/materiasalumno.component';
 
 
 
@@ -29,7 +32,10 @@ import { CargadenotasComponent } from './cargadenotas/cargadenotas.component';
     CrearevaluacionComponent,
     NotaComponent,
     CargarevaluacionComponent,
-    CargadenotasComponent    
+    CargadenotasComponent,
+    ListadodivComponent,
+    ListadoalumnosComponent,
+    MateriasalumnoComponent    
   ],
   imports: [
       BrowserModule,

@@ -13,10 +13,18 @@ export class PaneladminComponent implements OnInit {
   mostrar1= false;
   mostrar2= false;
   mostrar3= false;
-
+  mostrar4= false;
   ngOnInit() {
   }
 
+  verificarPreceptor() {
 
+    if ( localStorage.getItem( 'rol' ) === 'Profesor' ) {
+    return false;  
+    } else {
+      return true;
+    }
+  
+}
 
 }
