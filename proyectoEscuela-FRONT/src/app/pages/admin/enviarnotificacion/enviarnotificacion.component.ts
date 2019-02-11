@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
+
 
 @Component({
   selector: 'app-enviarnotificacion',
@@ -10,6 +12,10 @@ export class EnviarnotificacionComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+  }
+
+  enviarnot( not:NgForm ) {
+    console.log(not.value);
   }
 
 }

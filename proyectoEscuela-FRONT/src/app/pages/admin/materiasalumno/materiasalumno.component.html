@@ -45,6 +45,24 @@
     </table>
 </div>
 <div class="text-center">
-    <button type="button" class="btn btn-lg btn-success m-lg-2">Cargar</button>
+    <button type="button" class="btn btn-lg btn-success m-lg-2" data-toggle="modal" data-target="#exampleModal">Cargar</button>
     <button type="button" class="btn btn-lg btn-danger">Cancelar</button>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Notificación</h5>
+            </div>
+            <div class="modal-body">
+                <h3>Boletin actualizado correctamente</h3>
+            </div>
+            <div class="modal-footer text-center">
+                <button routerLink="/paneladmin/inicio" type="button" class="btn btn-success" data-dismiss="modal">Aceptar</button>
+            </div>
+        </div>
+    </div>
 </div>

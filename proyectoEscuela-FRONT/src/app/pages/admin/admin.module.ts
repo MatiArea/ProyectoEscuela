@@ -18,6 +18,7 @@ import { CargadenotasComponent } from './cargadenotas/cargadenotas.component';
 import { ListadodivComponent } from './listadodiv/listadodiv.component';
 import { ListadoalumnosComponent } from './listadoalumnos/listadoalumnos.component';
 import { MateriasalumnoComponent } from './materiasalumno/materiasalumno.component';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -40,8 +41,8 @@ import { MateriasalumnoComponent } from './materiasalumno/materiasalumno.compone
   imports: [
       BrowserModule,
       ADMIN_ROUTES,
-      SharedModule
-      // shared
+      SharedModule,
+      FormsModule
     
   ],
   exports:[

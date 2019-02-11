@@ -4,7 +4,7 @@
             <div class="row">
                 <div class="columna col">
                     <div class="contenedor">
-                        <form>
+                        <form #notificacion="ngForm" (ngSubmit)="enviarnot(notificacion)">
                             <h1>Envío de notificación</h1>
                             <hr>
                             <div class="form-group row">
@@ -14,19 +14,19 @@
                                         <label class="form-check-label"><h5>Comision:</h5></label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1" name="opcion1" ngModel>
                                         <label class="form-check-label" for="inlineCheckbox1"><h5>A1</h5></label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2" name="opcion2" ngModel>
                                         <label class="form-check-label" for="inlineCheckbox2"><h5>A2</h5></label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3">
+                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3" name="opcion3" ngModel>
                                         <label class="form-check-label" for="inlineCheckbox3"><h5>B1</h5></label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="option4">
+                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="option4" name="opcion4" ngModel>
                                         <label class="form-check-label" for="inlineCheckbox4"><h5>B2</h5></label>
                                     </div>
                                 </div>
@@ -36,12 +36,12 @@
                             <div class="form-group row">
                                 <label class="col-2 col-form-label ml-3"><h5>Descripción</h5></label>
                                 <div class="col-8">
-                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="descripcion" ngModel></textarea>
                                 </div>
                             </div>
 
 
-                            <button type="button" class="btn btn-lg btn-success m-lg-2">Enviar</button>
+                            <button type="submit" class="btn btn-lg btn-success m-lg-2" data-toggle="modal" data-target="#exampleModal">Enviar</button>
                             <button type="button" class="btn btn-lg btn-danger">Cancelar</button>
 
                         </form>
@@ -53,4 +53,22 @@
 
 
 
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Notificación</h5>
+            </div>
+            <div class="modal-body">
+                <h3>Notificación enviada correctamente</h3>
+            </div>
+            <div class="modal-footer text-center">
+                <button routerLink="/paneladmin/inicio" type="button" class="btn btn-success" data-dismiss="modal">Aceptar</button>
+            </div>
+        </div>
+    </div>
 </div>
