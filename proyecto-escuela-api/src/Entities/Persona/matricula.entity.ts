@@ -30,10 +30,6 @@ import { Cuota } from '../Facturacion/cuota.entity';
     })
     notas: EvaluAlumno[];
 
-    @OneToOne(type => Anio)
-    @JoinColumn()
-    anio: Anio;
-
     @OneToMany(type => ConceptoDetalle, conceptoDetalle => conceptoDetalle.matricula, {
       cascade: true,
     })

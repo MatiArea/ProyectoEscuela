@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { EvaluacionController } from './evaluacion.controller';
-import { EvaluacionService } from 'src/Services/evaluacion.service';
+import { EvaluacionService } from './../../Services/evaluacion.service';
 
 @Module({
   providers: [EvaluacionService],

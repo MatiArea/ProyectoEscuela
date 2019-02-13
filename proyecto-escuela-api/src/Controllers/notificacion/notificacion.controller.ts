@@ -1,12 +1,39 @@
-import { Controller, Get } from '@nestjs/common';
-import { NotificacionService } from 'src/Services/notificacion.service';
+import { NotificarOne } from './../../Dto/notificarOne.dto';
+import { NotificarTodos } from './../../Dto/notificarTodos.dto';
+import { Controller, Get, Post, Body, Param, Put } from '@nestjs/common';
+import { NotificacionService } from './../../Services/notificacion.service';  
 
-@Controller('notificacion')
+@Controller('notificaciones')
 export class NotificacionController {
-    constructor(public notificacionService: NotificacionService){}
+    constructor(private readonly notificacionService: NotificacionService) {}
 
-@Get('/crearAviso')
-async crearAviso() {
-   }
+@Get('panel/:legajo')
+recuperarNotificacionesNoLeidas(@Param('legajo') parametro){
+    return this.notificacionService.getNotificacionesNoLeidas(parametro);
+} 
 
+@Get('all/:legajo')
+recuperarNotificaciones(@Param('legajo') parametro){
+    return this.notificacionService.getNotificaciones(parametro);
+}
+
+@Get('display/:id')
+verNotificacion(@Param('id') parametro){
+    return this.notificacionService.showNotificacion(parametro);
+}
+
+@Put('update/:id')
+modificarNotificacion(@Param('id') parametro){
+    return this.notificacionService.updateNotificacion(parametro);
+}
+
+@Post('aviso/enviar/division')
+crearAvisoTodos(@Body() body:NotificarTodos){
+    return this.notificacionService.createNotificacionAvisoTodos(body);
+}
+
+@Post('aviso/enviar/alumnos')
+crearAvisoAlumnos(@Body() body:NotificarOne){
+    return this.notificacionService.createOneNotificacionAviso(body);
+}
 }

@@ -20,6 +20,9 @@ import { Profesor } from '../Persona/profesor.entity';
     @Column()
     titulo: string;
 
+    @Column()
+    cargada: boolean;
+
     @ManyToOne(type => Profesor, profesor => profesor.evaluaciones)
     profesor: Profesor;
 

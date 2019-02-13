@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany, OneToOne } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, OneToOne, JoinColumn } from 'typeorm';
 import {Matricula} from '../Persona/matricula.entity';
 import {NotaBoletin} from './notaBoletin.entity';
 
@@ -12,6 +12,15 @@ import {NotaBoletin} from './notaBoletin.entity';
     @Column()
     codigo: number;
 
+    @OneToOne(type => Matricula)
+    @JoinColumn()
+    alumno: Matricula;
+
+    @OneToMany(type => NotaBoletin, notaBoletin => notaBoletin.boletin, {
+      cascade: true,
+    })
+    notas: NotaBoletin[];
+
     @Column()
     trimestre1: boolean;
 
@@ -20,12 +29,4 @@ import {NotaBoletin} from './notaBoletin.entity';
     
     @Column()
     trimestre3: boolean;
-
-    @OneToOne(type => Matricula)
-    alumno: Matricula;
-
-    @OneToMany(type => NotaBoletin, notaBoletin => notaBoletin.boletin, {
-      cascade: true,
-    })
-    notas: NotaBoletin[];
   }

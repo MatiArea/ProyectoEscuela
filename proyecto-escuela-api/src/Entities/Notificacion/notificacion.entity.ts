@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany, OneToOne, JoinColumn } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, OneToOne, JoinColumn, ManyToOne } from "typeorm";
 import { Cuenta } from "../Persona/cuenta.entity";
 
 @Entity() export class Notificacion{
@@ -23,8 +23,9 @@ import { Cuenta } from "../Persona/cuenta.entity";
     @Column()
     enviada:boolean;
 
-    @OneToOne(type => Cuenta)
-    @JoinColumn()
+   @ManyToOne(type => Cuenta, cuenta => cuenta.notificacionesEnviadas)
     autor:Cuenta;
 
+   @ManyToOne(type => Cuenta, cuenta => cuenta.notificacionesRecibidas)
+    destinatario:Cuenta;
 }
