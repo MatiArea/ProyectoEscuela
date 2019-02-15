@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-avisos',
@@ -7,15 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AvisosComponent implements OnInit {
 
-  constructor() { }
+  constructor( private http: HttpClient ) { }
 
-  avisos:any[] =[
-    {fecha:'30/11/18',descripcion:'Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora excepturi vitae aliquam quas vel blanditiis fugiat eaque dicta minima amet. In optio magni, nobis excepturi perspiciatis quisquam repellat quod doloribus culpa illum volup'},
-    {fecha:'20/11/18',descripcion:'Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora excepturi vitae aliquam quas vel blanditiis fugiat eaque dicta minima amet. In optio magni, nobis excepturi perspiciatis quisquam repellat quod doloribus culpa illum volup'},   
-   
-  ];
-
+  notificaciones:any;
+  legajo:any;
   ngOnInit() {
+    this.legajo=localStorage.getItem( 'legajo' );
+      return this.http.get(`http://localhost:4000/notificaciones/all/${this.legajo}`)
+    .subscribe( data=> {
+    this.notificaciones=data;
+    console.log(this.notificaciones);
+   } );
   }
-
 }

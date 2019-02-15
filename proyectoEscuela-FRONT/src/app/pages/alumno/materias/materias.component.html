@@ -9,10 +9,8 @@
                             <hr>
                             <div class="row">
                                 <div class="col-4">
-                                    <li class="ml-3"><i class="fas fa-caret-square-right mr-1"></i>Matematica </li>
-                                    <li class="ml-3"><i class="fas fa-caret-square-right mr-1"></i>Lengua </li>
-                                    <li class="ml-3"><i class="fas fa-caret-square-right mr-1"></i>Musica</li>
-                                    <li class="ml-3"><i class="fas fa-caret-square-right mr-1"></i>Religion </li>
+                                    <li *ngFor="let materia of materias" class="ml-3"><i class="fas fa-caret-square-right mr-1"></i>{{materia.materia.nombre}} </li>
+
                                 </div>
                                 <div class="col-2">
                                     <i routerLink="/panel/evaluaciones" class="fas fa-arrow-alt-circle-right ml-5 click position-static"></i>

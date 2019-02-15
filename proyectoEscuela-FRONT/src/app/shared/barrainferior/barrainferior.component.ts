@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
 
 @Component({
@@ -9,20 +10,25 @@ import { Router } from '@angular/router';
 })
 export class BarrainferiorComponent implements OnInit {
 
-  constructor( private router:Router ) { }
+  constructor( private router:Router , private http: HttpClient) { }
 
   usuario = localStorage.getItem( 'email' );
   rol = localStorage.getItem( 'rol' );
-
-  notificaciones:any[] =[
-    {nombre:'Notificacion 1',descripcion:'Notis'},
-    {nombre:'Notificacion 2',descripcion:'Notis'},
-    {nombre:'Notificacion 3',descripcion:'Notis'},
-    {nombre:'Notificacion 4',descripcion:'Notis'},
-    {nombre:'Notificacion 5',descripcion:'Notis'},
-  ];
+  legajo:any;
+  notificaciones:any;
+  cantidad:any;
 
   ngOnInit() {
+    
+    this.legajo=localStorage.getItem( 'legajo' );
+      return this.http.get(`http://localhost:4000/notificaciones/panel/${this.legajo}`)
+    .subscribe( data=> {
+    this.notificaciones=data;
+    this.cantidad=this.notificaciones.length;
+
+   
+   } );
+   
   }
 
 
@@ -34,7 +40,11 @@ export class BarrainferiorComponent implements OnInit {
 
   }
 
-  hola() {
-    console.log('hola');
-  }
+ update( noti:any ){
+    this.router.navigate([`/panel/notificacion/${noti.id}`]);
+    this.http.put(`http://localhost:4000/notificaciones/update/${noti.id}'`,noti.id)
+    .subscribe((data:any)=>{
+      console.log(data);
+    });
+}
 }

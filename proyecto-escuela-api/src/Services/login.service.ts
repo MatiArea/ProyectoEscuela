@@ -1,4 +1,4 @@
-import { LoginRes, LoginDTO } from './../Dto/login.dto';
+import { LoginDTO } from './../Dto/login.dto';
 import { Administrativo } from './../Entities/Persona/administrativo.entity';
 import { Profesor } from './../Entities/Persona/profesor.entity';
 import { InjectRepository } from '@nestjs/typeorm';

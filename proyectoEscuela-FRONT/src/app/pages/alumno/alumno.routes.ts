@@ -16,7 +16,7 @@ const alumnoRoutes: Routes = [
     { path: 'panel', component: PanelComponent,canActivate:[LoginGuard,RolAlumno],
         children: [
             { path: 'inicio', component: InicioComponent,canActivate:[LoginGuard,RolAlumno]},
-            { path: 'notificacion', component: AvisoComponent,canActivate:[LoginGuard,RolAlumno]},
+            { path: 'notificacion/:id', component: AvisoComponent,canActivate:[LoginGuard,RolAlumno]},
             { path: 'notificaciones', component: AvisosComponent,canActivate:[LoginGuard,RolAlumno]},
             { path: 'boletin', component: BoletinComponent,canActivate:[LoginGuard,RolAlumno]},
             { path: 'materias', component: MateriasComponent,canActivate:[LoginGuard,RolAlumno]},

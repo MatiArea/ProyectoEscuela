@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -9,11 +10,42 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
 
-  constructor( private rotuer:Router ) { }
+  constructor( private rotuer:Router, private http: HttpClient  ) { }
 
   mostrarerror=false;
+ 
+  postlogin(form: NgForm) {
+  
+    this.http.post('http://localhost:4000/login',
+    {
+      user: form.value.email,
+      pass:form.value.password
+    }).subscribe(
+      (data:any)=> {
+        console.log(data);
+    
+        if ( data.status===200 ) {
+          localStorage.setItem( 'email', data.nombre );
+          localStorage.setItem( 'rol', data.roll );
+          localStorage.setItem( 'legajo', data.legajo );
+          localStorage.setItem( 'dni', data.dni );
 
-  login( form: NgForm) {
+          if( data.roll==='Alumno' ) {this.rotuer.navigate(['/panel/inicio']);}        
+          else if ( data.roll==='Profesor' ) {this.rotuer.navigate(['/paneladmin/inicio']);}      
+          else if( data.roll==='Preceptor' ) {this.rotuer.navigate(['/paneladmin/inicio']);}
+    
+
+          this.mostrarerror=false;
+        } else if ( data.status=500 ) {
+          this.mostrarerror=true;
+        } 
+    
+      }
+    ); 
+  
+  }
+
+/*  login( form: NgForm) {
     console.log( form.value );
 
     if ( form.value.email === 'ivan'  &&  form.value.password === 'ivan') {
@@ -46,5 +78,8 @@ export class LoginComponent {
       this.mostrarerror=true;
     }
   }
+*/
+ 
 
+  
 }

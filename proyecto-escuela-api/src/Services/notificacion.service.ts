@@ -42,7 +42,7 @@ export class NotificacionService {
     }
 
     async updateNotificacion(id){
-        await getConnection().createQueryBuilder(Notificacion, "Notificacion").update(Notificacion).set({leida:1})
+        await getConnection().createQueryBuilder(Notificacion, "Notificacion").update(Notificacion).set({leida:true})
         .where("notificacion.id = :p", {p:id}).execute();
         let res = {
             status:200,

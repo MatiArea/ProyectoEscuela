@@ -5,6 +5,7 @@ import { AppComponent } from '../app.component';
 import { ErrorComponent } from './error/error.component';
 import { SHARED_ROUTES } from './shared.routes';
 import { InicioComponent } from './inicio/inicio.component';
+import { PruebaComponent } from './prueba/prueba.component';
 
 
 
@@ -12,7 +13,8 @@ import { InicioComponent } from './inicio/inicio.component';
   declarations: [
     BarrainferiorComponent,
     ErrorComponent,
-    InicioComponent
+    InicioComponent,
+    PruebaComponent
   ],
   imports: [
     BrowserModule,
