@@ -1,3 +1,4 @@
+import { Responsable } from './Entities/Persona/responsable.entity';
 import { Horario } from './Entities/Evaluacion/horario.entity';
 import { Profesor } from './Entities/Persona/profesor.entity';
 import { Matricula } from './Entities/Persona/matricula.entity';
@@ -41,8 +42,8 @@ constructor(@InjectRepository(Anio) private anioRepository:Repository<Anio>,
 
   async getAlumnosByAnioAndDivision(params){
     const anio : Anio = await this.anioRepository.createQueryBuilder("anio").select("anio").where("anio.numero = :p", {p:params.anio}).getOne();
-    const division : Division = await this.divisionRepository.createQueryBuilder("division").where("division.nombre = :p", {p:params.division})
-                                .andWhere("division.anio = :p", {p:anio.id}).getOne();
+    const division : Division = await this.divisionRepository.createQueryBuilder("division").where("division.nombre = :d", {d:params.division})
+                                .andWhere("division.anio = :a", {a:anio.id}).getOne();
     const alumnos = getConnection().createQueryBuilder(Matricula, "matricula").select("matricula.codigo").addSelect("alumno.nombre")
                     .addSelect("alumno.apellido").addSelect("alumno.legajo").innerJoin("matricula.alumno", "alumno")
                     .where("matricula.division = :p", {p:division.id}).getMany();
@@ -68,4 +69,5 @@ constructor(@InjectRepository(Anio) private anioRepository:Repository<Anio>,
        return horarios; 
       
   }
+
 }

@@ -40,5 +40,4 @@ export class AppController {
     return this.appService.getMateriasCursadas(parametro);
   }
 
-
 }

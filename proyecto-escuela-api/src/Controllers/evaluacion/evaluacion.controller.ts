@@ -32,6 +32,11 @@ export class EvaluacionController {
         return this.evaluacionService.getEvaluacionesCargadas(parametros);
     }
 
+    @Get('folio')
+    generarFolio(){
+        return this.evaluacionService.getFolio();
+    }
+
     @Post('create')
     crearEvaluacion(@Body() body:EvaluacionDTO){
         this.evaluacionService.createEvaluacion(body);
@@ -42,9 +47,9 @@ export class EvaluacionController {
         return this.evaluacionService.getEvaluacionCompleta(parametro);
     }
 
-    @Get('todas/alumno/:legajo')
-    recuperarEvaluacionesAlumno(@Param('legajo') parametro){
-        return this.evaluacionService.getEvaluacionesAlumnoTodas(parametro);
+    @Get('todas/alumno/:legajo/:materiaID')
+    recuperarEvaluacionesAlumno(@Param() parametros){
+        return this.evaluacionService.getEvaluacionesAlumnoTodas(parametros);
     }
 
 }

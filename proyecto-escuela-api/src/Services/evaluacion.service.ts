@@ -25,15 +25,15 @@ export class EvaluacionService {
      const profesor : Profesor = await this.profesorRepository.createQueryBuilder("profesor").select("profesor")
                                             .where("profesor.legajo = :p", {p:params.legajo}).getOne();
      const anio : Anio = await this.anioRepository.createQueryBuilder("anio").select("anio").where("anio.numero = :p", {p:params.anio}).getOne();
-     const division : Division = await this.divisionRepository.createQueryBuilder("division").select("division")
-                                           .where("division.nombre = :p", {p:params.division}).andWhere("division.anio = :p", {p:anio.id}).getOne();
-    const materia : Materia = await this.materiaRepository.createQueryBuilder("materia").select("materia").where("materia.nombre = :p", {p:params.materia})
-                                        .andWhere("materia.anio = :p", {p:anio.id}).getOne();
+     const division : Division = await this.divisionRepository.createQueryBuilder("division").select("division").innerJoinAndSelect("division.anio", "anio")
+                                           .where("division.nombre = :p", {p:params.division}).andWhere("division.anio = :a", {a:anio.id}).getOne();                                    
+    const materia : Materia = await this.materiaRepository.createQueryBuilder("materia").select("materia").where("materia.nombre = :p", {p:params.materia}).andWhere("materia.anio = :mate", {mate:anio.id}).getOne();
+    
 
-    const evaluaciones = getConnection().createQueryBuilder(Evaluacion, "evaluacion").select("evaluacion.fecha")
+    const evaluaciones = await getConnection().createQueryBuilder(Evaluacion, "evaluacion").select("evaluacion.fecha")
                          .addSelect("evaluacion.titulo").addSelect("evaluacion.folio").addSelect("evaluacion.temas")
-                         .where("evaluacion.profesor = :p", {p:profesor.id}).andWhere("evaluacion.division = :p", {p:division.id})
-                         .andWhere("evaluacion.materia = :p", {p:materia.id}).andWhere("evaluacion.cargada = :p", {p:false}).getMany();
+                         .where("evaluacion.profesor = :profe", {profe:profesor.id}).andWhere("evaluacion.division = :div", {div:division.id})
+                         .andWhere("evaluacion.materia = :mate", {mate:materia.id}).andWhere("evaluacion.cargada = :carga", {carga:false}).getMany();
     return evaluaciones;
     }
 
@@ -42,12 +42,11 @@ export class EvaluacionService {
     }
 
     async createEvaluAlumnos(params){
-        var alumno : Matricula;
         const evaluacioN : Evaluacion = await this.evaluacionRepository.createQueryBuilder("evaluacion").select("evaluacion")
                                         .where("evaluacion.folio = :p", {p:params.folioEvaluacion}).getOne();
         
         for(let indice = 0; indice<=params.notas.length; indice++ ){
-           alumno = await this.matriculaRepository.createQueryBuilder("matricula").select("matricula")
+           const alumno = await this.matriculaRepository.createQueryBuilder("matricula").select("matricula")
                        .where("matricula.codigo = :p", {p:params.notas[indice].codigoMatricula}).getOne();
             await getConnection().createQueryBuilder(EvaluAlumno, "notas").insert().into(EvaluAlumno)
                   .values([{nota:params.notas[indice].nota, matricula:alumno, evaluacion:evaluacioN }]).execute();
@@ -71,26 +70,37 @@ export class EvaluacionService {
                                    .where("profesor.legajo = :p", {p:params.legajo}).getOne();
         const anio : Anio = await this.anioRepository.createQueryBuilder("anio").select("anio").where("anio.numero = :p", {p:params.anio}).getOne();
         const division : Division = await this.divisionRepository.createQueryBuilder("division").select("division")
-                                   .where("division.anio = :p", {p:anio.id}).andWhere("division.nombre = :p", {p:params.division}).getOne();  
+                                   .where("division.anio = :a", {a:anio.id}).andWhere("division.nombre = :d", {d:params.division}).getOne();  
         
                             
-        const materia : Materia = await this.materiaRepository.createQueryBuilder("materia").select("materia").where("materia.nombre = :p", {p:params.materia})
-                                   .andWhere("materia.anio = :p", {p:anio.id}).getOne();        
+        const materia : Materia = await this.materiaRepository.createQueryBuilder("materia").select("materia").where("materia.nombre = :n", {n:params.materia})
+                                   .andWhere("materia.anio = :a", {a:anio.id}).getOne();        
         const evaluaciones = getConnection().createQueryBuilder(Evaluacion, "evaluacion").select("evaluacion.fecha")
                              .addSelect("evaluacion.titulo").addSelect("evaluacion.folio").addSelect("evaluacion.temas")
-                             .where("evaluacion.profesor = :p", {p:profesor.id}).andWhere("evaluacion.division = :p", {p:division.id})
-                             .andWhere("evaluacion.materia = :p", {p:materia.id}).andWhere("evaluacion.cargada = :p", {p:1}).getMany();
+                             .where("evaluacion.profesor = :p", {p:profesor.id}).andWhere("evaluacion.division = :d", {d:division.id})
+                             .andWhere("evaluacion.materia = :m", {m:materia.id}).andWhere("evaluacion.cargada = :c", {c:1}).getMany();
          return evaluaciones;
     }  
+
+    async getFolio(){
+        const max = await getConnection().createQueryBuilder(Evaluacion, "evaluacion").select("MAX(evaluacion.id)", "maximo").getRawOne();
+        if(max.maximo == null){
+            return 19071997
+        } else {
+            const evaluacion : Evaluacion = await this.evaluacionRepository.createQueryBuilder("evaluacion").select("evaluacion").where("evaluacion.id = :p", {p:max.maximo}).getOne();
+            const folio = evaluacion.folio+1;
+            return folio;
+        }
+    }
 
     async createEvaluacion(params){
         const profesor : Profesor = await this.profesorRepository.createQueryBuilder("profesor").select("profesor")
                                    .where("profesor.legajo = :p", {p:params.legajoProfesor}).getOne();
         const anio : Anio = await this.anioRepository.createQueryBuilder("anio").select("anio").where("anio.numero = :p", {p:params.anio}).getOne();
         const division : Division = await this.divisionRepository.createQueryBuilder("division").select("division")
-                                   .where("division.nombre = :p", {p:params.division}).andWhere("division.anio = :p", {p:anio.id}).getOne();
-        const materia : Materia = await this.materiaRepository.createQueryBuilder("materia").select("materia").where("materia.nombre = :p", {p:params.materia})
-                                   .andWhere("materia.anio = :p", {p:anio.id}).getOne();
+                                   .where("division.nombre = :d", {d:params.division}).andWhere("division.anio = :a", {a:anio.id}).getOne();
+        const materia : Materia = await this.materiaRepository.createQueryBuilder("materia").select("materia").where("materia.nombre = :m", {m:params.materia})
+                                   .andWhere("materia.anio = :a", {a:anio.id}).getOne();
 
         getConnection().createQueryBuilder(Evaluacion, "evaluacion").insert().into(Evaluacion)
         .values([{fecha:params.fecha, folio:params.folio, temas:params.temas, titulo:params.titulo, cargada:false, profesor:profesor, division:division, materia:materia}]).execute();
@@ -106,14 +116,14 @@ export class EvaluacionService {
          return eva;
     }
 
-    async getEvaluacionesAlumnoTodas(legajo){
-        const alumno : Alumno = await this.alumnoRepository.createQueryBuilder("alumno").select("alumno").where("alumno.legajo = :p", {p:legajo}).getOne();
+    async getEvaluacionesAlumnoTodas(params){
+        const alumno : Alumno = await this.alumnoRepository.createQueryBuilder("alumno").select("alumno").where("alumno.legajo = :p", {p:params.legajo}).getOne();
         const matricula : Matricula = await this.matriculaRepository.createQueryBuilder("matricula").select("matricula")
                           .where("matricula.alumno = :p", {p:alumno.id}).getOne();      
         
-        const evaluaciones = getConnection().createQueryBuilder(EvaluAlumno, "nota").select("nota.nota").addSelect("evaluacion.fecha").addSelect("evaluacion.folio")
-                             .addSelect("evaluacion.temas").addSelect("evaluacion.titulo").addSelect("materia.nombre").innerJoin("nota.evaluacion", "evaluacion").innerJoin("evaluacion.materia", "materia")
-                             .where("nota.matricula = :p", {p:matricula.id}).getMany();  
+        const evaluaciones = await getConnection().createQueryBuilder(EvaluAlumno, "nota").select("nota.nota").addSelect("evaluacion.fecha").addSelect("evaluacion.folio")
+                             .addSelect("evaluacion.temas").addSelect("evaluacion.titulo").addSelect("materia.nombre").innerJoin("nota.evaluacion", "evaluacion").innerJoin("evaluacion.materia", "materia").innerJoin("nota.matricula", "matricula")
+                             .where("materia.id = :m", {m:params.materiaID}).andWhere("matricula.id = :p", {p:matricula.id}).getMany();  
         return evaluaciones;                             
     }
     
