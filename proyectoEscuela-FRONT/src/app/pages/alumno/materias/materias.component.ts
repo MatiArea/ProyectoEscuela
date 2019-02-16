@@ -15,12 +15,7 @@ export class MateriasComponent implements OnInit {
 
   ngOnInit() {
 
-    this.legajo=localStorage.getItem( 'legajo' );
-      return this.http.get(`http://localhost:4000/colegio/alumno/materias/${this.legajo}`)
-    .subscribe( data=> {
-    this.materias=data;
-    console.log(this.materias);
-   } );
+   
 
   }
 

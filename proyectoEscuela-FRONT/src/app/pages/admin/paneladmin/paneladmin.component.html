@@ -17,7 +17,7 @@
                     <li routerLink="/paneladmin/enviaraviso" *ngIf="mostrar2" routerLinkActive="activado"><i class="fas fa-comment"></i><span>Enviar notificacion</span></li>
                 </ul>
 
-                <li (click)=" mostrar3 = !mostrar3 " routerLinkActive="activado"><i class="fas fa-id-badge"></i><span>Evaluaciones</span><i class="fas fa-angle-down derecha"></i></li>
+                <li *ngIf="verificarProfesor()" (click)=" mostrar3 = !mostrar3 " routerLinkActive="activado"><i class="fas fa-id-badge"></i><span>Evaluaciones</span><i class="fas fa-angle-down derecha"></i></li>
                 <ul>
                     <li routerLink="/paneladmin/crearevaluacion" *ngIf="mostrar3" routerLinkActive="activado"><i class="fas fa-id-badge"></i><span>Crear Evaluacion</span></li>
                     <li routerLink="/paneladmin/materias" *ngIf="mostrar3" routerLinkActive="activado"><i class="fas fa-id-badge"></i><span>Cargar Evaluacion</span></li>

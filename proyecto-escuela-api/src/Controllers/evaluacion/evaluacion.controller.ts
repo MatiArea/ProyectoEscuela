@@ -48,7 +48,7 @@ export class EvaluacionController {
         return this.evaluacionService.getEvaluacionCompleta(parametro);//evalucion al hacer click
     }
 
-    @Get('todas/alumno/:legajo/:materiaID')
+    @Get('todas/alumno/:legajo/:materia')
     recuperarEvaluacionesAlumno(@Param() parametros){
         return this.evaluacionService.getEvaluacionesAlumnoTodas(parametros);//obtener todas las evaluaciones de una materia del alumno
     }

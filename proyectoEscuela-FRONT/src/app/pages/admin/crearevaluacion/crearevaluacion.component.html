@@ -12,7 +12,7 @@
                                 <div class="col-8">
                                     <select (change)="capturar($event.target.value)" name="materia" ngModel>
                                         <option value="">-</option>
-                                        <option *ngFor="let materia of materias" value="{{materia.materia.nombre}}" ><span id="anio">{{ materia.materia.anio.numero }}</span>°<span id="division">{{ materia.division.nombre }} </span> <span>{{ materia.materia.nombre }}</span></option>                                      
+                                        <option *ngFor="let materia of materiasindice" value="{{materia.id}}" ><span>{{ materia.anio }}</span>°<span>{{ materia.division }} </span> <span>{{ materia.nombremateria }}</span></option>                                      
                                     </select>
                                 </div>
                             </div>
