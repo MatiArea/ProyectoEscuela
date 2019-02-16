@@ -1,0 +1,119 @@
+<div *ngIf="!mostrar1">
+    <div class="container-fluid animacion fadeIn">
+        <div class="row">
+            <main class="main col ">
+                <div class="row">
+                    <div class="columna col">
+                        <div class="contenedor">
+                            <form>
+                                <h1 class="text-center">Listado de materias</h1>
+                                <hr>
+                                <div *ngFor="let materia of materias" class="row">
+                                    <div class="col-6">
+                                        <li class="ml-3"><i class="fas fa-caret-square-right mr-1"></i><span>{{ materia.materia.anio.numero }}°</span> <span>{{ materia.division.nombre }} </span> <span>{{ materia.materia.nombre }}</span></li>
+                                    </div>
+                                    <div class="col-2">
+                                        <i (click)="cargarmateria(materia)" (click)="cambiar1()" class="fas fa-arrow-alt-circle-right ml-5 click position-static"></i>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+</div>
+
+
+<div class="animated bounceInRight" *ngIf="!mostrar2">
+    <div class="contenedor animacion fadeIn">
+        <h1 class="text-center">Evaluaciones</h1>
+        <hr>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Fecha</th>
+                    <th scope="col">Titulo</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr *ngFor="let evaluacion of evaluaciones">
+                    <td>{{ evaluacion.fecha }}</td>
+                    <td>{{ evaluacion.titulo }}</td>
+                    <td><i (click)="cargaralumnos(evaluacion)" (click)="cambiar2()" class="fas fa-arrow-alt-circle-right ml-5 click position-static"></i></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="animated bounceInRight" *ngIf="!mostrar3">
+    <div class="contenedor animacion fadeIn">
+        <h1 class="text-center">Alumnos</h1>
+        <hr>
+        <form #evaluaciones="ngForm" (ngSubmit)="cargarnotas(evaluaciones)">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col" class="text-center">Legajo</th>
+                        <th scope="col" class="text-center">Alumno</th>
+                        <th scope="col" class="text-center">Nota</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr *ngFor="let alumno of alumnos">
+                        <td class="text-center">{{ alumno.alumno.legajo }}</td>
+                        <td class="text-center"><span>{{ alumno.alumno.nombre }}</span><span> {{ alumno.alumno.apellido }}</span></td>
+                        <td class="text-center"><select name="nota" ngModel>
+                            <option value="">-</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                        </select>
+                        </td>
+                    </tr>
+                </tbody>
+
+            </table>
+
+            <div class="text-center">
+                <button type="submit" class="btn btn-lg btn-success m-lg-2" data-toggle="modal" data-target="#exampleModal">Cargar</button>
+            </div>
+        </form>
+
+    </div>
+
+</div>
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Notificación</h5>
+            </div>
+            <div class="modal-body">
+                <h3>Notas cargadas correctamente</h3>
+            </div>
+            <div class="modal-footer text-center">
+                <button routerLink="/paneladmin/inicio" type="button" class="btn btn-success" data-dismiss="modal">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,18 +1,38 @@
-<div class="container-fluid animacion fadeIn">
-    <div class="row">
-        <main class="main col ">
-            <div class="row">
-                <div class="columna col">
-                    <div class="contenedor">
-                        <button>PRUEBA BACK</button>
-                        <div *ngFor="let item of prueba"> {{ item.dia.nombre }}</div>
+<div *ngIf="!mostrar1">
 
+    <div class="container-fluid animacion fadeIn">
+        <div class="row">
+            <main class="main col ">
+                <div class="row">
+                    <div class="columna col">
+                        <div class="contenedor">
+                            <button (click)="cambiar()">CAMBIAR</button> hola
+
+                        </div>
                     </div>
                 </div>
-            </div>
-        </main>
+            </main>
+        </div>
+
     </div>
+</div>
 
+<div class="animated bounceInRight" *ngIf="!mostrar2">
 
+    <div class="container-fluid animacion fadeIn">
+        <div class="row">
+            <main class="main col ">
+                <div class="row">
+                    <div class="columna col">
+                        <div class="contenedor">
+                            chau
+
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+
+    </div>
 
 </div>

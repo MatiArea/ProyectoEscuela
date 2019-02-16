@@ -15,6 +15,7 @@ import { ListadoalumnosComponent } from './listadoalumnos/listadoalumnos.compone
 import { MateriasalumnoComponent } from './materiasalumno/materiasalumno.component';
 import { RolAdmin } from 'src/app/guards/RolAdmin.guard';
 import { InicioComponent } from 'src/app/shared/inicio/inicio.component';
+import { ListadomatevaComponent } from './listadomateva/listadomateva.component';
 
 
 
@@ -33,7 +34,8 @@ const adminRoutes: Routes = [
             { path: 'nota', component: NotaComponent,canActivate:[LoginGuard,RolAdmin]},
             { path: 'divisiones', component: ListadodivComponent,canActivate:[LoginGuard,RolAdmin]},
             { path: 'listadoalumnos', component: ListadoalumnosComponent,canActivate:[LoginGuard,RolAdmin]},
-            { path: 'materiasalumno', component: MateriasalumnoComponent,canActivate:[LoginGuard,RolAdmin]}
+            { path: 'materiasalumno', component: MateriasalumnoComponent,canActivate:[LoginGuard,RolAdmin]},
+            { path: 'materias', component: ListadomatevaComponent,canActivate:[LoginGuard,RolAdmin]}
 
         ]
     }

@@ -8,12 +8,12 @@ export class BoletinController {
 
     @Get('materias/alumno/:codigo')
     recuperarMateriasAlumno(@Param('codigo') parametro){
-        return this.boletinService.getBoletinAlumno(parametro);
+        return this.boletinService.getBoletinAlumno(parametro);//click en alumno, para mostrar el boletin con sus materias 
     }
 
     @Post('notas/insert')
     crearNotasBoletin(@Body() body:BoletinDTO){
-        return this.boletinService.cargarNotasBoletin(body);
+        return this.boletinService.cargarNotasBoletin(body);//boton cargar
     }
 
     @Get('all')
@@ -23,16 +23,16 @@ export class BoletinController {
 
     @Get('all/division/:id')
     recuperarBoletinesByID(@Param('id') parametro){
-        return this.boletinService.getBoletinesTodosByDivision(parametro);
+        return this.boletinService.getBoletinesTodosByDivision(parametro);//boletiens filtrados
     }
 
     @Put('boletin/update/:boletin/:trimestre')
     modificarBoletinTrimestre(@Param() parametros){
-        return this.boletinService.updateBoletinTrimestre(parametros);
+        return this.boletinService.updateBoletinTrimestre(parametros);//IMPORTANTE UPDATEAR EL BOLETIN QUE SE ACABA DE CARGAR CON EL NUMERO DE TRIMESTRE QUE SE ACABA DE CARGAR
     } 
 
     @Get('display/:legajo')
     recuperarBoletin(@Param('legajo') parametro){
-        return this.boletinService.showBoletin(parametro);
+        return this.boletinService.showBoletin(parametro);//muestra boletin al hacer click
     }
 }

@@ -11,6 +11,12 @@ export class CrearevaluacionComponent implements OnInit {
   materias:any;
   legajo:any;
   body:any;
+  materia:any;
+  folio:any;
+  anio:any;
+  division:any;
+
+ 
 
 
   constructor( private http: HttpClient ) { }
@@ -26,25 +32,32 @@ export class CrearevaluacionComponent implements OnInit {
     console.log(data);
    } );
 
+   this.http.get(`http://localhost:4000/evaluacion/folio`)
+   .subscribe( data=> {
+   this.folio=data;
+   console.log(this.folio);
+  } );
+
   }
 
-  guardar(materia:any){
-     this.body = JSON.parse(materia);
-     console.log(this.body); 
+  capturar(mat:any){
+    console.log(JSON.stringify(mat));    
   }
 
   enviarevaluacion(evalu:any){
-    console.log(evalu.value);
+    this.anio = document.getElementById('anio').innerHTML;
+    this.division = document.getElementById('division').innerHTML;
+    console.log(this.anio,this.division);
 
     this.http.post('http://localhost:4000/evaluacion/create',
     {
     fecha:evalu.value.fecha,
-    folio:evalu.value.folio,
+    folio:this.folio,
     temas:evalu.value.temas,
     titulo:evalu.value.titulo,
     legajoProfesor:this.legajo,
-    division:evalu.value.materia.division.nombre,
-    anio:evalu.value.materia.materia.anio.numero,
+    division:this.division,
+    anio:this.anio,
     materia:evalu.value.materia
     }).subscribe((data:any)=>{
       console.log(data);
@@ -53,6 +66,3 @@ export class CrearevaluacionComponent implements OnInit {
   }
 
 }
-/*
-    
-*/
