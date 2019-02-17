@@ -20,6 +20,7 @@ import { ListadoalumnosComponent } from './listadoalumnos/listadoalumnos.compone
 import { MateriasalumnoComponent } from './materiasalumno/materiasalumno.component';
 import { FormsModule } from '@angular/forms';
 import { ListadomatevaComponent } from './listadomateva/listadomateva.component';
+import { BoletinComponent } from './boletin/boletin.component';
 
 
 
@@ -38,7 +39,8 @@ import { ListadomatevaComponent } from './listadomateva/listadomateva.component'
     ListadodivComponent,
     ListadoalumnosComponent,
     MateriasalumnoComponent,
-    ListadomatevaComponent    
+    ListadomatevaComponent,
+    BoletinComponent    
   ],
   imports: [
       BrowserModule,

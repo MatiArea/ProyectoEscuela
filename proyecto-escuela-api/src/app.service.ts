@@ -70,4 +70,10 @@ constructor(@InjectRepository(Anio) private anioRepository:Repository<Anio>,
       
   }
 
+  async getAniosConDivisiones(){
+    const anios = getConnection().createQueryBuilder(Anio,"anio").select("anio.numero").select("anio.numero").addSelect("division.nombre")
+                        .innerJoin("anio.divisiones","division").getMany();
+    return anios;
+  }
+
 }

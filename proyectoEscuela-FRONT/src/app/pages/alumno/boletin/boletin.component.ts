@@ -27,6 +27,7 @@ export class BoletinComponent implements OnInit {
     this.http.get(`http://localhost:4000/boletin/display/${this.legajo}`)
     .subscribe( data=> {
     this.boletin=data;
+    console.log(this.boletin);
     this.notas=this.boletin.notas;
     this.trimestre2=this.boletin.trimestre2;
     this.trimestre3=this.boletin.trimestre3;
