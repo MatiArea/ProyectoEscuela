@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-boletin',
@@ -7,16 +8,40 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BoletinComponent implements OnInit {
 
-  constructor() { }
+  constructor( private http: HttpClient ) { }
 
-   materias:any[] =[
-     {nombre:'Matematica',Nota1:'10',Nota2:'10',Nota3:'10',promedio:'10'},
-     {nombre:'Lengua',Nota1:'10',Nota2:'10',Nota3:'10',promedio:'10'},
-     {nombre:'Musica',Nota1:'10',Nota2:'10',Nota3:'10',promedio:'10'},
-     {nombre:'Religion',Nota1:'10',Nota2:'10',Nota3:'10',promedio:'10'},
-     {nombre:'Educacion Fisica',Nota1:'10',Nota2:'10',Nota3:'10',promedio:'10'},
-   ];
+  legajo:any;
+  boletin:any;
+  notas:any;
+  trimestre1:boolean;
+  trimestre2:boolean;
+  trimestre3:boolean;
+  promedio=[];
 
   ngOnInit() {
+
+    this.legajo=localStorage.getItem( 'legajo' );
+
+
+
+    this.http.get(`http://localhost:4000/boletin/display/${this.legajo}`)
+    .subscribe( data=> {
+    this.boletin=data;
+    console.log(this.boletin);
+    this.notas=this.boletin.notas;
+    this.trimestre2=this.boletin.trimestre2;
+    this.trimestre3=this.boletin.trimestre3;
+    
+    for (let index = 0; index < this.notas.length; index++) {
+      this.promedio[index] = this.notas[index].nota1;
+      
+      
+    }
+
+    console.log(this.promedio);
+
+    });
+
+   
   }
 }

@@ -41,7 +41,11 @@ export class AppController {
   }
 
   @Get('anios/divisiones')
+<<<<<<< HEAD
   recuperarAniosConDivisiones(){
+=======
+  recuperarAniosDivisiones(){
+>>>>>>> c828a43ba081c5f9d3c9489d2285455a1fb80cea
     return this.appService.getAniosConDivisiones();
   }
 

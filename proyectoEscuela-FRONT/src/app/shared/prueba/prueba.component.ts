@@ -8,10 +8,22 @@ import { HttpClient } from '@angular/common/http';
 })
 export class PruebaComponent implements OnInit {
 
+  mostrar1=false;
+  mostrar2=true;
+
   prueba:any;
   date=new Date();
 
   constructor( private http: HttpClient ) { }
+
+
+   cambiar(){
+    this.mostrar2 = !this.mostrar2 ;
+    this.mostrar1 = !this.mostrar1 ;
+   
+    
+   }
+
 
   ngOnInit() {
     console.log(this.date);

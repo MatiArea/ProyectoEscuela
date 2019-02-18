@@ -1,23 +1,60 @@
-<div class="contenedor animacion fadeIn">
-    <h1 class="text-center">Nombre materia</h1>
-    <hr>
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">Fecha</th>
-                <th scope="col">Descripcion</th>
-                <th scope="col">Nota</th>
-            </tr>
-        </thead>
+<div class="container-fluid animacion fadeIn" *ngIf="!mostrar1">
+    <div class="row">
+        <main class="main col ">
+            <div class="row">
+                <div class="columna col">
+                    <div class="contenedor">
+                        <form>
+                            <h1 class="text-center">Listado de materias</h1>
+                            <hr>
+                            <div class="row">
+                                <div class="col-4">
+                                    <li *ngFor="let materia of materias" class="ml-3"><i class="fas fa-caret-square-right mr-1"></i>{{materia.materia.nombre}} </li>
 
-        <tbody>
-            <tr>
-                <td>10/10/19</td>
-                <td>Suma y resta</td>
-                <td>10</td>
+                                </div>
+                                <div class="col-2">
+                                    <i (click)="cargarnotas(materia)" (click)="cambiar1()" *ngFor="let materia of materias" class="fas fa-arrow-alt-circle-right ml-5 click position-static"></i>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
 
 
-            </tr>
-        </tbody>
-    </table>
+
+<div class="animated bounceInRight" *ngIf="!mostrar2">
+    <div class="contenedor animacion fadeIn">
+        <h1 class="text-center">Evaluaciones</h1>
+        <hr>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Fecha</th>
+                    <th scope="col">Titulo</th>
+                    <th scope="col">Temas</th>
+                    <th scope="col">Nota</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr *ngFor="let not of nota">
+                    <td>{{ not.evaluacion.fecha }}</td>
+                    <td>{{ not.evaluacion.titulo }}</td>
+                    <td>{{ not.evaluacion.temas }}</td>
+                    <td>{{ not.nota }}</td>
+
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center">
+        <button class="btn btn-lg btn-success m-lg-2" (click)="cambiar1()">Volver</button>
+    </div>
+
 </div>

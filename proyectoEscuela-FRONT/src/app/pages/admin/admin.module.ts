@@ -19,6 +19,8 @@ import { ListadodivComponent } from './listadodiv/listadodiv.component';
 import { ListadoalumnosComponent } from './listadoalumnos/listadoalumnos.component';
 import { MateriasalumnoComponent } from './materiasalumno/materiasalumno.component';
 import { FormsModule } from '@angular/forms';
+import { ListadomatevaComponent } from './listadomateva/listadomateva.component';
+import { BoletinComponent } from './boletin/boletin.component';
 
 
 
@@ -36,7 +38,9 @@ import { FormsModule } from '@angular/forms';
     CargadenotasComponent,
     ListadodivComponent,
     ListadoalumnosComponent,
-    MateriasalumnoComponent    
+    MateriasalumnoComponent,
+    ListadomatevaComponent,
+    BoletinComponent    
   ],
   imports: [
       BrowserModule,

@@ -27,4 +27,15 @@ export class PaneladminComponent implements OnInit {
   
 }
 
+
+verificarProfesor() {
+
+  if ( localStorage.getItem( 'rol' ) === 'Preceptor' ) {
+  return false;  
+  } else {
+    return true;
+  }
+
+}
+
 }

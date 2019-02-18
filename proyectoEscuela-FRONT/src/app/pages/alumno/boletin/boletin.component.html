@@ -1,25 +1,26 @@
 <div class="contenedor animacion fadeIn">
-    <h1 class="text-center">Año 1 Curso A</h1>
+    <h1 class="text-center">Boletin</h1>
     <hr>
     <table class="table">
         <thead>
             <tr>
                 <th scope="col">Materia</th>
-                <th scope="col">Trimestre 1</th>
-                <th scope="col">Trimestre 2</th>
-                <th scope="col">Trimestre 3</th>
+                <th *ngIf="trimestre1" scope="col">Trimestre 1</th>
+                <th *ngIf="trimestre2" scope="col">Trimestre 2</th>
+                <th *ngIf="trimestre3" scope="col">Trimestre 3</th>
                 <th scope="col">Promedio</th>
             </tr>
         </thead>
 
         <tbody>
-            <tr *ngFor="let materia of materias">
-                <td>{{ materia.nombre }}</td>
-                <td>{{ materia.Nota1 }}</td>
-                <td>{{ materia.Nota2 }}</td>
-                <td>{{ materia.Nota3 }}</td>
-                <td>{{ materia.promedio }}</td>
+            <tr *ngFor="let nota of notas">
+                <td>{{ nota.materia.nombre }}</td>
+                <td>No se cargaron notas aún</td>
+                <td *ngIf="trimestre1">{{ nota.nota1 }}</td>
+                <td *ngIf="trimestre2">{{ nota.nota2 }}</td>
+                <td *ngIf="trimestre3">{{ nota.nota3 }}</td>
             </tr>
+
         </tbody>
     </table>
 </div>

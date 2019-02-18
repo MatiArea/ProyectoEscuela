@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-evaluaciones',
@@ -7,9 +8,43 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EvaluacionesComponent implements OnInit {
 
-  constructor() { }
+  constructor( private http: HttpClient ) { }
+
+  mostrar1=false;
+  mostrar2=true;
+  legajo:any;
+  materias:any;
+  evaluaciones:any;
+  nota:any;
+
 
   ngOnInit() {
+
+    this.legajo=localStorage.getItem( 'legajo' );
+    return this.http.get(`http://localhost:4000/colegio/alumno/materias/${this.legajo}`)
+  .subscribe( data=> {
+  this.materias=data;
+  console.log(this.materias);
+ } );
+
+  }
+  /////////////////////////////////////////////////////////
+
+  cambiar1(){
+    this.mostrar1 = !this.mostrar1 ;
+    this.mostrar2 = !this.mostrar2 ;
+  }
+
+
+
+ 
+
+  cargarnotas(e:any){
+    this.http.get(`http://localhost:4000/evaluacion/todas/alumno/${this.legajo}/${e.materia.nombre}`)
+    .subscribe( data=> {
+    this.nota=data;
+    console.log(this.nota);
+    });
   }
 
 }

@@ -8,11 +8,11 @@
                             <h1>Creación de evaluacion</h1>
                             <hr>
                             <div class="form-group row">
-                                <label class="col-2 col-form-label"><h5>Materia</h5></label>
+                                <label class="col-2 col-form-label ml-3"><h5>Materia</h5></label>
                                 <div class="col-8">
-                                    <select (change)="guardar($event.target.value)" name="materia" ngModel>
+                                    <select (change)="capturar($event.target.value)" name="materia" ngModel>
                                         <option value="">-</option>
-                                        <option *ngFor="let materia of materias" value="{{materia}}" >{{ materia.materia.nombre }}</option>                                      
+                                        <option *ngFor="let materia of materiasindice" value="{{materia.id}}" ><span>{{ materia.anio }}</span>°<span>{{ materia.division }} </span> <span>{{ materia.nombremateria }}</span></option>                                      
                                     </select>
                                 </div>
                             </div>
@@ -27,7 +27,7 @@
                             <div class="form-group row">
                                 <label class="col-2 col-form-label ml-3"><h5>Folio</h5></label>
                                 <div class="col-8">
-                                    <input class="form-control" type="number" name="folio" ngModel>
+                                    <input value="{{ folio }}" class="form-control" type="number" name="folio" readonly ngModel>
                                 </div>
                             </div>
 

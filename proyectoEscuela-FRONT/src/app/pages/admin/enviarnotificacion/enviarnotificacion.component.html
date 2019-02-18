@@ -8,7 +8,7 @@
                             <h1>Envío de notificación</h1>
                             <hr>
                             <div class="form-group row text-center">
-                                <label class="col-2 col-form-label text-center"><h5>Año</h5></label>
+                                <label class="col-2 col-form-label text-center ml-3"><h5>Año</h5></label>
                                 <div class="col-8">
                                     <select (change)="getdivisiones($event.target.value)" name="anio" ngModel>
                                         <option value="">-</option>
@@ -18,9 +18,10 @@
                             </div>
 
                             <div class="form-group row text-center">
-                                <label class="col-2 col-form-label text-center"><h5>Divisiones</h5></label>
+                                <label class="col-2 col-form-label text-center ml-3"><h5>Divisiones</h5></label>
                                 <div class="col-8">
                                     <select name="division" ngModel>
+                                        <option value="">-</option>
                                         <option *ngFor="let division of divisiones" value="{{division.id}}" >{{ division.nombre }}°</option>                                      
                                       </select>
                                 </div>
