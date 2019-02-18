@@ -1,3 +1,4 @@
+import { NotasDTO } from './../../Dto/notas.dto';
 import { EvaluacionDTO } from './../../Dto/evaluacion.dto';
 import { EvaluAlumnoDTO } from './../../Dto/evaluAlumnos.dto';
 import { EvaluacionService } from 'src/Services/evaluacion.service';
@@ -47,7 +48,7 @@ export class EvaluacionController {
         return this.evaluacionService.getEvaluacionCompleta(parametro);
     }
 
-    @Get('todas/alumno/:legajo/:materiaID')
+    @Get('todas/alumno/:legajo/:materia')
     recuperarEvaluacionesAlumno(@Param() parametros){
         return this.evaluacionService.getEvaluacionesAlumnoTodas(parametros);
     }

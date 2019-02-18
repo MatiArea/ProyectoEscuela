@@ -119,11 +119,15 @@ export class EvaluacionService {
     async getEvaluacionesAlumnoTodas(params){
         const alumno : Alumno = await this.alumnoRepository.createQueryBuilder("alumno").select("alumno").where("alumno.legajo = :p", {p:params.legajo}).getOne();
         const matricula : Matricula = await this.matriculaRepository.createQueryBuilder("matricula").select("matricula")
-                          .where("matricula.alumno = :p", {p:alumno.id}).getOne();      
+                          .innerJoinAndSelect("matricula.division", "division").innerJoinAndSelect("division.anio", "anio")
+                          .where("matricula.alumno = :p", {p:alumno.id}).getOne();  
+        const materia : Materia = await this.materiaRepository.createQueryBuilder("materia").select("materia")
+                        .where("materia.nombre = :m", {m:params.materia})
+                        .andWhere("materia.anio = :a", {a:matricula.division.anio.id}).getOne();                      
         
         const evaluaciones = await getConnection().createQueryBuilder(EvaluAlumno, "nota").select("nota.nota").addSelect("evaluacion.fecha").addSelect("evaluacion.folio")
                              .addSelect("evaluacion.temas").addSelect("evaluacion.titulo").addSelect("materia.nombre").innerJoin("nota.evaluacion", "evaluacion").innerJoin("evaluacion.materia", "materia").innerJoin("nota.matricula", "matricula")
-                             .where("materia.id = :m", {m:params.materiaID}).andWhere("matricula.id = :p", {p:matricula.id}).getMany();  
+                             .where("materia.id = :m", {m:materia.id}).andWhere("matricula.id = :p", {p:matricula.id}).getMany();  
         return evaluaciones;                             
     }
     

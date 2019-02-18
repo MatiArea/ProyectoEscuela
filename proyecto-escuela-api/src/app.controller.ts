@@ -40,4 +40,9 @@ export class AppController {
     return this.appService.getMateriasCursadas(parametro);
   }
 
+  @Get('anios/divisiones')
+  recuperarAniosConDivisiones(){
+    return this.appService.getAniosConDivisiones();
+  }
+
 }

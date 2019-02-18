@@ -1,3 +1,5 @@
+import { NotificacionBoletinDTO } from './../../Dto/notificacionBoletin.dto';
+import { NotificacionEvaluacionDTO } from './../../Dto/notificacionEvaluacion.dto';
 import { NotificarOne } from './../../Dto/notificarOne.dto';
 import { NotificarTodos } from './../../Dto/notificarTodos.dto';
 import { Controller, Get, Post, Body, Param, Put } from '@nestjs/common';
@@ -36,4 +38,16 @@ crearAvisoTodos(@Body() body:NotificarTodos){
 crearAvisoAlumnos(@Body() body:NotificarOne){
     return this.notificacionService.createOneNotificacionAviso(body);
 }
+
+@Post('evaluacion/enviar/division')
+crearNotificacionEvaluacionTodos(@Body() body:NotificacionEvaluacionDTO){
+return this.notificacionService.createNotificacionEvaluacionTodos(body);
+}
+
+@Post('boletin/enviar/alumno')
+crearNotificacionBoletinAlumno(@Body() body:NotificacionBoletinDTO){
+    return this.notificacionService.createNotificacionBoletinAlumno(body);
+}
+
+
 }
