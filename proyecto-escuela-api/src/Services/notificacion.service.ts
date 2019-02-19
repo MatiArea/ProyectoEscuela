@@ -27,10 +27,10 @@ export class NotificacionService {
                 @InjectRepository(Evaluacion) private evaluacionRepository:Repository<Evaluacion>){}
 
    async getNotificacionesNoLeidas(legajo){
-        const alu : Alumno = await this.alumnoRepository.createQueryBuilder("alumno").select("alumno").innerJoinAndSelect("alumno.cuenta", "cuenta").where("alumno.legajo = :p", {p:legajo}).getOne();
+        const alumno : Alumno = await this.alumnoRepository.createQueryBuilder("alumno").select("alumno").innerJoinAndSelect("alumno.cuenta", "cuenta").where("alumno.legajo = :p", {p:legajo}).getOne();
         const notificaciones = await getConnection().createQueryBuilder(Notificacion, "notificacion").select("notificacion.id").addSelect("notificacion.titulo")
                                .addSelect("notificacion.descripcion").addSelect("notificacion.fecha")
-                               .where("notificacion.destinatario = :p", {p:alu.cuenta.id}).andWhere("notificacion.leida = :f", {f:0})
+                               .where("notificacion.destinatario = :a", {a:alumno.cuenta.id}).andWhere("notificacion.leida = :f", {f:0})
                                .orderBy("notificacion.fecha", "DESC").getMany();
         return notificaciones;
     }

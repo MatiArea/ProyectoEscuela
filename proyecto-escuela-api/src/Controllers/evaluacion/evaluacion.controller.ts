@@ -1,7 +1,5 @@
-import { NotasDTO } from './../../Dto/notas.dto';
 import { EvaluacionDTO } from './../../Dto/evaluacion.dto';
 import { EvaluAlumnoDTO } from './../../Dto/evaluAlumnos.dto';
-import { NotasDTO } from './../../Dto/notas.dto';
 import { EvaluacionService } from 'src/Services/evaluacion.service';
 import { Controller, Get, Body, Param, Post, Put } from '@nestjs/common';
 
