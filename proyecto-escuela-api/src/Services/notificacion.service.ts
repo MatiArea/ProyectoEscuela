@@ -114,7 +114,7 @@ export class NotificacionService {
     async createNotificacionEvaluacionTodos(params){
 
         const profesor : Profesor = await this.profesorRepository.createQueryBuilder("profesor").select("profesor")
-                                        .innerJoinAndSelect("profesor.cuenta", "cuenta").where("profesor.dni = :p", {p:params.legajo}).getOne();
+                                        .innerJoinAndSelect("profesor.cuenta", "cuenta").where("profesor.legajo = :p", {p:params.legajo}).getOne();
         const anio : Anio = await this.anioRepository.createQueryBuilder("anio").select("anio").where("anio.numero = :p", {p:params.anio}).getOne();
         const division : Division = await this.divisionRepository.createQueryBuilder("division").select("division").where("division.nombre = :p", {p:params.division}).andWhere("division.anio = :a", {a:anio.id}).getOne();
         

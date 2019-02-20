@@ -127,7 +127,7 @@ export class EvaluacionService {
         
         const evaluaciones = await getConnection().createQueryBuilder(EvaluAlumno, "nota").select("nota.nota").addSelect("evaluacion.fecha").addSelect("evaluacion.folio")
                              .addSelect("evaluacion.temas").addSelect("evaluacion.titulo").addSelect("materia.nombre").innerJoin("nota.evaluacion", "evaluacion").innerJoin("evaluacion.materia", "materia").innerJoin("nota.matricula", "matricula")
-                             .where("materia.id = :m", {m:materia.id}).andWhere("matricula.id = :p", {p:matricula.id}).getMany();  
+                             .where("materia.id = :m", {m:materia.id}).andWhere("matricula.id = :p", {p:matricula.id}).orderBy("evaluacion.fecha", "DESC").getMany();  
         return evaluaciones;                             
     }
     
