@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { NotaBoletinMostrar } from 'src/app/models/notaboletinamostrar';
+import * as jspdf from 'jspdf';  
+import html2canvas from 'html2canvas'; 
 
 @Component({
   selector: 'app-boletin',
@@ -20,12 +22,32 @@ export class BoletinComponent implements OnInit {
   promedio=[];
   mostrarpromedio:boolean;
   notamostrar:NotaBoletinMostrar[]=[];
+  alumnonombre:any;
+  alumnoapellido:any;
+  data:any;
+  imgWidth:any;
+  pageHeight:any;
+  imgHeight:any;
+  heightLeft:any;
+  pdf:any;
+  position:any;
+  aniodivision:any;
+
+
 
   ngOnInit() {
 
     this.legajo=localStorage.getItem( 'legajo' );
+    this.alumnonombre=localStorage.getItem( 'email' );
+    this.alumnoapellido=localStorage.getItem( 'apellido' );
 
 
+
+    this.http.get(`http://localhost:4000/colegio/alumno/curso/${this.legajo}`)
+    .subscribe( data=> {
+    this.aniodivision=data;
+    });
+    
 
     this.http.get(`http://localhost:4000/boletin/display/${this.legajo}`)
     .subscribe( data=> {
@@ -66,4 +88,25 @@ export class BoletinComponent implements OnInit {
       this.mostrarpromedio=true;
     }
   }
+
+  captureScreen(){
+    
+    {  
+      this.data = document.getElementById('contentToConvert');  
+      html2canvas(this.data).then(canvas => {  
+        // Few necessary setting options  
+        this.imgWidth = 208;   
+        this.pageHeight = 295;    
+        this.imgHeight = canvas.height * this.imgWidth / canvas.width;  
+        this.heightLeft = this.imgHeight;  
+    
+        const contentDataURL = canvas.toDataURL('image/png')  
+        this.pdf = new jspdf('p', 'mm', 'a4'); // A4 size page of PDF  
+        this.position = 0;  
+        this.pdf.addImage(contentDataURL, 'PNG', 0, this.position, this.imgWidth, this.imgHeight)  
+        this.pdf.save('boletin.pdf'); // Generated PDF   
+      });  
+    }  
+  } 
 }
+

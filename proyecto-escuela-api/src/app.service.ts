@@ -76,6 +76,12 @@ constructor(@InjectRepository(Anio) private anioRepository:Repository<Anio>,
     return anios;
   }
 
+  async getDivisionAndAnio(legajo){
+     const matricula : Matricula = await this.matriculaRepository.createQueryBuilder("matricula").select("matricula").innerJoinAndSelect("matricula.alumno", "alumno").innerJoinAndSelect("matricula.division", "division").where("alumno.legajo = :m", {m:legajo}).getOne();
+     const res = getConnection().createQueryBuilder(Division, "division").select("division.nombre").addSelect("anio.numero").innerJoin("division.anio", "anio").where("division.id = :i", {i:matricula.division.id}).getOne();
+     return res;
+  }
+
 
 
 }

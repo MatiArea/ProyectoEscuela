@@ -1,26 +1,31 @@
 <div class="contenedor animacion fadeIn">
-    <h1 class="text-center">Boletin</h1>
-    <table class="table">
-        <thead>
-            <tr class="text-center">
-                <th scope="col">Materia</th>
-                <th *ngIf="trimestre1" scope="col">Trimestre 1</th>
-                <th *ngIf="trimestre2" scope="col">Trimestre 2</th>
-                <th *ngIf="trimestre3" scope="col">Trimestre 3</th>
-                <th *ngIf="mostrarpromedio" scope="col">Promedio</th>
-            </tr>
-        </thead>
+    <div id="contentToConvert">
+        <h1 class="text-center">Alumno: <span>{{ alumnoapellido }} </span><span>{{ alumnonombre }} <br> </span> Legajo: <span>{{ legajo }}</span> <br><span>Año {{ aniodivision.anio.numero }}º</span> División {{ aniodivision.nombre }}<span></span> </h1>
+        <table class="table">
+            <thead>
+                <tr class="text-center">
+                    <th scope="col">Materia</th>
+                    <th *ngIf="trimestre1" scope="col">Trimestre 1</th>
+                    <th *ngIf="trimestre2" scope="col">Trimestre 2</th>
+                    <th *ngIf="trimestre3" scope="col">Trimestre 3</th>
+                    <th *ngIf="mostrarpromedio" scope="col">Promedio</th>
+                </tr>
+            </thead>
 
-        <tbody>
-            <tr class="text-center" *ngFor="let nota of notamostrar">
-                <td>{{ nota.materia }}</td>
-                <td *ngIf="trimestre1">{{ nota.nota1 }}</td>
-                <td *ngIf="trimestre2">{{ nota.nota2 }}</td>
-                <td *ngIf="trimestre3">{{ nota.nota3 }}</td>
-                <td *ngIf="mostrarpromedio">{{ nota.promedio | number:'1.0-0' }}</td>
+            <tbody>
+                <tr class="text-center" *ngFor="let nota of notamostrar">
+                    <td>{{ nota.materia }}</td>
+                    <td *ngIf="trimestre1">{{ nota.nota1 }}</td>
+                    <td *ngIf="trimestre2">{{ nota.nota2 }}</td>
+                    <td *ngIf="trimestre3">{{ nota.nota3 }}</td>
+                    <td *ngIf="mostrarpromedio">{{ nota.promedio | number:'1.0-0' }}</td>
 
-            </tr>
+                </tr>
 
-        </tbody>
-    </table>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center">
+        <button (click)="captureScreen()" class="btn btn-primary" type="submit">Descargar Boletin</button>
+    </div>
 </div>
