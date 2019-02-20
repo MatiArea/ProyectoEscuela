@@ -23,10 +23,15 @@ export class ListadomatevaComponent implements OnInit {
   alumnos:any;
   folio:any;
   notas:Notas[]=[];
+  fecha=new Date();
+  fechaactual:string;
+
 
   ngOnInit() {
 
     this.legajo=localStorage.getItem( 'legajo' );
+    this.fecha.setMonth( this.fecha.getMonth() + 1 );
+    this.fechaactual='' + this.fecha.getFullYear() + '/' + this.fecha.getMonth() + '/' + this.fecha.getDate();
 
 
 
@@ -109,6 +114,17 @@ export class ListadomatevaComponent implements OnInit {
       
     });
   
+
+    this.http.post('http://localhost:4000/notificaciones/evaluacion/enviar/division',
+    {
+      legajo:this.legajo,
+      division:this.materia.division.nombre,
+      anio:this.materia.materia.anio.numero,
+      folio:this.folio,
+      fecha:this.fechaactual
+    }).subscribe((data:any)=>{
+      console.log(data);
+    });
 
    }
 }

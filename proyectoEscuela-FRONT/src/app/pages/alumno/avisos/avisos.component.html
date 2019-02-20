@@ -2,22 +2,22 @@
     <h1 class="text-center">Notificaciones</h1>
 
     <table class="table">
-        <thead>
-            <tr>
-                <th class="text-center">Fecha</th>
-                <th class="text-center">Titulo</th>
-                <th class="text-center">Descripcion</th>
-            </tr>
-        </thead>
 
-        <tbody>
-            <tr *ngFor="let data of notificaciones">
-                <td class="text-center">{{ data.fecha }}</td>
-                <td class="text-center">{{ data.titulo }}</td>
-                <td class="text-center">{{ data.descripcion }}</td>
-                <td class="text-center"><i routerLink="/panel/notificacion/{{data.id}}" class="fas fa-arrow-alt-circle-right"></i></td>
-                <hr>
-            </tr>
-        </tbody>
+        <tr>
+            <th class="text-center">Fecha</th>
+            <th class="text-center">Titulo</th>
+            <th class="text-center">Descripcion</th>
+        </tr>
+
+
+
+        <tr *ngFor="let data of notificaciones">
+            <td class="fecha">{{ data.fecha }}</td>
+            <td class="text-center">{{ data.titulo }}</td>
+            <td class="text-center">{{ data.descripcion }}</td>
+            <td class="text-center"><i routerLink="/panel/notificacion/{{data.id}}" class="fas fa-arrow-alt-circle-right click"></i></td>
+            <hr>
+        </tr>
+
     </table>
 </div>

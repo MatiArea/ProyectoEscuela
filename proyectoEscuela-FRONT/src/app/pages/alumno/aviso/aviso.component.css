@@ -1,21 +1,10 @@
-li {
-    text-decoration: none;
-    list-style: none;
-}
-
-ul {
-    text-decoration: none;
-    list-style: none;
-    margin-left: 50px;
-}
-
 .contenedor {
     background: #E6E6E6;
-    width: auto;
-    margin: auto;
     border: 4px solid #0275db;
+    width: auto;
     font-size: 30px;
-    padding: 5px;
+    padding: 20px;
+    margin: 20px;
 }
 
 hr {
@@ -33,8 +22,9 @@ th {
 
 td {
     border: 3px solid black;
+    width: 30px;
 }
 
-td {
-    border-top: 3px solid black;
+tr {
+    width: 30px;
 }

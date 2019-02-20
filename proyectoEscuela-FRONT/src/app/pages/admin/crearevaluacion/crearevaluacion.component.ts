@@ -73,6 +73,8 @@ export class CrearevaluacionComponent implements OnInit {
       console.log(data);
     });
 
+    
+
   }
 
 }

@@ -23,7 +23,7 @@ form .btn {
 }
 
 .card {
-    margin-top: 70px;
+    margin-top: 200px;
 }
 
 ul {
@@ -37,4 +37,8 @@ ul {
 #error label {
     color: red;
     font-weight: bold;
+}
+
+.centro {
+    margin: auto;
 }

@@ -5,7 +5,7 @@
                 <div class="columna col">
                     <div class="contenedor">
                         <form #evaluacion="ngForm" (ngSubmit)="enviarevaluacion(evaluacion)">
-                            <h1>Creación de evaluacion</h1>
+                            <h1>Creación de evaluación</h1>
                             <hr>
                             <div class="form-group row">
                                 <label class="col-2 col-form-label ml-3"><h5>Materia</h5></label>
@@ -83,8 +83,9 @@
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Notificación</h5>
             </div>
-            <div class="modal-body">
+            <div class="modal-body text-center">
                 <h3>Evaluación creada correctamente</h3>
+                <img class="heartBeat" src="../../../../assets/iconos/font/verificado.png" alt="">
             </div>
             <div class="modal-footer text-center">
                 <button routerLink="/paneladmin/inicio" type="button" class="btn btn-success" data-dismiss="modal">Aceptar</button>

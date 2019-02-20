@@ -1,24 +1,24 @@
 <div class="contenedor animacion fadeIn">
     <h1 class="text-center">Boletin</h1>
-    <hr>
     <table class="table">
         <thead>
-            <tr>
+            <tr class="text-center">
                 <th scope="col">Materia</th>
                 <th *ngIf="trimestre1" scope="col">Trimestre 1</th>
                 <th *ngIf="trimestre2" scope="col">Trimestre 2</th>
                 <th *ngIf="trimestre3" scope="col">Trimestre 3</th>
-                <th scope="col">Promedio</th>
+                <th *ngIf="mostrarpromedio" scope="col">Promedio</th>
             </tr>
         </thead>
 
         <tbody>
-            <tr *ngFor="let nota of notas">
-                <td>{{ nota.materia.nombre }}</td>
-                <td>No se cargaron notas aún</td>
+            <tr class="text-center" *ngFor="let nota of notamostrar">
+                <td>{{ nota.materia }}</td>
                 <td *ngIf="trimestre1">{{ nota.nota1 }}</td>
                 <td *ngIf="trimestre2">{{ nota.nota2 }}</td>
                 <td *ngIf="trimestre3">{{ nota.nota3 }}</td>
+                <td *ngIf="mostrarpromedio">{{ nota.promedio | number:'1.0-0' }}</td>
+
             </tr>
 
         </tbody>

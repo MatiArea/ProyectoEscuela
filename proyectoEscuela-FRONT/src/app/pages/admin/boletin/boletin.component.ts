@@ -28,12 +28,20 @@ export class BoletinComponent implements OnInit {
   trimestreactual:number;
   notasboletin:NotasBol[]=[];
   lareputramadre:number;
+  dni:any;
+  fecha=new Date();
+  fechaactual:string;
+
   
   constructor( private http: HttpClient ) { }
-
+  
   
 
   ngOnInit() {
+
+    this.dni=localStorage.getItem( 'dni' );
+    this.fecha.setMonth( this.fecha.getMonth() + 1 );
+    this.fechaactual='' + this.fecha.getFullYear() + '/' + this.fecha.getMonth() + '/' + this.fecha.getDate();
 
     this.http.get(`http://localhost:4000/colegio/anios/divisiones`)
     .subscribe( data=> {
@@ -89,7 +97,8 @@ export class BoletinComponent implements OnInit {
   }
 
   cargarmaterias(a:any){
-
+    this.alumno=a;
+    console.log(this.alumno)
     this.http.get(`http://localhost:4000/boletin/materias/alumno/${a.codigo}`)
    .subscribe( data=> {
    this.boletin=data;
@@ -148,8 +157,21 @@ export class BoletinComponent implements OnInit {
       console.log(data);
     });
 
+
+    this.http.post('http://localhost:4000/notificaciones/boletin/enviar/alumno',
+    {
+      legajoAlumno:this.alumno.alumno.legajo,
+      dniPreceptor:this.dni,
+      fecha:this.fechaactual,
+      trimestre:this.trimestreactual
+    }).subscribe((data:any)=>{
+      console.log(data);
+    });
+  
+
   }
 
+ 
 
 
 }

@@ -124,7 +124,7 @@ export class NotificacionService {
         const evaluacion : Evaluacion = await this.evaluacionRepository.createQueryBuilder("evaluacion").select("evaluacion").innerJoinAndSelect("evaluacion.materia", "materia").where("evaluacion.folio = :f", {f:params.folio}).getOne();
 
         for(let indice = 0; indice <= matriculas.length; indice++){
-         const notaEva : EvaluAlumno = await this.evaluAlumnoRepository.createQueryBuilder("evaluAlumno").select("evaluAlumno").where("evluaAlumno.matricula = :p", {p:matriculas[indice].id}).andWhere("evaluAlumno.evaluacion = :n", {n:evaluacion.id}).getOne();  
+         const notaEva : EvaluAlumno = await this.evaluAlumnoRepository.createQueryBuilder("evaluAlumno").select("evaluAlumno").where("evaluAlumno.matricula = :p", {p:matriculas[indice].id}).andWhere("evaluAlumno.evaluacion = :n", {n:evaluacion.id}).getOne();  
          const nota = notaEva.nota.toString();
          const notificacion = {
              titulo:'Evaluacion',

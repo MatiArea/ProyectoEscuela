@@ -9,10 +9,10 @@
                                 <h1 class="text-center">Listado de materias</h1>
                                 <hr>
                                 <div *ngFor="let materia of materias" class="row">
-                                    <div class="col-6">
+                                    <div class="col-3">
                                         <li class="ml-3"><i class="fas fa-caret-square-right mr-1"></i><span>{{ materia.materia.anio.numero }}°</span> <span>{{ materia.division.nombre }} </span> <span>{{ materia.materia.nombre }}</span></li>
                                     </div>
-                                    <div class="col-2">
+                                    <div class="col-1">
                                         <i (click)="cargarmateria(materia)" (click)="cambiar1()" class="fas fa-arrow-alt-circle-right ml-5 click position-static"></i>
                                     </div>
                                 </div>
@@ -30,21 +30,20 @@
 <div class="animated bounceInRight" *ngIf="!mostrar2">
     <div class="contenedor animacion fadeIn">
         <h1 class="text-center">Evaluaciones</h1>
-        <hr>
         <table class="table">
             <thead>
-                <tr>
-                    <th scope="col">Fecha</th>
-                    <th scope="col">Titulo</th>
-                    <th scope="col"></th>
+                <tr class="text-center">
+                    <th>Fecha</th>
+                    <th>Titulo</th>
+                    <th></th>
                 </tr>
             </thead>
 
             <tbody>
-                <tr *ngFor="let evaluacion of evaluaciones">
+                <tr class="text-center" *ngFor="let evaluacion of evaluaciones">
                     <td>{{ evaluacion.fecha }}</td>
                     <td>{{ evaluacion.titulo }}</td>
-                    <td><i (click)="cargaralumnos(evaluacion)" (click)="cambiar2()" class="fas fa-arrow-alt-circle-right ml-5 click position-static"></i></td>
+                    <td><i (click)="cargaralumnos(evaluacion)" (click)="cambiar2()" class="fas fa-arrow-alt-circle-right click position-static"></i></td>
                 </tr>
             </tbody>
         </table>
@@ -54,15 +53,13 @@
 <div class="animated bounceInRight" *ngIf="!mostrar3">
     <div class="contenedor animacion fadeIn">
         <h1 class="text-center">Alumnos</h1>
-        <hr>
         <form #evaluaciones="ngForm" (ngSubmit)="cargarnotas(evaluaciones)">
             <table class="table">
                 <thead>
                     <tr>
-                        <th scope="col" class="text-center">Legajo</th>
-                        <th scope="col" class="text-center">Alumno</th>
-                        <th scope="col" class="text-center">Nota</th>
-                        <th scope="col"></th>
+                        <th class="text-center">Legajo</th>
+                        <th class="text-center">Alumno</th>
+                        <th class="text-center">Nota</th>
                     </tr>
                 </thead>
 
@@ -108,8 +105,9 @@
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Notificación</h5>
             </div>
-            <div class="modal-body">
+            <div class="modal-body text-center">
                 <h3>Notas cargadas correctamente</h3>
+                <img class="heartBeat" src="../../../../assets/iconos/font/verificado.png" alt="">
             </div>
             <div class="modal-footer text-center">
                 <button routerLink="/paneladmin/inicio" type="button" class="btn btn-success" data-dismiss="modal">Aceptar</button>
