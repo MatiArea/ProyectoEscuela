@@ -32,7 +32,6 @@ export class MostrarboletinesComponent implements OnInit {
     this.http.get(`http://localhost:4000/colegio/anios/divisiones`)
     .subscribe( data=> {
     this.anio=data;
-    console.log(this.anio);
    } );
  
   }
@@ -60,7 +59,6 @@ export class MostrarboletinesComponent implements OnInit {
     this.http.get(`http://localhost:4000/colegio/divisiones/${a.numero}`)
     .subscribe( data=> {
     this.divisiones=data;
-    console.log(this.divisiones);
  
    } );
     
@@ -72,7 +70,6 @@ export class MostrarboletinesComponent implements OnInit {
     this.http.get(`http://localhost:4000/colegio/alumnos/${d.id}`)
    .subscribe( data=> {
    this.alumnos=data;
-   console.log(this.alumnos);
   } );    
   
   }
@@ -84,7 +81,6 @@ export class MostrarboletinesComponent implements OnInit {
     .subscribe( data=> {
     this.boletin=data;
     this.notas=this.boletin.notas;
-    console.log(this.notas);
 
 
 
@@ -101,7 +97,6 @@ export class MostrarboletinesComponent implements OnInit {
         promedio:(this.notas[index].nota1+this.notas[index].nota2+this.notas[index].nota3)/3
       };
     }
-    console.log(this.notamostrar);
 
     
 

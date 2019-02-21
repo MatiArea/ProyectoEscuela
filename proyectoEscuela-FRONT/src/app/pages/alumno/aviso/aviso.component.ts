@@ -32,7 +32,6 @@ export class AvisoComponent implements OnInit {
     this.id = this.route.snapshot.params['id'];
     return this.http.get(`http://localhost:4000/notificaciones/display/${this.id}`)
     .subscribe( data=> {
-      console.log(data);
     this.notificacion=data;
   } );
   

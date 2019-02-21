@@ -17,7 +17,6 @@ export class AvisosComponent implements OnInit {
       return this.http.get(`http://localhost:4000/notificaciones/all/${this.legajo}`)
     .subscribe( data=> {
     this.notificaciones=data;
-    console.log(this.notificaciones);
    } );
   }
 }

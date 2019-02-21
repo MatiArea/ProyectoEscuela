@@ -53,7 +53,6 @@ export class BoletinComponent implements OnInit {
     .subscribe( data=> {
     this.boletin=data;
     this.notas=this.boletin.notas;
-    console.log(this.notas);
 
     
     this.trimestres();
@@ -80,7 +79,6 @@ export class BoletinComponent implements OnInit {
         promedio:(this.notas[index].nota1+this.notas[index].nota2+this.notas[index].nota3)/3
       };
     }
-    console.log(this.notamostrar);
 
     
 

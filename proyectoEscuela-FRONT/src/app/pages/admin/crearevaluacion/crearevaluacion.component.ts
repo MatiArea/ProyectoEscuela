@@ -45,7 +45,6 @@ export class CrearevaluacionComponent implements OnInit {
    
 
 
-  console.log(this.materiasindice);
 
    this.http.get(`http://localhost:4000/evaluacion/folio`)
    .subscribe( data=> {
@@ -70,7 +69,6 @@ export class CrearevaluacionComponent implements OnInit {
     anio:this.materiasindice[this.indice].anio,
     materia:this.materiasindice[this.indice].nombremateria
     }).subscribe((data:any)=>{
-      console.log(data);
     });
 
     

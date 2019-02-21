@@ -62,7 +62,6 @@ export class ListadomateriasComponent implements OnInit {
     .subscribe( data=> {
     this.evaluacion=data;
     this.notas=this.evaluacion.notas;
-    console.log(this.notas);
     
     
     });

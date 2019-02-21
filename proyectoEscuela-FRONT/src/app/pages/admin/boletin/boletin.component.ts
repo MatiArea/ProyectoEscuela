@@ -46,7 +46,6 @@ export class BoletinComponent implements OnInit {
     this.http.get(`http://localhost:4000/colegio/anios/divisiones`)
     .subscribe( data=> {
     this.anio=data;
-    console.log(this.anio);
    } );
  
 
@@ -79,7 +78,6 @@ export class BoletinComponent implements OnInit {
     this.http.get(`http://localhost:4000/colegio/divisiones/${a.numero}`)
     .subscribe( data=> {
     this.divisiones=data;
-    console.log(this.divisiones);
  
    } );
     
@@ -91,18 +89,15 @@ export class BoletinComponent implements OnInit {
     this.http.get(`http://localhost:4000/colegio/alumnos/${d.id}`)
    .subscribe( data=> {
    this.alumnos=data;
-   console.log(this.alumnos);
   } );    
   
   }
 
   cargarmaterias(a:any){
     this.alumno=a;
-    console.log(this.alumno);
     this.http.get(`http://localhost:4000/boletin/materias/alumno/${a.codigo}`)
    .subscribe( data=> {
    this.boletin=data;
-   console.log(this.boletin);
    this.trimestre1=this.boletin.boletin.trimestre1;
    this.trimestre2=this.boletin.boletin.trimestre2;
    this.trimestre3=this.boletin.boletin.trimestre3;
@@ -131,7 +126,6 @@ export class BoletinComponent implements OnInit {
   }
 
   cargarboletin(b:any){
-   console.log(b);
    for (let index = 0; index < this.boletin.materias.length; index++) {
     this.notasboletin[index] = {
       idMateria: this.boletin.materias[index].id,
@@ -148,13 +142,11 @@ export class BoletinComponent implements OnInit {
     trimestre:this.trimestreactual,
     notas:this.notasboletin
   }).subscribe((data:any)=>{
-    console.log(data);
   });
 
   
   this.http.get(`http://localhost:4000/boletin/update/${this.boletin.boletin.id}/${this.trimestreactual}` )
     .subscribe((data:any)=>{
-      console.log(data);
     });
 
 
@@ -165,7 +157,6 @@ export class BoletinComponent implements OnInit {
       fecha:this.fechaactual,
       trimestre:this.trimestreactual
     }).subscribe((data:any)=>{
-      console.log(data);
     });
   
 

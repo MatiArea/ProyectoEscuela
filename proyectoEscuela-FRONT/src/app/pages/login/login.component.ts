@@ -22,7 +22,6 @@ export class LoginComponent {
       pass:form.value.password
     }).subscribe(
       (data:any)=> {
-        console.log(data);
     
         if ( data.status===200 ) {
           localStorage.setItem( 'email', data.nombre );
@@ -47,7 +46,6 @@ export class LoginComponent {
   }
 
 /*  login( form: NgForm) {
-    console.log( form.value );
 
     if ( form.value.email === 'ivan'  &&  form.value.password === 'ivan') {
       localStorage.setItem( 'email', form.value.email );

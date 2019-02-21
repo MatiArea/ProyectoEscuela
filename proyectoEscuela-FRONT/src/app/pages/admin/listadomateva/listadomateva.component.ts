@@ -60,7 +60,6 @@ export class ListadomatevaComponent implements OnInit {
   
    cargarmateria(m:any){
     this.materia=m;
-    console.log(m);
 
     this.http.get(`http://localhost:4000/evaluacion/cargarNotas/${m.materia.nombre}/${this.legajo}/${m.materia.anio.numero}/${m.division.nombre}`)
     .subscribe( data=> {
@@ -123,7 +122,6 @@ export class ListadomatevaComponent implements OnInit {
       folio:this.folio,
       fecha:this.fechaactual
     }).subscribe((data:any)=>{
-      console.log(data);
     });
 
    }

@@ -24,7 +24,6 @@ export class EvaluacionesComponent implements OnInit {
     return this.http.get(`http://localhost:4000/colegio/alumno/materias/${this.legajo}`)
   .subscribe( data=> {
   this.materias=data;
-  console.log(this.materias);
  } );
 
   }
@@ -43,7 +42,6 @@ export class EvaluacionesComponent implements OnInit {
     this.http.get(`http://localhost:4000/evaluacion/todas/alumno/${this.legajo}/${e.materia.nombre}`)
     .subscribe( data=> {
     this.nota=data;
-    console.log(this.nota);
     });
   }
 
