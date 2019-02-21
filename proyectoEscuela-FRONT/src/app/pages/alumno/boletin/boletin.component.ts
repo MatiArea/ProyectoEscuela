@@ -100,10 +100,10 @@ export class BoletinComponent implements OnInit {
         this.imgHeight = canvas.height * this.imgWidth / canvas.width;  
         this.heightLeft = this.imgHeight;  
     
-        const contentDataURL = canvas.toDataURL('image/png')  
+        const contentDataURL = canvas.toDataURL('image/png');  
         this.pdf = new jspdf('p', 'mm', 'a4'); // A4 size page of PDF  
         this.position = 0;  
-        this.pdf.addImage(contentDataURL, 'PNG', 0, this.position, this.imgWidth, this.imgHeight)  
+        this.pdf.addImage(contentDataURL, 'PNG', 0, this.position, this.imgWidth, this.imgHeight);  
         this.pdf.save('boletin.pdf'); // Generated PDF   
       });  
     }  

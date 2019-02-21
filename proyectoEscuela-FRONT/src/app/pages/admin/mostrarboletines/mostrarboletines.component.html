@@ -1,0 +1,92 @@
+<div class="container-fluid animacion fadeIn" *ngIf="!mostrar1">
+    <div class="row">
+        <main class="main col ">
+            <div class="row">
+                <div class="columna col">
+                    <div class="contenedor">
+                        <form>
+                            <h1 class="text-center">Listado de años</h1>
+                            <hr>
+                            <div *ngFor="let ano of anio">
+                                <li class="ml-3"><i class="fas fa-caret-square-right mr-1"></i>Año {{ ano.numero }}<i (click)="cargardivisiones(ano)" (click)="cambiar1()" class="fas fa-arrow-alt-circle-right ml-3 click"></i>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+
+<div class="container-fluid animacion fadeIn" *ngIf="!mostrar2">
+    <div class="row">
+        <main class="main col ">
+            <div class="row">
+                <div class="columna col">
+                    <div class="contenedor">
+                        <form>
+                            <h1 class="text-center">Listado de divisiones</h1>
+                            <hr>
+                            <div *ngFor="let division of divisiones">
+                                <li class="ml-3"><i class="fas fa-caret-square-right mr-1"></i>Division {{ division.nombre }}<i (click)="cargaralumnos(division)" (click)="cambiar2()" class="fas fa-arrow-alt-circle-right ml-3 click"></i>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+
+
+<div class="container-fluid animacion fadeIn" *ngIf="!mostrar3">
+    <div class="row">
+        <main class="main col ">
+            <div class="row">
+                <div class="columna col">
+                    <div class="contenedor">
+                        <form>
+                            <h1 class="text-center">Alumnos</h1>
+                            <hr>
+                            <div *ngFor="let alumno of alumnos" class="row">
+                                <div class="col-6">
+                                    <li class="ml-3"><i class="fas fa-caret-square-right mr-1"></i><span> {{ alumno.alumno.apellido }} </span><span> {{ alumno.alumno.nombre }}</span>
+                                </div>
+                                <div class="col-2">
+                                    <i (click)="cargarmaterias(alumno)" (click)="cambiar3()" class="fas fa-arrow-alt-circle-right click ml-2"></i>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+
+<div class="contenedor animacion fadeIn" *ngIf="!mostrar4">
+
+    <table class="table">
+        <thead>
+            <tr class="text-center">
+                <th scope="col">Materia</th>
+                <th *ngIf="trimestre1" scope="col">Trimestre 1</th>
+                <th *ngIf="trimestre2" scope="col">Trimestre 2</th>
+                <th *ngIf="trimestre3" scope="col">Trimestre 3</th>
+                <th *ngIf="mostrarpromedio" scope="col">Promedio</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr class="text-center" *ngFor="let nota of notamostrar">
+                <td>{{ nota.materia }}</td>
+                <td *ngIf="trimestre1">{{ nota.nota1 }}</td>
+                <td *ngIf="trimestre2">{{ nota.nota2 }}</td>
+                <td *ngIf="trimestre3">{{ nota.nota3 }}</td>
+                <td *ngIf="mostrarpromedio">{{ nota.promedio | number:'1.0-0' }}</td>
+
+            </tr>
+
+        </tbody>
+    </table>
+</div>

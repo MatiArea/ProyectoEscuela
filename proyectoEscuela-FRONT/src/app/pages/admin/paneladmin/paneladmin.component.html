@@ -23,8 +23,11 @@
                     <li routerLink="/paneladmin/materias" *ngIf="mostrar3" routerLinkActive="activado"><i class="fas fa-id-badge"></i><span>Cargar Evaluacion</span></li>
                     <li routerLink="/paneladmin/listadomaterias" *ngIf="mostrar3" routerLinkActive="activado"><i class="fas fa-id-badge"></i><span>Listado Evaluaciones</span></li>
                 </ul>
-                <li routerLink="/paneladmin/boletin" *ngIf="verificarPreceptor()" (click)=" mostrar4 = !mostrar4 " routerLinkActive="activado"><i class="fas fa-graduation-cap"></i><span>Boletin</span></li>
-
+                <li routerLink="/paneladmin/boletin" *ngIf="verificarPreceptor()" (click)=" mostrar4 = !mostrar4 " routerLinkActive="activado"><i class="fas fa-graduation-cap"></i><span>Boletin</span><i class="fas fa-angle-down derecha"></i></li>
+                <ul>
+                    <li routerLink="/paneladmin/cargarboletin" *ngIf="mostrar4" routerLinkActive="activado"><i class="fas fa-id-badge"></i><span>Cargar Boletin</span></li>
+                    <li routerLink="/paneladmin/boletines" *ngIf="mostrar4" routerLinkActive="activado"><i class="fas fa-id-badge"></i><span>Ver Boletines</span></li>
+                </ul>
 
             </nav>
         </div>

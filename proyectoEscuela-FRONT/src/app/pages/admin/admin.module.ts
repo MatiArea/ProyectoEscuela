@@ -21,6 +21,7 @@ import { MateriasalumnoComponent } from './materiasalumno/materiasalumno.compone
 import { FormsModule } from '@angular/forms';
 import { ListadomatevaComponent } from './listadomateva/listadomateva.component';
 import { BoletinComponent } from './boletin/boletin.component';
+import { MostrarboletinesComponent } from './mostrarboletines/mostrarboletines.component';
 
 
 
@@ -40,7 +41,8 @@ import { BoletinComponent } from './boletin/boletin.component';
     ListadoalumnosComponent,
     MateriasalumnoComponent,
     ListadomatevaComponent,
-    BoletinComponent    
+    BoletinComponent,
+    MostrarboletinesComponent    
   ],
   imports: [
       BrowserModule,

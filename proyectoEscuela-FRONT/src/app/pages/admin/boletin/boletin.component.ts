@@ -98,7 +98,7 @@ export class BoletinComponent implements OnInit {
 
   cargarmaterias(a:any){
     this.alumno=a;
-    console.log(this.alumno)
+    console.log(this.alumno);
     this.http.get(`http://localhost:4000/boletin/materias/alumno/${a.codigo}`)
    .subscribe( data=> {
    this.boletin=data;
