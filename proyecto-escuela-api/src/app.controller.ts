@@ -45,4 +45,9 @@ export class AppController {
     return this.appService.getAniosConDivisiones();
   }
 
+  @Get('alumno/curso/:legajo')
+  recuperarCursoAlumno(@Param('legajo') parametro){
+    return this.appService.getDivisionAndAnio(parametro);
+  }
+
 }

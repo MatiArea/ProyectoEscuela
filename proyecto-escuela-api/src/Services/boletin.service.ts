@@ -14,7 +14,8 @@ import { Injectable } from '@nestjs/common';
 export class BoletinService {
     constructor(@InjectRepository(Matricula) private matriculaRepository:Repository<Matricula>, 
                 @InjectRepository(Alumno) private alumnoRepository:Repository<Alumno>, 
-                @InjectRepository(Boletin) private boletinRepository:Repository<Boletin>){}
+                @InjectRepository(Boletin) private boletinRepository:Repository<Boletin>, 
+                @InjectRepository(NotaBoletin) private notaBoletinRepository:Repository<NotaBoletin>){}
 
     async getBoletinAlumno(codigo){
         const matricula : Matricula = await this.matriculaRepository.createQueryBuilder("matricula").select("matricula").innerJoinAndSelect("matricula.division", "division")
@@ -36,14 +37,19 @@ export class BoletinService {
     async cargarNotasBoletin(params){
         for(let indice = 0; indice <= params.notas.length; indice++){
             switch(params.trimestre){
-                case 1: await getConnection().createQueryBuilder(NotaBoletin, "notaBoletin").update(NotaBoletin).set({nota1:params.notas[indice].nota})
-                               .where("notaBoletin.boletin = :b", {b:params.idBoletin}).andWhere("notaBoletin.materia = :m", {m:params.notas[indice].idMateria}).execute();
+                case 1:const nota1 : NotaBoletin = await this.notaBoletinRepository.createQueryBuilder("notaBoletin").select("notaBoletin").innerJoinAndSelect("notaBoletin.boletin", "boletin").innerJoinAndSelect("notaBoletin.materia", "materia").where("boletin.id = :p", {p:params.idBoletin}).andWhere("materia.id = :m", {m:params.notas[indice].idMateria}).getOne();
+                await getConnection().createQueryBuilder(NotaBoletin, "notaBoletin").update(NotaBoletin).set({nota1:params.notas[indice].nota})
+                               .where("id = :b", {b:nota1.id}).execute();
                 break;
-                case 2: await getConnection().createQueryBuilder(NotaBoletin, "notaBoletin").update(NotaBoletin).set({nota2:params.notas[indice].nota})
-                              .where("notaBoletin.boletin = :b", {b:params.idBoletin}).andWhere("notaBoletin.materia = :m", {m:params.notas[indice].idMateria}).execute();
+                case 2: const nota2 : NotaBoletin = await this.notaBoletinRepository.createQueryBuilder('notaBoletin').select('notaBoletin').innerJoinAndSelect('notaBoletin.boletin', 'boletin').innerJoinAndSelect('notaBoletin.materia', 'materia').where('boletin.id = :p', {p:params.idBoletin}).andWhere('materia.id = :m', {m:params.notas[indice].idMateria}).getOne();
+                
+                await getConnection().createQueryBuilder(NotaBoletin, "notaBoletin").update(NotaBoletin).set({nota2:params.notas[indice].nota})
+                              .where("id = :b", {b:nota2.id}).execute();
                 break;
-                case 3: await getConnection().createQueryBuilder(NotaBoletin, "notaBoletin").update(NotaBoletin).set({nota3:params.notas[indice].nota})
-                               .where("notaBoletin.boletin = :b", {b:params.idBoletin}).andWhere("notaBoletin.materia = :m", {m:params.notas[indice].idMateria}).execute();
+                case 3: const nota3 : NotaBoletin = await this.notaBoletinRepository.createQueryBuilder('notaBoletin').select('notaBoletin').innerJoinAndSelect('notaBoletin.boletin', 'boletin').innerJoinAndSelect('notaBoletin.materia', 'materia').where('boletin.id = :p', {p:params.idBoletin}).andWhere('materia.id = :m', {m:params.notas[indice].idMateria}).getOne();
+                
+                await getConnection().createQueryBuilder(NotaBoletin, "notaBoletin").update(NotaBoletin).set({nota3:params.notas[indice].nota})
+                               .where("id = :b", {b:nota3.id}).execute();
                 break;
                 default: let res = {status:500,message:'Error de trimestre'};
                          return res;
@@ -59,24 +65,44 @@ export class BoletinService {
         return response;
     }
 
-    async updateBoletinTrimestre(params){
-        switch(params.trimestre){
-            case 1: await getConnection().createQueryBuilder(Boletin, "boletin").update(Boletin).set({trimestre1:true}).
-                          where("boletin.id = p", {p:params.boletin}).execute();
-            break;
-            case 2: await getConnection().createQueryBuilder(Boletin, "boletin").update(Boletin).set({trimestre2:true}).
-                          where("boletin.id = p", {p:params.boletin}).execute();
-            break;
-            case 3: await getConnection().createQueryBuilder(Boletin, "boletin").update(Boletin).set({trimestre3:true}).
-                          where("boletin.id = p", {p:params.boletin}).execute();
-            break;
-            default: let res = {status:500,message:'Error de trimestre'};
-            return res;
+    async updateBoletinTrimestre(par1, par2){
+        var  response = {
+            status:0,
+            message:''
         }
+        const uno : number = 1;
+        const dos : number = 2;
+        const tres : number = 3;
+        var variable : number = 0;
 
-        let response = {
-            status:200,
-            message:'OK'
+        if(par2 == uno){
+            variable = uno;
+        } else if (par2 == dos){
+            variable = dos
+        } else if (par2 == tres){
+            variable = tres;
+        } else {
+            return ''
+        }
+        switch(variable){
+            case 1: {await getConnection().createQueryBuilder(Boletin, "boletin").update(Boletin).set({trimestre1:true}).
+                          where("id = :p", {p:par1}).execute();   
+                          response.status=200;
+                          response.message="OK";
+                                                
+            break;}
+            case 2: {await getConnection().createQueryBuilder(Boletin, "boletin").update(Boletin).set({trimestre2:true}).
+                          where("id = :p", {p:par1}).execute();
+                          response.status=200;
+                          response.message="OK";  
+            break;}
+            case 3: {await getConnection().createQueryBuilder(Boletin, "boletin").update(Boletin).set({trimestre3:true}).
+                          where("id = :p", {p:par1}).execute();
+                          response.status=200;
+                          response.message="OK";  
+            break;}
+            default: {response.status=500; response.message="Error de trimestre";
+            break;}
         }
         return response;
     }

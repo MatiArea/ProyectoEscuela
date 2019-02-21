@@ -27,10 +27,10 @@ export class NotificacionService {
                 @InjectRepository(Evaluacion) private evaluacionRepository:Repository<Evaluacion>){}
 
    async getNotificacionesNoLeidas(legajo){
-        const alu : Alumno = await this.alumnoRepository.createQueryBuilder("alumno").select("alumno").innerJoinAndSelect("alumno.cuenta", "cuenta").where("alumno.legajo = :p", {p:legajo}).getOne();
+        const alumno : Alumno = await this.alumnoRepository.createQueryBuilder("alumno").select("alumno").innerJoinAndSelect("alumno.cuenta", "cuenta").where("alumno.legajo = :p", {p:legajo}).getOne();
         const notificaciones = await getConnection().createQueryBuilder(Notificacion, "notificacion").select("notificacion.id").addSelect("notificacion.titulo")
                                .addSelect("notificacion.descripcion").addSelect("notificacion.fecha")
-                               .where("notificacion.destinatario = :p", {p:alu.cuenta.id}).andWhere("notificacion.leida = :f", {f:0})
+                               .where("notificacion.destinatario = :a", {a:alumno.cuenta.id}).andWhere("notificacion.leida = :f", {f:0})
                                .orderBy("notificacion.fecha", "DESC").getMany();
         return notificaciones;
     }
@@ -114,7 +114,7 @@ export class NotificacionService {
     async createNotificacionEvaluacionTodos(params){
 
         const profesor : Profesor = await this.profesorRepository.createQueryBuilder("profesor").select("profesor")
-                                        .innerJoinAndSelect("profesor.cuenta", "cuenta").where("profesor.dni = :p", {p:params.legajo}).getOne();
+                                        .innerJoinAndSelect("profesor.cuenta", "cuenta").where("profesor.legajo = :p", {p:params.legajo}).getOne();
         const anio : Anio = await this.anioRepository.createQueryBuilder("anio").select("anio").where("anio.numero = :p", {p:params.anio}).getOne();
         const division : Division = await this.divisionRepository.createQueryBuilder("division").select("division").where("division.nombre = :p", {p:params.division}).andWhere("division.anio = :a", {a:anio.id}).getOne();
         
@@ -124,7 +124,7 @@ export class NotificacionService {
         const evaluacion : Evaluacion = await this.evaluacionRepository.createQueryBuilder("evaluacion").select("evaluacion").innerJoinAndSelect("evaluacion.materia", "materia").where("evaluacion.folio = :f", {f:params.folio}).getOne();
 
         for(let indice = 0; indice <= matriculas.length; indice++){
-         const notaEva : EvaluAlumno = await this.evaluAlumnoRepository.createQueryBuilder("evaluAlumno").select("evaluAlumno").where("evluaAlumno.matricula = :p", {p:matriculas[indice].id}).andWhere("evaluAlumno.evaluacion = :n", {n:evaluacion.id}).getOne();  
+         const notaEva : EvaluAlumno = await this.evaluAlumnoRepository.createQueryBuilder("evaluAlumno").select("evaluAlumno").where("evaluAlumno.matricula = :p", {p:matriculas[indice].id}).andWhere("evaluAlumno.evaluacion = :n", {n:evaluacion.id}).getOne();  
          const nota = notaEva.nota.toString();
          const notificacion = {
              titulo:'Evaluacion',

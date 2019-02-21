@@ -15,7 +15,8 @@ ul {
     margin: auto;
     border: 4px solid #0275db;
     font-size: 30px;
-    padding: 5px;
+    padding: 20px;
+    margin: 20px;
 }
 
 hr {
@@ -37,4 +38,8 @@ td {
 
 td {
     border-top: 3px solid black;
+}
+
+.fecha {
+    width: 14% !important;
 }

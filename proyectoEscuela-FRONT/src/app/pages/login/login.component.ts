@@ -26,6 +26,7 @@ export class LoginComponent {
     
         if ( data.status===200 ) {
           localStorage.setItem( 'email', data.nombre );
+          localStorage.setItem( 'apellido', data.apellido );
           localStorage.setItem( 'rol', data.roll );
           localStorage.setItem( 'legajo', data.legajo );
           localStorage.setItem( 'dni', data.dni );

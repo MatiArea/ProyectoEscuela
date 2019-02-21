@@ -26,9 +26,9 @@ export class BoletinController {
         return this.boletinService.getBoletinesTodosByDivision(parametro);//boletiens filtrados
     }
 
-    @Put('boletin/update/:boletin/:trimestre')
-    modificarBoletinTrimestre(@Param() parametros){
-        return this.boletinService.updateBoletinTrimestre(parametros);//IMPORTANTE UPDATEAR EL BOLETIN QUE SE ACABA DE CARGAR CON EL NUMERO DE TRIMESTRE QUE SE ACABA DE CARGAR
+    @Get('update/:boletin/:trimestre')
+    modificarBoletinTrimestre(@Param('boletin') boletin, @Param('trimestre') trimestre ){
+        return this.boletinService.updateBoletinTrimestre(boletin, trimestre);//IMPORTANTE UPDATEAR EL BOLETIN QUE SE ACABA DE CARGAR CON EL NUMERO DE TRIMESTRE QUE SE ACABA DE CARGAR
     } 
 
     @Get('display/:legajo')

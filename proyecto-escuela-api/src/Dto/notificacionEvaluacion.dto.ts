@@ -5,3 +5,5 @@ export class NotificacionEvaluacionDTO {
     folio:number;
     fecha:Date
 }
+
+

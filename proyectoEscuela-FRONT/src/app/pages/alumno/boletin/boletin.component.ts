@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { NotaBoletinMostrar } from 'src/app/models/notaboletinamostrar';
+import * as jspdf from 'jspdf';  
+import html2canvas from 'html2canvas'; 
 
 @Component({
   selector: 'app-boletin',
@@ -17,31 +20,93 @@ export class BoletinComponent implements OnInit {
   trimestre2:boolean;
   trimestre3:boolean;
   promedio=[];
+  mostrarpromedio:boolean;
+  notamostrar:NotaBoletinMostrar[]=[];
+  alumnonombre:any;
+  alumnoapellido:any;
+  data:any;
+  imgWidth:any;
+  pageHeight:any;
+  imgHeight:any;
+  heightLeft:any;
+  pdf:any;
+  position:any;
+  aniodivision:any;
+
+
 
   ngOnInit() {
 
     this.legajo=localStorage.getItem( 'legajo' );
+    this.alumnonombre=localStorage.getItem( 'email' );
+    this.alumnoapellido=localStorage.getItem( 'apellido' );
 
 
+
+    this.http.get(`http://localhost:4000/colegio/alumno/curso/${this.legajo}`)
+    .subscribe( data=> {
+    this.aniodivision=data;
+    });
+    
 
     this.http.get(`http://localhost:4000/boletin/display/${this.legajo}`)
     .subscribe( data=> {
     this.boletin=data;
-    console.log(this.boletin);
     this.notas=this.boletin.notas;
-    this.trimestre2=this.boletin.trimestre2;
-    this.trimestre3=this.boletin.trimestre3;
-    
-    for (let index = 0; index < this.notas.length; index++) {
-      this.promedio[index] = this.notas[index].nota1;
-      
-      
-    }
+    console.log(this.notas);
 
-    console.log(this.promedio);
+    
+    this.trimestres();
+  
 
     });
 
+
    
   }
+
+
+  trimestres(){
+    this.trimestre1=this.boletin.boletin.trimestre1;
+    this.trimestre2=this.boletin.boletin.trimestre2;
+    this.trimestre3=this.boletin.boletin.trimestre3;
+    
+    for (let index = 0; index < this.notas.length; index++) {
+      this.notamostrar[index]={
+        materia:this.notas[index].materia.nombre,
+        nota1:this.notas[index].nota1,
+        nota2:this.notas[index].nota2,
+        nota3:this.notas[index].nota3,
+        promedio:(this.notas[index].nota1+this.notas[index].nota2+this.notas[index].nota3)/3
+      };
+    }
+    console.log(this.notamostrar);
+
+    
+
+    if ( this.trimestre1===true && this.trimestre2===true && this.trimestre3===true ) {
+      this.mostrarpromedio=true;
+    }
+  }
+
+  captureScreen(){
+    
+    {  
+      this.data = document.getElementById('contentToConvert');  
+      html2canvas(this.data).then(canvas => {  
+        // Few necessary setting options  
+        this.imgWidth = 208;   
+        this.pageHeight = 295;    
+        this.imgHeight = canvas.height * this.imgWidth / canvas.width;  
+        this.heightLeft = this.imgHeight;  
+    
+        const contentDataURL = canvas.toDataURL('image/png')  
+        this.pdf = new jspdf('p', 'mm', 'a4'); // A4 size page of PDF  
+        this.position = 0;  
+        this.pdf.addImage(contentDataURL, 'PNG', 0, this.position, this.imgWidth, this.imgHeight)  
+        this.pdf.save('boletin.pdf'); // Generated PDF   
+      });  
+    }  
+  } 
 }
+
