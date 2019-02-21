@@ -9,7 +9,6 @@ import { PaneladminComponent } from './paneladmin/paneladmin.component';
 import { ADMIN_ROUTES } from './admin.routes';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { CrearevaluacionComponent } from './crearevaluacion/crearevaluacion.component';
-import { ListadoalumnosComponent } from './listadoalumnos/listadoalumnos.component';
 import { FormsModule } from '@angular/forms';
 import { ListadomatevaComponent } from './listadomateva/listadomateva.component';
 import { BoletinComponent } from './boletin/boletin.component';
@@ -22,8 +21,7 @@ import { MostrarboletinesComponent } from './mostrarboletines/mostrarboletines.c
     EnviarnotificacionComponent,    
     ListadomateriasComponent,
     PaneladminComponent,
-    CrearevaluacionComponent,  
-    ListadoalumnosComponent,    
+    CrearevaluacionComponent,    
     ListadomatevaComponent,
     BoletinComponent,
     MostrarboletinesComponent    

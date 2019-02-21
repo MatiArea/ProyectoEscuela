@@ -4,7 +4,6 @@ import { LoginGuard } from 'src/app/guards/login.guard';
 import { EnviarnotificacionComponent } from './enviarnotificacion/enviarnotificacion.component';
 import { ListadomateriasComponent } from './listadomaterias/listadomaterias.component';
 import { CrearevaluacionComponent } from './crearevaluacion/crearevaluacion.component';
-import { ListadoalumnosComponent } from './listadoalumnos/listadoalumnos.component';
 import { RolAdmin } from 'src/app/guards/RolAdmin.guard';
 import { InicioComponent } from 'src/app/shared/inicio/inicio.component';
 import { ListadomatevaComponent } from './listadomateva/listadomateva.component';
@@ -20,7 +19,6 @@ const adminRoutes: Routes = [
             { path: 'enviaraviso', component: EnviarnotificacionComponent,canActivate:[LoginGuard,RolAdmin]},
             { path: 'listadomaterias', component: ListadomateriasComponent,canActivate:[LoginGuard,RolAdmin]},
             { path: 'crearevaluacion', component: CrearevaluacionComponent,canActivate:[LoginGuard,RolAdmin]},
-            { path: 'listadoalumnos', component: ListadoalumnosComponent,canActivate:[LoginGuard,RolAdmin]},
             { path: 'materias', component: ListadomatevaComponent,canActivate:[LoginGuard,RolAdmin]},
             { path: 'cargarboletin', component: BoletinComponent,canActivate:[LoginGuard,RolAdmin]},
             { path: 'boletines', component: MostrarboletinesComponent,canActivate:[LoginGuard,RolAdmin]}
