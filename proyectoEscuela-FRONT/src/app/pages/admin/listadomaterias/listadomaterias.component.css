@@ -39,3 +39,7 @@ th {
 td {
     border: 3px solid black;
 }
+
+#chartContainer {
+    border: 4px solid #0275db;
+}
