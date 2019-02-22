@@ -14,8 +14,7 @@ import { Profesor } from "../Persona/profesor.entity";
     @Column('time')
     horario: string;
 
-    @OneToOne(type => DiaSemana)
-    @JoinColumn()
+    @ManyToOne(type => DiaSemana, diaSemana => diaSemana.horarios)
     dia: DiaSemana;
 
     @ManyToOne(type => Profesor, profesor => profesor.horarios)
