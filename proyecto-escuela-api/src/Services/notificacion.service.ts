@@ -1,3 +1,4 @@
+import { MailService } from './mail.service';
 import { Evaluacion } from './../Entities/Evaluacion/evaluacion.entity';
 import { Division } from './../Entities/Evaluacion/division.entity';
 import { Anio } from './../Entities/Evaluacion/anio.entity';
@@ -24,7 +25,8 @@ export class NotificacionService {
                 @InjectRepository(EvaluAlumno) private evaluAlumnoRepository:Repository<EvaluAlumno>, 
                 @InjectRepository(Anio) private anioRepository:Repository<Anio>, 
                 @InjectRepository(Division) private divisionRepository:Repository<Division>, 
-                @InjectRepository(Evaluacion) private evaluacionRepository:Repository<Evaluacion>){}
+                @InjectRepository(Evaluacion) private evaluacionRepository:Repository<Evaluacion>, 
+                private readonly mailService: MailService){}
 
    async getNotificacionesNoLeidas(legajo){
         const alumno : Alumno = await this.alumnoRepository.createQueryBuilder("alumno").select("alumno").innerJoinAndSelect("alumno.cuenta", "cuenta").where("alumno.legajo = :p", {p:legajo}).getOne();
@@ -56,6 +58,7 @@ export class NotificacionService {
             status:200,
             message:'OK'
         }
+        return res;
     }
 
     async createNotificacionAvisoTodos(params){
@@ -81,7 +84,14 @@ export class NotificacionService {
             await getConnection().createQueryBuilder(Notificacion, "notificacion").insert().into(Notificacion)
                                  .values([{titulo:params.titulo, descripcion:params.descripcion, cuerpo:params.cuerpo, fecha:params.fecha, 
                                 leida:false, enviada:true, autor: autorCuenta, destinatario:destinatarioCuenta}]).execute();
+            this.mailService.enviarCorreoNotificacion(matriculas[indice].alumno.email, params.cuerpo);           
+        } 
+        var res = {
+            status:200,
+            message:'OK'
         }
+        return res;
+        
     }
 
 
@@ -109,6 +119,12 @@ export class NotificacionService {
             .values([{titulo:params.titulo, descripcion:params.descripcion, cuerpo:params.cuerpo, fecha:params.fecha, 
            leida:false, enviada:true, autor: autorCuenta, destinatario:destinatarioCuenta}]).execute();
         }
+
+        var res = {
+            status:200,
+            message:'OK'
+        }
+        return res;
     }
 
     async createNotificacionEvaluacionTodos(params){
@@ -122,7 +138,7 @@ export class NotificacionService {
                                         .innerJoinAndSelect("matricula.alumno", "alumno").innerJoinAndSelect("alumno.cuenta", "cuenta")
                                         .where("matricula.division = :p", {p:division.id}).getMany();
         const evaluacion : Evaluacion = await this.evaluacionRepository.createQueryBuilder("evaluacion").select("evaluacion").innerJoinAndSelect("evaluacion.materia", "materia").where("evaluacion.folio = :f", {f:params.folio}).getOne();
-
+        
         for(let indice = 0; indice <= matriculas.length; indice++){
          const notaEva : EvaluAlumno = await this.evaluAlumnoRepository.createQueryBuilder("evaluAlumno").select("evaluAlumno").where("evaluAlumno.matricula = :p", {p:matriculas[indice].id}).andWhere("evaluAlumno.evaluacion = :n", {n:evaluacion.id}).getOne();  
          const nota = notaEva.nota.toString();
@@ -135,7 +151,14 @@ export class NotificacionService {
         await getConnection().createQueryBuilder(Notificacion, "notificacion").insert().into(Notificacion)
         .values([{titulo:notificacion.titulo, descripcion:notificacion.descripcion, cuerpo:notificacion.cuerpo, fecha:params.fecha, 
                 leida:false, enviada:true, autor: profesor.cuenta, destinatario:matriculas[indice].alumno.cuenta}]).execute();
+                this.mailService.enviarCorreoNotaSubida(matriculas[indice].alumno.email, evaluacion.titulo, evaluacion.fecha, evaluacion.materia.nombre);
+                
          }
+         var res = {
+            status:200,
+            message:'OK'
+        }
+        return res;
     }
 
     async createNotificacionBoletinAlumno(params){
@@ -148,10 +171,20 @@ export class NotificacionService {
             descripcion:'Se han actualizado las notas de su Boletin Digital', 
             cuerpo:'Se han subido las notas del '+trimestre+'° trimestre, al boletin Digital del alumno '+alumno.apellido+' '+alumno.nombre+'.' 
         }
+
         await getConnection().createQueryBuilder(Notificacion, "notificacion").insert().into(Notificacion)
         .values([{titulo:notificacion.titulo, descripcion:notificacion.descripcion, cuerpo:notificacion.cuerpo, fecha:params.fecha, 
                 leida:false, enviada:true, autor: preceptor.cuenta, destinatario:alumno.cuenta}]).execute();
+
+                this.mailService.enviarCorreoBoletinSubido(alumno.email, trimestre);
+
+                var res = {
+                    status:200,
+                    message:'OK'
+                }
+                return res;
     }
+
 
 
 }

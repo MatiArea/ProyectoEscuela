@@ -1,3 +1,4 @@
+import { MailService } from './Services/mail.service';
 import { AppService } from './app.service';
 import { AppController } from './app.controller';
 import { Profesor } from './Entities/Persona/profesor.entity';
@@ -43,6 +44,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       synchronize: true,
     }), TypeOrmModule.forFeature([Alumno, Administrativo, Profesor, Matricula, Familiar, Cuenta, Notificacion, Anio, Boletin, Division, Evaluacion, EvaluAlumno, Horario, Materia, NotaBoletin])],
   controllers:[NotificacionController, BoletinController, EvaluacionController, LoginController, AppController],
-  providers: [LoginService, NotificacionService, EvaluacionService, BoletinService, AppService]
+  providers: [LoginService, NotificacionService, EvaluacionService, BoletinService, AppService, MailService]
 })
 export class AppModule {}

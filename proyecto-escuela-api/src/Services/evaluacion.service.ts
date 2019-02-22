@@ -1,3 +1,4 @@
+import { MailService } from './mail.service';
 import { Alumno } from './../Entities/Persona/alumno.entity';
 import { Matricula } from './../Entities/Persona/matricula.entity';
 import { EvaluAlumno } from './../Entities/Evaluacion/evaluAlumno.entity';
@@ -19,7 +20,8 @@ export class EvaluacionService {
                 @InjectRepository(Profesor) private profesorRepository:Repository<Profesor>, 
                 @InjectRepository(Materia) private materiaRepository:Repository<Materia>, 
                 @InjectRepository(Matricula) private matriculaRepository:Repository<Matricula>, 
-                @InjectRepository(Alumno) private alumnoRepository:Repository<Alumno>){}
+                @InjectRepository(Alumno) private alumnoRepository:Repository<Alumno>, 
+                private readonly mailService: MailService){}
 
     async getEvaluacionesSinCargar(params){
      const profesor : Profesor = await this.profesorRepository.createQueryBuilder("profesor").select("profesor")
@@ -102,8 +104,20 @@ export class EvaluacionService {
         const materia : Materia = await this.materiaRepository.createQueryBuilder("materia").select("materia").where("materia.nombre = :m", {m:params.materia})
                                    .andWhere("materia.anio = :a", {a:anio.id}).getOne();
 
-        getConnection().createQueryBuilder(Evaluacion, "evaluacion").insert().into(Evaluacion)
+        await getConnection().createQueryBuilder(Evaluacion, "evaluacion").insert().into(Evaluacion)
         .values([{fecha:params.fecha, folio:params.folio, temas:params.temas, titulo:params.titulo, cargada:false, profesor:profesor, division:division, materia:materia}]).execute();
+
+        const matriculas : Matricula[] = await this.matriculaRepository.createQueryBuilder("matricula").select("matricula").innerJoinAndSelect("matricula.alumno", "alumno").where("matricula.division = :p", {p:division.id}).getMany();
+        
+        for(let indice = 0; indice <= matriculas.length; indice++){
+        this.mailService.enviarCorreoEvaluacionCreada(matriculas[indice].alumno.email, params.fecha, params.titulo, materia.nombre);    
+        }     
+
+        var res = {
+            status:200,
+            message:'OK'
+        }
+        return res;
     }
 
     async getEvaluacionCompleta(param){

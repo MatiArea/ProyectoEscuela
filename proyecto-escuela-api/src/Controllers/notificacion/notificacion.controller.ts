@@ -3,7 +3,7 @@ import { NotificacionEvaluacionDTO } from './../../Dto/notificacionEvaluacion.dt
 import { NotificarOne } from './../../Dto/notificarOne.dto';
 import { NotificarTodos } from './../../Dto/notificarTodos.dto';
 import { Controller, Get, Post, Body, Param, Put } from '@nestjs/common';
-import { NotificacionService } from './../../Services/notificacion.service';  
+import { NotificacionService } from './../../Services/notificacion.service'; 
 
 @Controller('notificaciones')
 export class NotificacionController {
