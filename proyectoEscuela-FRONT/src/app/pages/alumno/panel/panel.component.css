@@ -72,3 +72,13 @@ ul {
     text-align: center;
     margin: auto;
 }
+
+#index1 {
+    z-index: 1 !important;
+    position: relative;
+}
+
+#index2 {
+    z-index: 2 !important;
+    position: absolute;
+}
