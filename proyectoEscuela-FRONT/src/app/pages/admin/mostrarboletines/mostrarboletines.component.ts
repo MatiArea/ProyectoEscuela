@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { NotaBoletinMostrar } from 'src/app/models/notaboletinamostrar';
-
+import { Url } from '../../../models/url';
 
 @Component({
   selector: 'app-mostrarboletines',
@@ -12,6 +12,7 @@ export class MostrarboletinesComponent implements OnInit {
 
   constructor( private http: HttpClient ) { }
 
+  url=Url;
   mostrar1=false;
   mostrar2=true;
   mostrar3=true;
@@ -29,7 +30,7 @@ export class MostrarboletinesComponent implements OnInit {
 
   ngOnInit( ) {
 
-    this.http.get(`http://localhost:4000/colegio/anios/divisiones`)
+    this.http.get(`${this.url}/colegio/anios/divisiones`)
     .subscribe( data=> {
     this.anio=data;
    } );
@@ -56,7 +57,7 @@ export class MostrarboletinesComponent implements OnInit {
 
   cargardivisiones(a:any){
 
-    this.http.get(`http://localhost:4000/colegio/divisiones/${a.numero}`)
+    this.http.get(`${this.url}/colegio/divisiones/${a.numero}`)
     .subscribe( data=> {
     this.divisiones=data;
  
@@ -67,7 +68,7 @@ export class MostrarboletinesComponent implements OnInit {
 
   cargaralumnos(d:any){
 
-    this.http.get(`http://localhost:4000/colegio/alumnos/${d.id}`)
+    this.http.get(`${this.url}/colegio/alumnos/${d.id}`)
    .subscribe( data=> {
    this.alumnos=data;
   } );    
@@ -77,7 +78,7 @@ export class MostrarboletinesComponent implements OnInit {
 
   cargarmaterias(a:any){
 
-    this.http.get(`http://localhost:4000/boletin/display/${a.alumno.legajo}`)
+    this.http.get(`${this.url}/boletin/display/${a.alumno.legajo}`)
     .subscribe( data=> {
     this.boletin=data;
     this.notas=this.boletin.notas;

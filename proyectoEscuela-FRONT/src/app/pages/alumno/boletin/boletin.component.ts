@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { NotaBoletinMostrar } from 'src/app/models/notaboletinamostrar';
 import * as jspdf from 'jspdf';  
 import html2canvas from 'html2canvas'; 
+import { Url } from '../../../models/url';
 
 @Component({
   selector: 'app-boletin',
@@ -13,6 +14,7 @@ export class BoletinComponent implements OnInit {
 
   constructor( private http: HttpClient ) { }
 
+  url=Url;
   legajo:any;
   boletin:any;
   notas:any;
@@ -43,13 +45,13 @@ export class BoletinComponent implements OnInit {
 
 
 
-    this.http.get(`http://localhost:4000/colegio/alumno/curso/${this.legajo}`)
+    this.http.get(`${this.url}/colegio/alumno/curso/${this.legajo}`)
     .subscribe( data=> {
     this.aniodivision=data;
     });
     
 
-    this.http.get(`http://localhost:4000/boletin/display/${this.legajo}`)
+    this.http.get(`${this.url}/boletin/display/${this.legajo}`)
     .subscribe( data=> {
     this.boletin=data;
     this.notas=this.boletin.notas;

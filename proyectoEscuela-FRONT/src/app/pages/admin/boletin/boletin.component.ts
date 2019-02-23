@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { NotasBol } from '../../../models/notaboletin';
+import { Url } from '../../../models/url';
 
 
 @Component({
@@ -9,6 +10,8 @@ import { NotasBol } from '../../../models/notaboletin';
   styleUrls: ['./boletin.component.css']
 })
 export class BoletinComponent implements OnInit {
+
+  url=Url;
   mostrar1=false;
   mostrar2=true;
   mostrar3=true;
@@ -43,7 +46,7 @@ export class BoletinComponent implements OnInit {
     this.fecha.setMonth( this.fecha.getMonth() + 1 );
     this.fechaactual='' + this.fecha.getFullYear() + '/' + this.fecha.getMonth() + '/' + this.fecha.getDate();
 
-    this.http.get(`http://localhost:4000/colegio/anios/divisiones`)
+    this.http.get(`${this.url}/colegio/anios/divisiones`)
     .subscribe( data=> {
     this.anio=data;
    } );
@@ -75,7 +78,7 @@ export class BoletinComponent implements OnInit {
 
   cargardivisiones(a:any){
 
-    this.http.get(`http://localhost:4000/colegio/divisiones/${a.numero}`)
+    this.http.get(`${this.url}/colegio/divisiones/${a.numero}`)
     .subscribe( data=> {
     this.divisiones=data;
  
@@ -86,7 +89,7 @@ export class BoletinComponent implements OnInit {
 
   cargaralumnos(d:any){
 
-    this.http.get(`http://localhost:4000/colegio/alumnos/${d.id}`)
+    this.http.get(`${this.url}/colegio/alumnos/${d.id}`)
    .subscribe( data=> {
    this.alumnos=data;
   } );    
@@ -95,7 +98,7 @@ export class BoletinComponent implements OnInit {
 
   cargarmaterias(a:any){
     this.alumno=a;
-    this.http.get(`http://localhost:4000/boletin/materias/alumno/${a.codigo}`)
+    this.http.get(`${this.url}/boletin/materias/alumno/${a.codigo}`)
    .subscribe( data=> {
    this.boletin=data;
    this.trimestre1=this.boletin.boletin.trimestre1;
@@ -136,7 +139,7 @@ export class BoletinComponent implements OnInit {
 
     
 
-  this.http.post('http://localhost:4000/boletin/notas/insert',
+  this.http.post(`${this.url}/boletin/notas/insert`,
   {
     idBoletin:this.boletin.boletin.id,
     trimestre:this.trimestreactual,
@@ -145,12 +148,12 @@ export class BoletinComponent implements OnInit {
   });
 
   
-  this.http.get(`http://localhost:4000/boletin/update/${this.boletin.boletin.id}/${this.trimestreactual}` )
+  this.http.get(`${this.url}/boletin/update/${this.boletin.boletin.id}/${this.trimestreactual}` )
     .subscribe((data:any)=>{
     });
 
 
-    this.http.post('http://localhost:4000/notificaciones/boletin/enviar/alumno',
+    this.http.post(`${this.url}/notificaciones/boletin/enviar/alumno`,
     {
       legajoAlumno:this.alumno.alumno.legajo,
       dniPreceptor:this.dni,

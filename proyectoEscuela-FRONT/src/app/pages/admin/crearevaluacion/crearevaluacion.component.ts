@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { MateriaIndice } from 'src/app/models/materiasindice';
+import { Url } from '../../../models/url';
 
 @Component({
   selector: 'app-crearevaluacion',
@@ -9,6 +10,7 @@ import { MateriaIndice } from 'src/app/models/materiasindice';
 })
 export class CrearevaluacionComponent implements OnInit {
 
+  url=Url;
   materias:any;
   legajo:any;
   body:any;
@@ -28,7 +30,7 @@ export class CrearevaluacionComponent implements OnInit {
 
 
 
-    this.http.get(`http://localhost:4000/colegio/profesor/materias/${this.legajo}`)
+    this.http.get(`${this.url}/colegio/profesor/materias/${this.legajo}`)
     .subscribe( data=> {
     this.materias=data;
     for (let index = 0; index < this.materias.length; index++) {
@@ -46,7 +48,7 @@ export class CrearevaluacionComponent implements OnInit {
 
 
 
-   this.http.get(`http://localhost:4000/evaluacion/folio`)
+   this.http.get(`${this.url}/evaluacion/folio`)
    .subscribe( data=> {
    this.folio=data;
   } );
@@ -58,7 +60,7 @@ export class CrearevaluacionComponent implements OnInit {
   }
 
   enviarevaluacion(evalu:any){
-    this.http.post('http://localhost:4000/evaluacion/create',
+    this.http.post(`${this.url}/evaluacion/create`,
     {
     fecha:evalu.value.fecha,
     folio:this.folio,

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Notas } from 'src/app/models/notas';
+import { Url } from '../../../models/url';
 
 @Component({
   selector: 'app-listadomateva',
@@ -15,6 +16,7 @@ export class ListadomatevaComponent implements OnInit {
 
   constructor( private http: HttpClient ) { }
 
+  url=Url;
   legajo:any;
   materias:any;
   materia:any;
@@ -35,7 +37,7 @@ export class ListadomatevaComponent implements OnInit {
 
 
 
-    this.http.get(`http://localhost:4000/colegio/profesor/materias/${this.legajo}`)
+    this.http.get(`${this.url}/colegio/profesor/materias/${this.legajo}`)
     .subscribe( data=> {
     this.materias=data;
     });
@@ -61,7 +63,7 @@ export class ListadomatevaComponent implements OnInit {
    cargarmateria(m:any){
     this.materia=m;
 
-    this.http.get(`http://localhost:4000/evaluacion/cargarNotas/${m.materia.nombre}/${this.legajo}/${m.materia.anio.numero}/${m.division.nombre}`)
+    this.http.get(`${this.url}/evaluacion/cargarNotas/${m.materia.nombre}/${this.legajo}/${m.materia.anio.numero}/${m.division.nombre}`)
     .subscribe( data=> {
     this.evaluaciones=data;
     });
@@ -73,7 +75,7 @@ export class ListadomatevaComponent implements OnInit {
    
    cargaralumnos(e:any){
     this.folio=e.folio;
-    this.http.get(`http://localhost:4000/colegio/alumnos/${this.materia.materia.anio.numero}/${this.materia.division.nombre}`)
+    this.http.get(`${this.url}/colegio/alumnos/${this.materia.materia.anio.numero}/${this.materia.division.nombre}`)
     .subscribe( data=> {
     this.alumnos=data;
     });
@@ -99,7 +101,7 @@ export class ListadomatevaComponent implements OnInit {
   }
 
 
-  this.http.post('http://localhost:4000/evaluacion/cargarNotas/insert',
+  this.http.post(`${this.url}/evaluacion/cargarNotas/insert`,
   {
     folioEvaluacion:this.folio,
     notas:this.notas
@@ -108,13 +110,13 @@ export class ListadomatevaComponent implements OnInit {
   });
 
 
-  this.http.put(`http://localhost:4000/evaluacion/cargarNotas/update/${this.folio}`,this.folio)
+  this.http.put(`${this.url}/evaluacion/cargarNotas/update/${this.folio}`,this.folio)
     .subscribe((data:any)=>{
       
     });
   
 
-    this.http.post('http://localhost:4000/notificaciones/evaluacion/enviar/division',
+    this.http.post(`${this.url}/notificaciones/evaluacion/enviar/division`,
     {
       legajo:this.legajo,
       division:this.materia.division.nombre,

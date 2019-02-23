@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import * as CanvasJS from '../../../../../node_modules/canvasjs-2.3.1/canvasjs.min';
+import { Url } from '../../../models/url';
 
 
 @Component({
@@ -12,6 +13,7 @@ export class ListadomateriasComponent implements OnInit {
 
   constructor( private http: HttpClient ) { }
 
+  url=Url;
   mostrar1=false;
   mostrar2=true;
   mostrar3=true;
@@ -35,7 +37,7 @@ export class ListadomateriasComponent implements OnInit {
 
 
 
-    this.http.get(`http://localhost:4000/colegio/profesor/materias/${this.legajo}`)
+    this.http.get(`${this.url}/colegio/profesor/materias/${this.legajo}`)
     .subscribe( data=> {
     this.materias=data;
     });
@@ -60,7 +62,7 @@ export class ListadomateriasComponent implements OnInit {
   }
 
   cargarevaluaciones(m:any){
-    this.http.get(`http://localhost:4000/evaluacion/todas/cargadas/${m.materia.nombre}/${this.legajo}/${m.materia.anio.numero}/${m.division.nombre}`)
+    this.http.get(`${this.url}/evaluacion/todas/cargadas/${m.materia.nombre}/${this.legajo}/${m.materia.anio.numero}/${m.division.nombre}`)
     .subscribe( data=> {
     this.evaluaciones=data;
     });
@@ -69,7 +71,7 @@ export class ListadomateriasComponent implements OnInit {
 
   cargarnotas(m:any){
     this.aprobados=0;this.desaprobados=0;
-    this.http.get(`http://localhost:4000/evaluacion/display/${m.folio}`)
+    this.http.get(`${this.url}/evaluacion/display/${m.folio}`)
     .subscribe( data=> {
     this.evaluacion=data;
     this.notas=this.evaluacion.notas;

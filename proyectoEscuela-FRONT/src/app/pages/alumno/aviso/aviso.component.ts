@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Url } from '../../../models/url';
 
 @Component({
   selector: 'app-aviso',
@@ -9,6 +10,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 })
 export class AvisoComponent implements OnInit {
 
+  url=Url;
   notificacion:any;
   id:any;
   paramactual:any=0;
@@ -30,7 +32,7 @@ export class AvisoComponent implements OnInit {
      });
 
     this.id = this.route.snapshot.params['id'];
-    return this.http.get(`http://localhost:4000/notificaciones/display/${this.id}`)
+    return this.http.get(`${this.url}/notificaciones/display/${this.id}`)
     .subscribe( data=> {
     this.notificacion=data;
   } );
