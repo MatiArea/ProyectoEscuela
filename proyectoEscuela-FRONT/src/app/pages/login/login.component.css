@@ -1,5 +1,5 @@
 .card-login {
-    border-radius: 5px;
+    border-radius: 4px;
 }
 
 .card-login .card-title {
@@ -23,7 +23,8 @@ form .btn {
 }
 
 .card {
-    margin-top: 200px;
+    margin-top: 100px;
+    border-radius: 4px solid #0275db;
 }
 
 ul {
@@ -31,7 +32,7 @@ ul {
 }
 
 #ingresar {
-    border: 2px solid black;
+    border: 1px solid black;
 }
 
 #error label {

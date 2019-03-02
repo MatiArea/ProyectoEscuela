@@ -1,14 +1,16 @@
 <div id="index1">
     <app-barrainferior></app-barrainferior>
 </div>
-<div class="container-fluid index2">
+<div id="index3"></div>
+<div class="container-fluid " id="index2">
+    <h1 id="menuresponsive" (click)="cambiar()"><i class="fas" [ngClass]="icono"></i></h1>
     <div class="row">
-        <div class="barra-lateral col-2">
+        <div class="animated bounceInLeft barra-lateral col-2 " id="barra-lateral">
             <div class="logo">
 
                 <h2><i class="fas fa-edit"></i>Panel</h2>
             </div>
-            <nav class="menu d-flex d-sm-block justify-content-center flex-wrap">
+            <nav class="menu  d-sm-block justify-content-center flex-wrap">
 
 
 
@@ -29,9 +31,18 @@
             </nav>
         </div>
 
-        <div class="margin-auto col-9 principal ">
-            <router-outlet id="barrainferior"></router-outlet>
+
+
+
+
+
+
+        <div class="margin-auto principal">
+            <router-outlet></router-outlet>
         </div>
 
     </div>
+
+
+
 </div>

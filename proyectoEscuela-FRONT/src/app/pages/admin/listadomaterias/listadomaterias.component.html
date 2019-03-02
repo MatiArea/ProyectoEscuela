@@ -1,27 +1,19 @@
 <div *ngIf="!mostrar1">
-    <div class="container-fluid animacion fadeIn">
+    <div class="container-fluid animacion fadeIn contenedor">
         <div class="row">
-            <main class="main col ">
-                <div class="row">
-                    <div class="columna col">
-                        <div class="contenedor">
-                            <form>
-                                <h1 class="text-center">Listado de materias</h1>
-                                <hr>
-                                <div *ngFor="let materia of materias" class="row">
-                                    <div class="col-5">
-                                        <li class="ml-3"><i class="fas fa-caret-square-right mr-1"></i><span>{{ materia.materia.anio.numero }}°</span> <span>{{ materia.division.nombre }} </span> <span>{{ materia.materia.nombre }}</span></li>
-                                    </div>
-                                    <div class="col-1">
-                                        <i (click)="cargarevaluaciones(materia)" (click)="cambiar1()" class="fas fa-arrow-alt-circle-right ml-5 click position-static"></i>
-                                    </div>
-                                </div>
-
-                            </form>
+            <div class="columna col">
+                <form>
+                    <h1 class="text-center">Listado de materias</h1>
+                    <hr>
+                    <div *ngFor="let materia of materias" class="row">
+                        <div class="">
+                            <li class="ml-3"><i class="fas fa-caret-square-right mr-1"></i><span>{{ materia.materia.anio.numero }}°</span> <span>{{ materia.division.nombre }} </span> <span>{{ materia.materia.nombre }}</span><i (click)="cargarevaluaciones(materia)" (click)="cambiar1()"
+                                    class="fas fa-arrow-alt-circle-right ml-2 click position-static"></i></li>
                         </div>
                     </div>
-                </div>
-            </main>
+
+                </form>
+            </div>
         </div>
     </div>
 </div>

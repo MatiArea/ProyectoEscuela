@@ -1,62 +1,57 @@
-<div class="container-fluid animacion fadeIn">
+<div class="container-fluid animacion fadeIn contenedor">
     <div class="row">
-        <main class="main col ">
-            <div class="row">
-                <div class="columna col">
-                    <div class="contenedor">
-                        <form #notificacion="ngForm" (ngSubmit)="enviarnot(notificacion)">
-                            <h1>Envío de notificación</h1>
-                            <hr>
-                            <div class="form-group row text-center">
-                                <label class="col-2 col-form-label text-center ml-3"><h5>Año</h5></label>
-                                <div class="col-8">
-                                    <select (change)="getdivisiones($event.target.value)" name="anio" ngModel>
+        <div class="columna col">
+
+            <form #notificacion="ngForm" (ngSubmit)="enviarnot(notificacion)">
+                <h1>Envío de notificación</h1>
+                <hr>
+                <div class="form-group row text-center">
+                    <label class="col-2 col-form-label text-center ml-3"><h5>Año</h5></label>
+                    <div class="col-8">
+                        <select (change)="getdivisiones($event.target.value)" name="anio" ngModel>
                                         <option value="">-</option>
                                         <option  *ngFor="let anio of anios" value="{{anio.id}}" >{{ anio.numero }}°</option>                                      
                                       </select>
-                                </div>
-                            </div>
+                    </div>
+                </div>
 
-                            <div class="form-group row text-center">
-                                <label class="col-2 col-form-label text-center ml-3"><h5>Divisiones</h5></label>
-                                <div class="col-8">
-                                    <select name="division" ngModel>
+                <div class="form-group row text-center">
+                    <label class="col-2 col-form-label text-center ml-3"><h5>Divisiones</h5></label>
+                    <div class="col-8">
+                        <select name="division" ngModel>
                                         <option value="">-</option>
                                         <option *ngFor="let division of divisiones" value="{{division.id}}" >{{ division.nombre }}°</option>                                      
                                       </select>
-                                </div>
-                            </div>
-
-
-                            <div class="form-group row">
-                                <label class="col-2 col-form-label ml-3"><h5>Titulo</h5></label>
-                                <div class="col-8">
-                                    <input class="form-control" rows="3" name="descripcion" name="titulo" ngModel>
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label class="col-2 col-form-label ml-3"><h5>Descripción</h5></label>
-                                <div class="col-8">
-                                    <input class="form-control" id="exampleFormControlTextarea1" rows="3" name="descripcion" ngModel>
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label class="col-2 col-form-label ml-3"><h5>Cuerpo</h5></label>
-                                <div class="col-8">
-                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="cuerpo" ngModel></textarea>
-                                </div>
-                            </div>
-
-
-                            <button type="submit" class="btn btn-lg btn-success m-lg-2" data-toggle="modal" data-target="#exampleModal">Enviar</button>
-
-                        </form>
                     </div>
                 </div>
-            </div>
-        </main>
+
+
+                <div class="form-group row">
+                    <label class="col-2 col-form-label ml-3"><h5>Titulo</h5></label>
+                    <div class="col-8">
+                        <input class="form-control" rows="3" name="descripcion" name="titulo" ngModel>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-2 col-form-label ml-3"><h5>Descripción</h5></label>
+                    <div class="col-8">
+                        <input class="form-control" id="exampleFormControlTextarea1" rows="3" name="descripcion" ngModel>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-2 col-form-label ml-3"><h5>Cuerpo</h5></label>
+                    <div class="col-8">
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="cuerpo" ngModel></textarea>
+                    </div>
+                </div>
+
+
+                <button type="submit" class="btn btn-lg btn-success m-lg-2" data-toggle="modal" data-target="#exampleModal">Enviar</button>
+
+            </form>
+        </div>
     </div>
 
 

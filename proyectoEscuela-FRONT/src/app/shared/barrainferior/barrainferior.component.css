@@ -1,5 +1,6 @@
 .barrainferior {
     background: #262a34;
+    width: 100%;
     height: 50px;
     color: #fff;
     border-bottom: 2px solid #fff;
@@ -7,6 +8,7 @@
 
 .navbar {
     font-size: 25px;
+    width: 100%;
 }
 
 .barrainferior i {
@@ -50,4 +52,10 @@
 
 .dropdown-item:hover {
     background: #E6E6E6;
+}
+
+@media screen and (max-width:589px) {
+    .barrainferior {
+        height: 90px;
+    }
 }

@@ -1,3 +1,8 @@
+#prueba {
+    background: #262a34;
+    width: auto;
+}
+
 .barra-lateral {
     background: #262a34;
     color: #fff;
@@ -60,6 +65,7 @@ ul {
 
 .principal {
     margin: auto;
+    margin-top: 30px;
 }
 
 .activado {
@@ -71,4 +77,48 @@ ul {
     color: white;
     text-align: center;
     margin: auto;
+}
+
+#index1 {
+    z-index: 2 !important;
+    position: relative;
+}
+
+#index2 {
+    z-index: 1 !important;
+    display: inline-block;
+}
+
+#index3 {
+    width: 300%;
+    height: 300%;
+}
+
+#menuresponsive {
+    display: none;
+    cursor: pointer;
+    color: white;
+    position: absolute;
+    z-index: 4;
+}
+
+
+/*MEDIAQUERIES*/
+
+@media screen and (min-width:992px) {
+    .barra-lateral {
+        display: inline;
+    }
+}
+
+@media screen and (max-width:992px) {
+    #menuresponsive {
+        display: inline;
+    }
+    .barra-lateral {
+        display: none;
+        position: absolute;
+        z-index: 4;
+        margin-top: 45px;
+    }
 }
