@@ -1,5 +1,9 @@
-<div *ngIf="!mostrar1">
-    <div class="container-fluid animacion fadeIn contenedor">
+<div class="contenedor animacion fadeIn sombra" *ngIf="bandera">
+    <h1 class="text-center">Cargando<i class="fas fa-sync-alt fa-spin"></i></h1>
+</div>
+
+<div *ngIf="mostrar1">
+    <div class="container-fluid animacion fadeIn contenedor sombra">
         <div class="row">
             <div class="columna col">
                 <form>
@@ -8,7 +12,7 @@
                     <div *ngFor="let materia of materias" class="row">
                         <div class="">
                             <li class="ml-3"><i class="fas fa-caret-square-right mr-1"></i><span>{{ materia.materia.anio.numero }}°</span> <span>{{ materia.division.nombre }} </span> <span>{{ materia.materia.nombre }}</span>
-                                <i (click)="cargarmateria(materia)" (click)="cambiar1()" class="fas fa-arrow-alt-circle-right ml-2 click position-static"></i></li>
+                                <i (click)="cargarmateria(materia)" class="fas fa-arrow-alt-circle-right ml-2 click position-static"></i></li>
                         </div>
                     </div>
                 </form>
@@ -18,47 +22,50 @@
 </div>
 
 
-<div class="animated bounceInRight" *ngIf="!mostrar2">
-    <div class="contenedor animacion fadeIn">
+<div class="animated bounceInRight" *ngIf="mostrar2">
+    <div class="contenedor animacion fadeIn sombra">
         <h1 class="text-center">Evaluaciones</h1>
-        <table class="table">
+        <table class="">
             <thead>
                 <tr class="text-center">
-                    <th>Fecha</th>
-                    <th>Titulo</th>
+                    <th class="text-center" style="max-width:300px">Fecha</th>
+                    <th class="text-center" style="max-width:600px">Titulo</th>
                     <th></th>
                 </tr>
             </thead>
 
             <tbody>
                 <tr class="text-center" *ngFor="let evaluacion of evaluaciones">
-                    <td>{{ evaluacion.fecha }}</td>
-                    <td>{{ evaluacion.titulo }}</td>
-                    <td><i (click)="cargaralumnos(evaluacion)" (click)="cambiar2()" class="fas fa-arrow-alt-circle-right click position-static"></i></td>
+                    <td class="text-center" style="max-width:300px">{{ evaluacion.fecha }}</td>
+                    <td class="text-center" style="max-width:600px">{{ evaluacion.titulo }}</td>
+                    <td><i (click)="cargaralumnos(evaluacion)" class="fas fa-arrow-alt-circle-right click position-static"></i></td>
                 </tr>
             </tbody>
         </table>
     </div>
+    <div class="text-center">
+        <button (click)="cambiar1()" class="btn btn-lg btn-success m-lg-2">Volver</button>
+    </div>
 </div>
 
-<div class="animated bounceInRight" *ngIf="!mostrar3">
-    <div class="contenedor animacion fadeIn">
+<div class="animated bounceInRight" *ngIf="mostrar3">
+    <div class="contenedor animacion fadeIn sombra">
         <h1 class="text-center">Alumnos</h1>
         <form #evaluaciones="ngForm" (ngSubmit)="cargarnotas(evaluaciones)">
-            <table class="table">
+            <table class="">
                 <thead>
                     <tr>
-                        <th class="text-center">Legajo</th>
-                        <th class="text-center">Alumno</th>
-                        <th class="text-center">Nota</th>
+                        <th class="text-center" style="max-width:300px">Legajo</th>
+                        <th class="text-center" style="max-width:600px">Alumno</th>
+                        <th class="text-center" style="max-width:300px">Nota</th>
                     </tr>
                 </thead>
 
                 <tbody>
                     <tr *ngFor="let alumno of alumnos">
-                        <td class="text-center">{{ alumno.alumno.legajo }}</td>
-                        <td class="text-center"><span>{{ alumno.alumno.nombre }}</span><span> {{ alumno.alumno.apellido }}</span></td>
-                        <td class="text-center"><select name="nota" ngModel>
+                        <td class="text-center" style="max-width:300px">{{ alumno.alumno.legajo }}</td>
+                        <td class="text-center" style="max-width:600px"><span>{{ alumno.alumno.nombre }}</span><span> {{ alumno.alumno.apellido }}</span></td>
+                        <td class="text-center" style="max-width:300px"><select name="nota" ngModel>
                             <option value="">-</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
@@ -93,8 +100,8 @@
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Notificación</h5>
+            <div class="text-center bg-success" style="height:50px">
+                <h5 class="modal-title mt-2" id="exampleModalLabel">Notificación</h5>
             </div>
             <div class="modal-body text-center">
                 <h3>Notas cargadas correctamente</h3>

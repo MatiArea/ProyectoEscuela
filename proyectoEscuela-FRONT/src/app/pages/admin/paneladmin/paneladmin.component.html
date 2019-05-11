@@ -5,7 +5,7 @@
 <div class="container-fluid" id="index2">
     <h1 id="menuresponsive" (click)="cambiar()"><i class="fas" [ngClass]="icono"></i></h1>
     <div class="row">
-        <div class="barra-lateral col-2" id="barra-lateral">
+        <div class="barra-lateral col-2 sombrapanel" id="barra-lateral">
             <div class="logo">
 
                 <h2><i class="fas fa-edit"></i>Panel</h2>
@@ -18,14 +18,14 @@
 
                 <li (click)=" mostrar2 = !mostrar2 "><i class="fas fa-comment"></i><span>Notificaciones</span><i class="fas fa-angle-down derecha"></i></li>
                 <ul>
-                    <li routerLink="/paneladmin/enviaraviso" *ngIf="mostrar2" routerLinkActive="activado"><i class="fas fa-comment"></i><span>Enviar notificacion</span></li>
+                    <li routerLink="/paneladmin/enviarnotificacion" *ngIf="mostrar2" routerLinkActive="activado"><i class="fas fa-comment"></i><span>Enviar notificacion</span></li>
                 </ul>
 
                 <li *ngIf="verificarProfesor()" (click)=" mostrar3 = !mostrar3 " routerLinkActive="activado"><i class="fas fa-id-badge"></i><span>Evaluaciones</span><i class="fas fa-angle-down derecha"></i></li>
                 <ul>
                     <li routerLink="/paneladmin/crearevaluacion" *ngIf="mostrar3" routerLinkActive="activado"><i class="fas fa-id-badge"></i><span>Crear Evaluacion</span></li>
-                    <li routerLink="/paneladmin/materias" *ngIf="mostrar3" routerLinkActive="activado"><i class="fas fa-id-badge"></i><span>Cargar Evaluacion</span></li>
-                    <li routerLink="/paneladmin/listadomaterias" *ngIf="mostrar3" routerLinkActive="activado"><i class="fas fa-id-badge"></i><span>Listado Evaluaciones</span></li>
+                    <li routerLink="/paneladmin/cargarevaluacion" *ngIf="mostrar3" routerLinkActive="activado"><i class="fas fa-id-badge"></i><span>Cargar Evaluacion</span></li>
+                    <li routerLink="/paneladmin/listadoevaluaciones" *ngIf="mostrar3" routerLinkActive="activado"><i class="fas fa-id-badge"></i><span>Listado Evaluaciones</span></li>
                 </ul>
                 <li routerLink="/paneladmin/boletin" *ngIf="verificarPreceptor()" (click)=" mostrar4 = !mostrar4 " routerLinkActive="activado"><i class="fas fa-graduation-cap"></i><span>Boletin</span><i class="fas fa-angle-down derecha"></i></li>
                 <ul>
@@ -33,9 +33,17 @@
                     <li routerLink="/paneladmin/boletines" *ngIf="mostrar4" routerLinkActive="activado"><i class="fas fa-id-badge"></i><span>Ver Boletines</span></li>
                 </ul>
 
+                <li routerLinkActive="activado" *ngIf="verificarPreceptor()" (click)="mostrar5 = !mostrar5" routerLinkActive="activado"><i class="fas fa-wrench"></i><span>Configuracion</span><i class="fas fa-angle-down derecha"></i></li>
+                <ul>
+                    <li routerLink="/paneladmin/alumnos" *ngIf="mostrar5" routerLinkActive="activado"><i class="fas fa-user-graduate"></i><span>Alumnos</span></li>
+                    <li routerLink="/paneladmin/profesores" *ngIf="mostrar5" routerLinkActive="activado"><i class="fas fa-user-tie"></i><span>Profesores</span></li>
+
+                </ul>
+
+
             </nav>
         </div>
-        <div class="margin-auto principal">
+        <div class="principal col-12 col-sm-12 col-md-9 col-lg-8 col-xl-9">
             <router-outlet></router-outlet>
         </div>
 

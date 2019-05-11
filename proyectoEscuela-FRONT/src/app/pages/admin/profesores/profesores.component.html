@@ -1,0 +1,207 @@
+<div class="contenedor animacion fadeIn sombra" *ngIf="bandera">
+    <h1 class="text-center">Cargando<i class="fas fa-sync-alt fa-spin"></i></h1>
+</div>
+
+<div class="container-fluid animacion fadeIn contenedor sombra" *ngIf="mostrar1">
+    <div class="row">
+        <div class="columna col">
+
+            <form #notificacion="ngForm">
+                <div class="text-center">
+                    <h1>Mantenimiento de profesores</h1>
+                </div>
+                <hr>
+                <div class="form-group row">
+                    <div class="col-11">
+                        <input class="form-control ml-3" name="buscar" placeholder="Buscar..." ngModel>
+                    </div>
+                </div>
+                <hr>
+                <button class="btn btn-lg btn-success mb-3 radioboton" (click)="cambiar2()"><i class="fas fa-user-plus mr-1"></i>Nuevo</button>
+
+                <table class="">
+                    <thead>
+                        <tr class="">
+                            <th class="text-center" style="max-width:600px">Alumno</th>
+                            <th class="text-center" style="width:auto">Legajo</th>
+                            <th class="text-center" style="width:auto">DNI</th>
+                            <th class="text-center" style="width:auto">Año</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr class="">
+                            <td class="text-center" style="max-width:600px">Chiabrera Ivan</td>
+                            <td class="text-center" style="width:auto">27592</td>
+                            <td class="text-center" style="width:auto">40851838</td>
+                            <td class="text-center" style="width:auto">4° A</td>
+                            <td class="text-center"><i class="fas fa-user-edit mr-1 click" style="color:green" (click)="cambiar1()"></i><i class="fas fa-user-minus click" style="color:#dc3545" data-toggle="modal" data-target="#exampleModal"></i></td>
+                        </tr>
+                    </tbody>
+
+
+                </table>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<div class="container-fluid animacion fadeIn" *ngIf="mostrar2">
+    <div class="row contenedor2 sombra">
+        <div class="columna col">
+
+            <form #notificacion="ngForm">
+                <h1>Edición de profesor</h1>
+                <hr>
+
+                <div class="form-group row">
+                    <label class="col-2 col-form-label ml-3"><h5>Nombre</h5></label>
+                    <div class="col-8">
+                        <input type="text" class="form-control" rows="3" name="descripcion" name="nombre" ngModel>
+
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-2 col-form-label ml-3"><h5>Apellido</h5></label>
+                    <div class="col-8">
+                        <input class="form-control" id="exampleFormControlTextarea1" rows="3" name="descripcion" ngModel>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-2 col-form-label ml-3"><h5>Fecha de nacimiento</h5></label>
+                    <div class="col-8">
+                        <input class="form-control" type="date" name="fecha" ngModel>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-2 col-form-label ml-3"><h5>DNI</h5></label>
+                    <div class="col-8">
+                        <input type="number" class="form-control" id="exampleFormControlTextarea1" rows="3" name="descripcion" ngModel>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-2 col-form-label ml-3"><h5>Contraseña</h5></label>
+                    <div class="col-8">
+                        <input type="password" class="form-control" id="exampleFormControlTextarea1" rows="3" name="descripcion" ngModel>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-2 col-form-label ml-3"><h5>Legajo</h5></label>
+                    <div class="col-8">
+                        <input class="form-control" id="exampleFormControlTextarea1" rows="3" name="descripcion" ngModel readonly>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="text-center">
+        <button type="submit" class="btn btn-lg btn-success m-lg-2">Actualizar</button>
+        <button type="submit" class="btn btn-lg btn-primary m-lg-2" (click)="cambiar1()">Volver</button>
+    </div>
+
+</div>
+
+
+<div class="container-fluid animacion fadeIn" *ngIf="mostrar3">
+    <div class="row contenedor2 sombra">
+        <div class="columna col">
+
+            <form #notificacion="ngForm">
+                <h1>Nuevo profesor</h1>
+                <hr>
+
+                <div class="form-group row">
+                    <label class="col-2 col-form-label ml-3"><h5>Nombre</h5></label>
+                    <div class="col-8">
+                        <input type="text" class="form-control" rows="3" name="descripcion" name="nombre" ngModel>
+
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-2 col-form-label ml-3"><h5>Apellido</h5></label>
+                    <div class="col-8">
+                        <input class="form-control" id="exampleFormControlTextarea1" rows="3" name="descripcion" ngModel>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-2 col-form-label ml-3"><h5>Fecha de nacimiento</h5></label>
+                    <div class="col-8">
+                        <input class="form-control" type="date" name="fecha" ngModel>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-2 col-form-label ml-3"><h5>DNI</h5></label>
+                    <div class="col-8">
+                        <input type="number" class="form-control" id="exampleFormControlTextarea1" rows="3" name="descripcion" ngModel>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-2 col-form-label ml-3"><h5>Contraseña</h5></label>
+                    <div class="col-8">
+                        <input type="password" class="form-control" id="exampleFormControlTextarea1" rows="3" name="descripcion" ngModel>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-2 col-form-label ml-3"><h5>Legajo</h5></label>
+                    <div class="col-8">
+                        <input class="form-control" id="exampleFormControlTextarea1" rows="3" name="descripcion" ngModel readonly>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="text-center">
+        <button type="submit" class="btn btn-lg btn-success m-lg-2" data-toggle="modal" data-target="#exampleModal1">Agregar</button>
+        <button type="submit" class="btn btn-lg btn-primary m-lg-2" (click)="cambiar2()">Volver</button>
+    </div>
+
+</div>
+
+<!-- Modal -->
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="text-center bg-danger" style="height:50px">
+                <h5 class="modal-title mt-2" id="exampleModalLabel">Notificación</h5>
+            </div>
+            <div class="modal-body text-center">
+                <h3>¿Esta seguro que desea eliminar al profesor?</h3>
+            </div>
+            <div class="modal-footer text-center">
+                <button routerLink="/paneladmin/inicio" class="btn btn-outline-danger" data-dismiss="modal">Eliminar</button>
+                <button class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="text-center bg-success" style="height:50px">
+                <h5 class="modal-title mt-2" id="exampleModalLabel">Notificación</h5>
+            </div>
+            <div class="modal-body text-center">
+                <h3>Alumno agregado correctamente</h3>
+                <img class="heartBeat" src="../../../../assets/iconos/font/verificado.png" alt="">
+            </div>
+            <div class="modal-footer text-center">
+                <button routerLink="/paneladmin/inicio" type="button" class="btn btn-success" data-dismiss="modal">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -5,18 +5,18 @@ import { Url } from '../../../models/url';
 
 
 @Component({
-  selector: 'app-boletin',
-  templateUrl: './boletin.component.html',
-  styleUrls: ['./boletin.component.css']
+  selector: 'app-cargarboletin',
+  templateUrl: './cargarboletin.component.html',
+  styleUrls: ['./cargarboletin.component.css']
 })
-export class BoletinComponent implements OnInit {
+export class CargarBoletinComponent implements OnInit {
 
   url=Url;
   mostrar1=false;
-  mostrar2=true;
-  mostrar3=true;
-  mostrar4=true;
-  mostrar5=true;
+  mostrar2=false;
+  mostrar3=false;
+  mostrar4=false;
+  mostrar5=false;
   anio:any;
   alumnos:any;
   alumno:any;
@@ -34,6 +34,7 @@ export class BoletinComponent implements OnInit {
   dni:any;
   fecha=new Date();
   fechaactual:string;
+  bandera:boolean;
 
   
   constructor( private http: HttpClient ) { }
@@ -46,13 +47,7 @@ export class BoletinComponent implements OnInit {
     this.fecha.setMonth( this.fecha.getMonth() + 1 );
     this.fechaactual='' + this.fecha.getFullYear() + '/' + this.fecha.getMonth() + '/' + this.fecha.getDate();
 
-    this.http.get(`${this.url}/colegio/anios/divisiones`)
-    .subscribe( data=> {
-    this.anio=data;
-   } );
- 
-
-
+    this.cargaranos();
   }
 
   cambiar1(){
@@ -76,11 +71,27 @@ export class BoletinComponent implements OnInit {
   }
 
 
-  cargardivisiones(a:any){
 
+
+
+  cargaranos(){
+    this.bandera=true;
+    this.http.get(`${this.url}/colegio/anios/divisiones`)
+    .subscribe( data=> {
+    this.anio=data;
+    this.bandera=false;
+    this.mostrar1=!this.mostrar1;
+   } );
+  }
+
+  cargardivisiones(a:any){
+    this.mostrar1 = !this.mostrar1 ;
+    this.bandera=true;
     this.http.get(`${this.url}/colegio/divisiones/${a.numero}`)
     .subscribe( data=> {
     this.divisiones=data;
+    this.bandera=false;
+    this.mostrar2 = !this.mostrar2 ;
  
    } );
     
@@ -88,15 +99,21 @@ export class BoletinComponent implements OnInit {
   }
 
   cargaralumnos(d:any){
-
+    this.mostrar2 = !this.mostrar2 ;
+    this.bandera=true;
     this.http.get(`${this.url}/colegio/alumnos/${d.id}`)
    .subscribe( data=> {
-   this.alumnos=data;
+     this.alumnos=data;
+     this.bandera=false;
+    this.mostrar3 = !this.mostrar3 ;
+
   } );    
   
   }
 
   cargarmaterias(a:any){
+    this.mostrar3 = !this.mostrar3 ;
+    this.bandera=true;
     this.alumno=a;
     this.http.get(`${this.url}/boletin/materias/alumno/${a.codigo}`)
    .subscribe( data=> {
@@ -112,6 +129,8 @@ export class BoletinComponent implements OnInit {
     } else if ( this.trimestre3===false ) {
      this.valtri3=true;
   }
+    this.bandera=false;
+    this.mostrar4 = !this.mostrar4 ;
 
   } );  
 
@@ -119,6 +138,8 @@ export class BoletinComponent implements OnInit {
 
 
   trimestre(b:number){
+    this.mostrar4 = !this.mostrar4 ;
+
     if (b===1) {
       this.trimestreactual=1;      
     }else if( b===2){
@@ -126,6 +147,8 @@ export class BoletinComponent implements OnInit {
     }else if(b===3){
       this.trimestreactual=3;
     }
+    this.mostrar5 = !this.mostrar5 ;
+
   }
 
   cargarboletin(b:any){

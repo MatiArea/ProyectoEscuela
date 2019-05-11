@@ -14,6 +14,8 @@ export class PaneladminComponent implements OnInit {
   mostrar2= false;
   mostrar3= false;
   mostrar4= false;
+  mostrar5= false;
+
   variable:any;
   icono='fa-bars';
 

@@ -17,6 +17,7 @@ import { UnloginGuard } from '../app/guards/unlogin.guard';
 import { AdminModule } from './pages/admin/admin.module';
 import { AlumnoModule } from './pages/alumno/alumno.module';
 import { SharedModule } from './shared/shared.module';
+import { PruebaComponent } from './pages/prueba/prueba.component';
 
 
 
@@ -27,6 +28,7 @@ import { SharedModule } from './shared/shared.module';
   declarations: [
     AppComponent,
     LoginComponent,
+    PruebaComponent,
     
   ],
   imports: [

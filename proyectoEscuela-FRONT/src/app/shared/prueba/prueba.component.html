@@ -1,1 +1,55 @@
-<div id="chartContainer" style="height: 370px; width: 100%; margin-left:auto;margin-right:auto;"></div>
+<button type="submit" class="btn btn-lg btn-danger m-lg-2" data-toggle="modal" data-target="#exampleModal">Enviar</button>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="text-center bg-danger" style="height:50px">
+                <h5 class="modal-title mt-2" id="exampleModalLabel">Notificación</h5>
+            </div>
+            <div class="modal-body text-center">
+                <h3>Hubo un error en la carga, verifique los datos o intente nuevamente</h3>
+                <img class="heartBeat" src="../../../../assets/iconos/font/error.png" alt="">
+            </div>
+            <div class="modal-footer text-center">
+                <button routerLink="/paneladmin/inicio" type="button" class="btn btn-danger" data-dismiss="modal">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<button type="submit" class="btn btn-lg btn-success m-lg-2" data-toggle="modal" data-target="#exampleModal1">Enviar</button>
+
+<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="text-center bg-success" style="height:50px">
+                <h5 class="modal-title mt-2" id="exampleModalLabel">Notificación</h5>
+            </div>
+            <div class="modal-body text-center">
+                <h3>Notificación enviada correctamente</h3>
+                <img class="heartBeat" src="../../../../assets/iconos/font/verificado.png" alt="">
+            </div>
+            <div class="modal-footer text-center">
+                <button routerLink="/paneladmin/inicio" type="button" class="btn btn-success" data-dismiss="modal">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<i class="fas fa-sync-alt fa-spin"></i>
+
+<div class="container-fluid">
+    <div class="row bg-dark">
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 p-0 m-0 ">
+            <div class="bg-success prueba">aaaa</div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 p-0 m-0 ">
+            <div class="bg-danger prueba">bbbb</div>
+        </div>
+
+    </div>
+
+</div>

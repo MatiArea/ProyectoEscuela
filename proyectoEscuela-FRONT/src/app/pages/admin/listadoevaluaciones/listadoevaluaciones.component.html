@@ -1,0 +1,87 @@
+<div class="contenedor animacion fadeIn sombra" *ngIf="bandera">
+    <h1 class="text-center">Cargando<i class="fas fa-sync-alt fa-spin"></i></h1>
+</div>
+
+<div *ngIf="mostrar1">
+    <div class="container-fluid animacion fadeIn contenedor sombra">
+        <div class="row">
+            <div class="columna col">
+                <form>
+                    <h1 class="text-center">Listado de materias</h1>
+                    <hr>
+                    <div *ngFor="let materia of materias" class="row">
+                        <div class="">
+                            <li class="ml-3"><i class="fas fa-caret-square-right mr-1"></i><span>{{ materia.materia.anio.numero }}°</span> <span>{{ materia.division.nombre }} </span> <span>{{ materia.materia.nombre }}</span><i (click)="cargarevaluaciones(materia)" class="fas fa-arrow-alt-circle-right ml-2 click position-static"></i></li>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="animated bounceInRight" *ngIf="mostrar2">
+    <div class="contenedor animacion fadeIn sombra">
+        <h1 class="text-center">Evaluaciones</h1>
+        <table class="">
+            <thead>
+                <tr class="text-center">
+                    <th class="text-center" style="max-width:300px">Fecha</th>
+                    <th class="text-center" style="max-width:600px">Titulo</th>
+                    <th class="text-center" style="max-width:300px">Temas</th>
+                    <th></th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr class="text-center" *ngFor="let evaluacion of evaluaciones">
+                    <td class="text-center" style="max-width:300px">{{ evaluacion.fecha }}</td>
+                    <td class="text-center" style="max-width:600px">{{ evaluacion.titulo }}</td>
+                    <td class="text-center" style="max-width:300px">{{ evaluacion.temas }}</td>
+                    <td><i (click)="cargarnotas(evaluacion)" class="fas fa-arrow-alt-circle-right click position-static text-center"></i></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center">
+        <button (click)="cambiar1()" class="btn btn-lg btn-success m-lg-2">Volver</button>
+    </div>
+</div>
+
+
+
+<div class="animated bounceInRight" *ngIf="mostrar3">
+    <div class="contenedor animacion fadeIn sombra">
+        <h1 class="text-center">Notas</h1>
+        <form #evaluaciones="ngForm" (ngSubmit)="cargarnotas(evaluaciones)">
+            <table class="">
+                <thead>
+                    <tr>
+                        <th class="text-center" style="max-width:300px">Legajo</th>
+                        <th class="text-center" style="max-width:600px">Alumno</th>
+                        <th class="text-center" style="max-width:300px">Nota</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr *ngFor="let nota of notas">
+                        <td class="text-center" style="max-width:300px">{{ nota.matricula.alumno.legajo }}</td>
+                        <td class="text-center" style="max-width:600px"><span>{{nota.matricula.alumno.apellido}}</span><span> {{nota.matricula.alumno.nombre}}</span></td>
+                        <td class="text-center" style="max-width:300px">{{ nota.nota }}</td>
+                    </tr>
+                </tbody>
+
+            </table>
+
+
+        </form>
+
+    </div>
+    <div class="contenedor">
+        <div class="text-center" id="chartContainer" style="height: 370px; width: 100%; margin-left:auto;margin-right:auto;"></div>
+    </div>
+    <div class="text-center">
+        <button (click)="volver1()" class="btn btn-lg btn-success m-lg-2">Volver</button>
+    </div>
+</div>

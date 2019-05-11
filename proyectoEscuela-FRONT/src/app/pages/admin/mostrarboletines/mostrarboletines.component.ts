@@ -14,9 +14,9 @@ export class MostrarboletinesComponent implements OnInit {
 
   url=Url;
   mostrar1=false;
-  mostrar2=true;
-  mostrar3=true;
-  mostrar4=true;
+  mostrar2=false;
+  mostrar3=false;
+  mostrar4=false;
   anio:any;
   divisiones:any;
   alumnos:any;
@@ -27,14 +27,11 @@ export class MostrarboletinesComponent implements OnInit {
   notas:any;
   notamostrar:NotaBoletinMostrar[]=[];
   mostrarpromedio:any;
+  bandera:boolean;
 
   ngOnInit( ) {
 
-    this.http.get(`${this.url}/colegio/anios/divisiones`)
-    .subscribe( data=> {
-    this.anio=data;
-   } );
- 
+    this.retornardivisiones();
   }
 
 
@@ -55,11 +52,25 @@ export class MostrarboletinesComponent implements OnInit {
     this.mostrar4 = !this.mostrar4 ;
   }
 
-  cargardivisiones(a:any){
+  retornardivisiones(){
+    this.bandera=true;
+    this.http.get(`${this.url}/colegio/anios/divisiones`)
+    .subscribe( data=> {
+    this.anio=data;
+    this.bandera=false;
+    this.mostrar1=!this.mostrar1;
+   } );
+ 
+  }
 
+  cargardivisiones(a:any){
+    this.mostrar1=!this.mostrar1;
+    this.bandera=true;
     this.http.get(`${this.url}/colegio/divisiones/${a.numero}`)
     .subscribe( data=> {
     this.divisiones=data;
+    this.bandera=false;
+    this.mostrar2=!this.mostrar2;
  
    } );
     
@@ -67,17 +78,21 @@ export class MostrarboletinesComponent implements OnInit {
   }
 
   cargaralumnos(d:any){
-
+    this.mostrar2=!this.mostrar2;
+    this.bandera=true;
     this.http.get(`${this.url}/colegio/alumnos/${d.id}`)
    .subscribe( data=> {
    this.alumnos=data;
+   this.bandera=false;
+   this.mostrar3=!this.mostrar3;
   } );    
   
   }
 
 
   cargarmaterias(a:any){
-
+    this.mostrar3=!this.mostrar3;
+    this.bandera=true;
     this.http.get(`${this.url}/boletin/display/${a.alumno.legajo}`)
     .subscribe( data=> {
     this.boletin=data;
@@ -106,5 +121,7 @@ export class MostrarboletinesComponent implements OnInit {
     }
   });
 
+  this.bandera=false;
+  this.mostrar4=!this.mostrar4;
 }
 }

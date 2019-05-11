@@ -2,6 +2,16 @@ body {
     background: #086A87;
 }
 
+.sombra {
+    -webkit-box-shadow: 13px -8px 74px -6px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 13px -8px 74px -6px rgba(0, 0, 0, 0.75);
+    box-shadow: 13px -8px 74px -6px rgba(0, 0, 0, 0.75);
+}
+
+.hoverboton:hover {
+    color: rgba(46, 45, 45, 0.719) !important;
+}
+
 @charset "UTF-8";
 
 /*!

@@ -5,7 +5,7 @@ const nodemailer = require ('nodemailer');
 export class MailService{
     transporter: any;
     constructor() {
-        this.transporter = nodemailer.createTransport(
+       this.transporter = nodemailer.createTransport(
             {
                 host: 'smtp.zoho.com',
                 port: 465,

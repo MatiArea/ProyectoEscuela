@@ -68,3 +68,7 @@ ul {
     margin: auto;
     border: 4px solid #0275db;
 }
+
+.prueba {
+    width: min-content;
+}

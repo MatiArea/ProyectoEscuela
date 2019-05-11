@@ -1,0 +1,136 @@
+<div class="contenedor animacion fadeIn sombra" *ngIf="bandera">
+    <h1 class="text-center">Cargando<i class="fas fa-sync-alt fa-spin"></i></h1>
+</div>
+
+<div class="container-fluid animacion fadeIn contenedor sombra col-xl-3" *ngIf="mostrar1">
+    <div class="row">
+        <div class="columna col">
+            <form>
+                <h1 class="text-center">Listado de años</h1>
+                <hr>
+                <div *ngFor="let ano of anio" class="text-center">
+                    <li class="ml-3"><i class="fas fa-caret-square-right mr-1"></i>Año {{ ano.numero }}<i (click)="cargardivisiones(ano)" class="fas fa-arrow-alt-circle-right ml-3 click"></i>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid animated bounceInRight " *ngIf="mostrar2">
+    <div class="row contenedor sombra col-xl-3">
+        <div class="columna col">
+            <form>
+                <h1 class="text-center">Listado de divisiones</h1>
+                <hr>
+                <div *ngFor="let division of divisiones" class="text-center">
+                    <li class="ml-3"><i class="fas fa-caret-square-right mr-1"></i>Division {{ division.nombre }}<i (click)="cargaralumnos(division)" class="fas fa-arrow-alt-circle-right ml-3 click"></i>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="text-center">
+        <button (click)="cambiar1()" class="btn btn-lg btn-success m-lg-2">Volver</button>
+    </div>
+</div>
+
+
+<div class="container-fluid  animated bounceInRight " *ngIf="mostrar3">
+    <div class="row contenedor sombra col-xl-5 ">
+        <div class="columna col ">
+            <form>
+                <h1 class="text-center">Alumnos</h1>
+                <hr>
+                <div class="m-auto ">
+                    <div *ngFor="let alumno of alumnos">
+                        <li class="ml-3 m-auto"><i class="fas fa-caret-square-right mr-1"></i><span> {{ alumno.alumno.apellido }} </span><span> {{ alumno.alumno.nombre }}</span> <i (click)="cargarmaterias(alumno)" class="fas fa-arrow-alt-circle-right click ml-2"></i>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+    <div class="text-center">
+        <button (click)="cambiar2()" class="btn btn-lg btn-success m-lg-2">Volver</button>
+    </div>
+</div>
+
+
+<div class="container-fluid  animated bounceInRight " *ngIf="mostrar4">
+
+    <div class="row contenedor sombra col-xl-5">
+        <div class="columna col">
+            <form>
+                <h1 class="text-center">Trimestres</h1>
+                <hr>
+                <div class="">
+                    <li class="ml-3"><i class="fas fa-caret-square-right mr-1"></i>Trimestre 1<i (click)="trimestre(1)" *ngIf="valtri1" class="fas fa-arrow-alt-circle-right click ml-2"></i>
+                        <li class="ml-3"><i class="fas fa-caret-square-right mr-1"></i>Trimestre 2<i (click)="trimestre(2)" *ngIf="valtri2" class="fas fa-arrow-alt-circle-right click ml-2"></i>
+                            <li class="ml-3"><i class="fas fa-caret-square-right mr-1"></i>Trimestre 3<i (click)="trimestre(3)" *ngIf="valtri3" class="fas fa-arrow-alt-circle-right click ml-2"></i>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="text-center">
+        <button (click)="cambiar3()" class="btn btn-lg btn-success m-lg-2">Volver</button>
+    </div>
+</div>
+
+<div class="contenedor animated bounceInRight sombra col-xl-6 " *ngIf="mostrar5">
+    <h1 class="text-center">Boletin</h1>
+    <hr>
+    <form #boletinn="ngForm" (ngSubmit)="cargarboletin(boletinn)">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Materia</th>
+                    <th class="text-center">Trimestre</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr *ngFor="let materia of boletin.materias ">
+                    <td>{{ materia.nombre }}</td>
+                    <td class="text-center">
+                        <select name="nota" ngModel>
+                            <option value="">-</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                    </select>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <div class="text-center">
+            <button type="submit" class="btn btn-lg btn-success m-lg-2" data-toggle="modal" data-target="#exampleModal">Cargar</button>
+        </div>
+    </form>
+</div>
+
+
+<!-- Modal -->
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="text-center bg-success" style="height:50px">
+                <h5 class="modal-title mt-2" id="exampleModalLabel">Notificación</h5>
+            </div>
+            <div class="modal-body text-center">
+                <h3>Notas cargadas correctamente</h3>
+                <img class="heartBeat" src="../../../../assets/iconos/font/verificado.png" alt="">
+            </div>
+            <div class="modal-footer text-center">
+                <button routerLink="/paneladmin/inicio" type="button" class="btn btn-success" data-dismiss="modal">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>

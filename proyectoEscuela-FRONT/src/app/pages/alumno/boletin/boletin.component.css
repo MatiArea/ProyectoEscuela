@@ -17,6 +17,7 @@ ul {
     font-size: 30px;
     padding: 20px;
     margin: 20px;
+    overflow: auto;
 }
 
 hr {
@@ -38,8 +39,16 @@ th {
 
 td {
     border: 3px solid black;
+    padding: 10px;
 }
 
-td {
-    border-top: 3px solid black;
+@media screen and (max-width:560px) {
+    .contenedor {
+        font-size: 15px !important;
+        padding: 2px;
+        margin: 20px 0px 20px 0px;
+    }
+    h1 {
+        font-size: 20px;
+    }
 }

@@ -13,16 +13,21 @@ ul {
     background: #E6E6E6;
     width: auto;
     margin: auto;
-    margin-top: 35px;
     border: 4px solid #0275db;
     font-size: 30px;
     padding: 20px;
+    margin: 20px;
     overflow: auto;
 }
 
-hr {
-    border-top: 5px solid black;
-    margin: 0;
+.contenedor2 {
+    background: #E6E6E6;
+    text-align: center;
+    width: auto;
+    margin: auto;
+    margin-top: 35px;
+    border: 4px solid #0275db;
+    overflow: auto;
 }
 
 .click {
@@ -42,8 +47,21 @@ td {
     padding: 10px;
 }
 
+td i:hover {
+    color: rgba(46, 45, 45, 0.719) !important;
+}
+
+.radioboton {
+    border-radius: 30px;
+}
+
 @media screen and (max-width:560px) {
     .contenedor {
+        font-size: 15px !important;
+        padding: 2px;
+        margin: 20px 0px 20px 0px;
+    }
+    .contenedor2 {
         font-size: 15px !important;
         padding: 2px;
         margin: 20px 0px 20px 0px;

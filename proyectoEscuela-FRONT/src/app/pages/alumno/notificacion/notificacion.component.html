@@ -1,0 +1,27 @@
+<div class="contenedor animacion fadeIn sombra" *ngIf="bandera">
+    <h1 class="text-center">Cargando<i class="fas fa-sync-alt fa-spin"></i></h1>
+</div>
+
+<div class="contenedor animacion fadeIn sombra" *ngIf="!bandera">
+    <h1 class="text-center">Notificacion</h1>
+
+    <table class="">
+
+        <tr>
+            <th class="text-center" style="max-width:190px">Fecha</th>
+            <th class="text-center" style="max-width:190px">Titulo</th>
+            <th class="text-center" style="max-width:800px">Cuerpo</th>
+        </tr>
+
+
+
+        <tr>
+            <td class="text-center" style="max-width:190px">{{ notificacion.fecha }}</td>
+            <td class="text-center" style="max-width:190px">{{ notificacion.titulo }}</td>
+            <td class="text-center" style="max-width:800px">{{ notificacion.cuerpo }}</td>
+        </tr>
+    </table>
+</div>
+<div class="text-center">
+    <button class="btn btn-lg btn-success m-lg-2" routerLink="/panel/notificaciones/">Volver</button>
+</div>

@@ -1,22 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import * as CanvasJS from '../../../../../node_modules/canvasjs-2.3.1/canvasjs.min';
+import * as CanvasJS from 'canvasjs-2.3.1/canvasjs.min';
 import { Url } from '../../../models/url';
 
 
 @Component({
-  selector: 'app-listadomaterias',
-  templateUrl: './listadomaterias.component.html',
-  styleUrls: ['./listadomaterias.component.css']
+  selector: 'app-listadoevaluaciones',
+  templateUrl: './listadoevaluaciones.component.html',
+  styleUrls: ['./listadoevaluaciones.component.css']
 })
-export class ListadomateriasComponent implements OnInit {
+export class ListadoEvaluacionesComponent implements OnInit {
 
   constructor( private http: HttpClient ) { }
 
   url=Url;
   mostrar1=false;
-  mostrar2=true;
-  mostrar3=true;
+  mostrar2=false;
+  mostrar3=false;
   legajo:any;
   materias:any;
   evaluaciones:any;
@@ -24,8 +24,8 @@ export class ListadomateriasComponent implements OnInit {
   notas:any;
   aprobados=0;
   desaprobados=0;
-
   nota10=0;
+  bandera:boolean;
 
 
 
@@ -36,12 +36,7 @@ export class ListadomateriasComponent implements OnInit {
     this.legajo=localStorage.getItem( 'legajo' );
 
 
-
-    this.http.get(`${this.url}/colegio/profesor/materias/${this.legajo}`)
-    .subscribe( data=> {
-    this.materias=data;
-    });
-    
+    this.retornarmaterias();
 
   }
 ///////////////////////////////////////////////////////////////////
@@ -61,15 +56,32 @@ export class ListadomateriasComponent implements OnInit {
     this.mostrar3 = !this.mostrar3 ;   
   }
 
+  retornarmaterias(){
+    this.bandera=true;
+    this.http.get(`${this.url}/colegio/profesor/materias/${this.legajo}`)
+    .subscribe( data=> {
+    this.materias=data;
+    this.bandera=false;
+    this.mostrar1=!this.mostrar1;
+    });
+    
+  }
+
   cargarevaluaciones(m:any){
+    this.mostrar1=!this.mostrar1;
+    this.bandera=true;
     this.http.get(`${this.url}/evaluacion/todas/cargadas/${m.materia.nombre}/${this.legajo}/${m.materia.anio.numero}/${m.division.nombre}`)
     .subscribe( data=> {
     this.evaluaciones=data;
+    this.bandera=false;
+    this.mostrar2=!this.mostrar2;
     });
 
   }
 
   cargarnotas(m:any){
+    this.mostrar2=!this.mostrar2;
+    this.mostrar3=!this.mostrar3;
     this.aprobados=0;this.desaprobados=0;
     this.http.get(`${this.url}/evaluacion/display/${m.folio}`)
     .subscribe( data=> {

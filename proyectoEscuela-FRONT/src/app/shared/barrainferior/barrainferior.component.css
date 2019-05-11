@@ -1,6 +1,6 @@
 .barrainferior {
     background: #262a34;
-    width: 100%;
+    max-width: auto;
     height: 50px;
     color: #fff;
     border-bottom: 2px solid #fff;
@@ -57,5 +57,14 @@
 @media screen and (max-width:589px) {
     .barrainferior {
         height: 90px;
+    }
+}
+
+@media screen and (max-width:343px) {
+    .navbar {
+        font-size: 20px !important;
+    }
+    .barrainferior {
+        height: 75px;
     }
 }

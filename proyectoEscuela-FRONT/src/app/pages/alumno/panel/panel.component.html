@@ -3,9 +3,9 @@
 </div>
 <div id="index3"></div>
 <div class="container-fluid " id="index2">
-    <h1 id="menuresponsive" (click)="cambiar()"><i class="fas" [ngClass]="icono"></i></h1>
+    <i style="font-size:40px" id="menuresponsive" (click)="cambiar()" class="fas" [ngClass]="icono"></i>
     <div class="row">
-        <div class="animated bounceInLeft barra-lateral col-2 " id="barra-lateral">
+        <div class="animated bounceInLeft barra-lateral col-md-2 col-xl-2 sombrapanel " id="barra-lateral">
             <div class="logo">
 
                 <h2><i class="fas fa-edit"></i>Panel</h2>
@@ -37,7 +37,7 @@
 
 
 
-        <div class="margin-auto principal">
+        <div class="principal col-12 col-sm-12 col-md-9 col-lg-8 col-xl-9">
             <router-outlet></router-outlet>
         </div>
 

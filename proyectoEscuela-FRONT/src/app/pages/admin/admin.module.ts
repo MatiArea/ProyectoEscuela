@@ -4,27 +4,31 @@ import { LoginGuard } from 'src/app/guards/login.guard';
 import { UnloginGuard } from 'src/app/guards/unlogin.guard';
 import { AppComponent } from 'src/app/app.component';
 import { EnviarnotificacionComponent } from './enviarnotificacion/enviarnotificacion.component';
-import { ListadomateriasComponent } from './listadomaterias/listadomaterias.component';
+import { ListadoEvaluacionesComponent } from './listadoevaluaciones/listadoevaluaciones.component';
 import { PaneladminComponent } from './paneladmin/paneladmin.component';
 import { ADMIN_ROUTES } from './admin.routes';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { CrearevaluacionComponent } from './crearevaluacion/crearevaluacion.component';
 import { FormsModule } from '@angular/forms';
-import { ListadomatevaComponent } from './listadomateva/listadomateva.component';
-import { BoletinComponent } from './boletin/boletin.component';
+import { CargarEvaluacionComponent } from './cargarevaluacion/cargarevaluacion.component';
+import { CargarBoletinComponent } from './cargarboletin/cargarboletin.component';
 import { MostrarboletinesComponent } from './mostrarboletines/mostrarboletines.component';
+import { AlumnosComponent } from './alumnos/alumnos.component';
+import { ProfesoresComponent } from './profesores/profesores.component';
 
 
 
 @NgModule({
   declarations: [
     EnviarnotificacionComponent,    
-    ListadomateriasComponent,
+    ListadoEvaluacionesComponent,
     PaneladminComponent,
     CrearevaluacionComponent,          
-    ListadomatevaComponent,
-    BoletinComponent,
-    MostrarboletinesComponent    
+    CargarEvaluacionComponent,
+    CargarBoletinComponent,
+    MostrarboletinesComponent,
+    AlumnosComponent,
+    ProfesoresComponent    
   ],
   imports: [
       BrowserModule,
@@ -35,7 +39,7 @@ import { MostrarboletinesComponent } from './mostrarboletines/mostrarboletines.c
   ],
   exports:[
     EnviarnotificacionComponent,    
-    ListadomateriasComponent,    
+    ListadoEvaluacionesComponent,    
     PaneladminComponent
 
   ],

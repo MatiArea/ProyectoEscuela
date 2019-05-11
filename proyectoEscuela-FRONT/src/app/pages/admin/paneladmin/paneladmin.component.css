@@ -102,6 +102,12 @@ ul {
     z-index: 4;
 }
 
+.sombrapanel {
+    -webkit-box-shadow: 9px 0px 28px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 9px 0px 28px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: 9px 0px 28px 0px rgba(0, 0, 0, 0.75);
+}
+
 
 /*MEDIAQUERIES*/
 

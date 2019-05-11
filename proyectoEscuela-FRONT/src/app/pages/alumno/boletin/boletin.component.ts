@@ -34,6 +34,7 @@ export class BoletinComponent implements OnInit {
   pdf:any;
   position:any;
   aniodivision:any;
+  bandera:any;
 
 
 
@@ -43,8 +44,16 @@ export class BoletinComponent implements OnInit {
     this.alumnonombre=localStorage.getItem( 'email' );
     this.alumnoapellido=localStorage.getItem( 'apellido' );
 
+    this.retornarboletin();
+
+    
 
 
+   
+  }
+
+  retornarboletin(){
+    this.bandera=true;
     this.http.get(`${this.url}/colegio/alumno/curso/${this.legajo}`)
     .subscribe( data=> {
     this.aniodivision=data;
@@ -58,16 +67,17 @@ export class BoletinComponent implements OnInit {
 
     
     this.trimestres();
-  
+    
+    this.bandera=false;
+
 
     });
-
-
-   
   }
 
 
   trimestres(){
+
+    
     this.trimestre1=this.boletin.boletin.trimestre1;
     this.trimestre2=this.boletin.boletin.trimestre2;
     this.trimestre3=this.boletin.boletin.trimestre3;
@@ -87,6 +97,9 @@ export class BoletinComponent implements OnInit {
     if ( this.trimestre1===true && this.trimestre2===true && this.trimestre3===true ) {
       this.mostrarpromedio=true;
     }
+
+
+
   }
 
   captureScreen(){

@@ -4,15 +4,15 @@ import { Notas } from 'src/app/models/notas';
 import { Url } from '../../../models/url';
 
 @Component({
-  selector: 'app-listadomateva',
-  templateUrl: './listadomateva.component.html',
-  styleUrls: ['./listadomateva.component.css']
+  selector: 'app-cargarevaluacion',
+  templateUrl: './cargarevaluacion.component.html',
+  styleUrls: ['./cargarevaluacion.component.css']
 })
-export class ListadomatevaComponent implements OnInit {
+export class CargarEvaluacionComponent implements OnInit {
 
   mostrar1=false;
-  mostrar2=true;
-  mostrar3=true;
+  mostrar2=false;
+  mostrar3=false;
 
   constructor( private http: HttpClient ) { }
 
@@ -27,6 +27,7 @@ export class ListadomatevaComponent implements OnInit {
   notas:Notas[]=[];
   fecha=new Date();
   fechaactual:string;
+  bandera:boolean;
 
 
   ngOnInit() {
@@ -36,11 +37,8 @@ export class ListadomatevaComponent implements OnInit {
     this.fechaactual='' + this.fecha.getFullYear() + '/' + this.fecha.getMonth() + '/' + this.fecha.getDate();
 
 
-
-    this.http.get(`${this.url}/colegio/profesor/materias/${this.legajo}`)
-    .subscribe( data=> {
-    this.materias=data;
-    });
+    this.retornarmaterias();
+    
     
   }
 
@@ -55,17 +53,29 @@ export class ListadomatevaComponent implements OnInit {
    }
 
 
+  retornarmaterias(){
+    this.bandera=true;
+    this.http.get(`${this.url}/colegio/profesor/materias/${this.legajo}`)
+    .subscribe( data=> {
+    this.materias=data;
+    this.bandera=false;
+    this.mostrar1=!this.mostrar1;
+    });
+  }
   
   
   
   
   
    cargarmateria(m:any){
+    this.mostrar1=!this.mostrar1;
+    this.bandera=true;
     this.materia=m;
-
     this.http.get(`${this.url}/evaluacion/cargarNotas/${m.materia.nombre}/${this.legajo}/${m.materia.anio.numero}/${m.division.nombre}`)
     .subscribe( data=> {
     this.evaluaciones=data;
+    this.bandera=false;
+    this.mostrar2=!this.mostrar2;
     });
    }
 
@@ -74,10 +84,14 @@ export class ListadomatevaComponent implements OnInit {
    
    
    cargaralumnos(e:any){
+    this.mostrar2=!this.mostrar2;
+    this.bandera=true;
     this.folio=e.folio;
     this.http.get(`${this.url}/colegio/alumnos/${this.materia.materia.anio.numero}/${this.materia.division.nombre}`)
     .subscribe( data=> {
     this.alumnos=data;
+    this.bandera=false;
+    this.mostrar3=!this.mostrar3;
     });
 
    }
