@@ -4,6 +4,8 @@ import { NotaBoletinMostrar } from 'src/app/models/notaboletinamostrar';
 import * as jspdf from 'jspdf';  
 import html2canvas from 'html2canvas'; 
 import { Url } from '../../../models/url';
+import { ColegioService } from '../../../services/colegio/colegio.service';
+import { BoletinService } from '../../../services/boletin/boletin.service';
 
 @Component({
   selector: 'app-boletin',
@@ -12,7 +14,7 @@ import { Url } from '../../../models/url';
 })
 export class BoletinComponent implements OnInit {
 
-  constructor( private http: HttpClient ) { }
+  constructor( private http: HttpClient, private colegioService:ColegioService, private boletinService:BoletinService ) { }
 
   url=Url;
   legajo:any;
@@ -54,23 +56,17 @@ export class BoletinComponent implements OnInit {
 
   retornarboletin(){
     this.bandera=true;
-    this.http.get(`${this.url}/colegio/alumno/curso/${this.legajo}`)
+    this.colegioService.obtenerCursoAlumno(this.legajo)
     .subscribe( data=> {
     this.aniodivision=data;
     });
     
-
-    this.http.get(`${this.url}/boletin/display/${this.legajo}`)
+    this.boletinService.obtenerBoletin(this.legajo)
     .subscribe( data=> {
     this.boletin=data;
-    this.notas=this.boletin.notas;
-
-    
-    this.trimestres();
-    
+    this.notas=this.boletin.notas;    
+    this.trimestres();    
     this.bandera=false;
-
-
     });
   }
 

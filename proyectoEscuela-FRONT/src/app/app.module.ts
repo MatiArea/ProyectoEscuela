@@ -7,6 +7,11 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import { APP_ROUTING } from './app.routes';
 
+// servicios
+import {BoletinService} from './services/boletin/boletin.service';
+import { ColegioService } from './services/colegio/colegio.service';
+import { NotificacionService } from './services/notificacion/notificacion.service';
+import { EvaluacionService } from './services/evaluacion/evaluacion.service';
 //
 
 import { AppComponent } from './app.component';
@@ -42,7 +47,7 @@ import { PruebaComponent } from './pages/prueba/prueba.component';
     SharedModule
 
   ],
-  providers: [LoginGuard,UnloginGuard],
+  providers: [LoginGuard,UnloginGuard,BoletinService,ColegioService,NotificacionService,EvaluacionService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

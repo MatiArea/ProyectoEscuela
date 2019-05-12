@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Url } from '../../../models/url';
+import { NotificacionService } from '../../../services/notificacion/notificacion.service';
 
 @Component({
   selector: 'app-notificaciones',
@@ -9,7 +10,7 @@ import { Url } from '../../../models/url';
 })
 export class NotificacionesComponent implements OnInit {
 
-  constructor( private http: HttpClient ) { }
+  constructor( private http: HttpClient, private notificacionService:NotificacionService ) { }
 
   url=Url;
   notificaciones:any;
@@ -18,17 +19,17 @@ export class NotificacionesComponent implements OnInit {
   ngOnInit() {
     this.retornarnotificaciones();
   }
-
-
+// ======================================================
   retornarnotificaciones(){
     this.bandera=true;
     this.legajo=localStorage.getItem( 'legajo' );
-      return this.http.get(`${this.url}/notificaciones/all/${this.legajo}`)
+    this.notificacionService.obtenerNotificacionesAlumno(this.legajo)
     .subscribe( data=> {
     this.notificaciones=data;
     this.bandera=false;
    } );
   }
+// ======================================================
 
 
 

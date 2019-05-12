@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { NotaBoletinMostrar } from 'src/app/models/notaboletinamostrar';
 import { Url } from '../../../models/url';
+import { ColegioService } from '../../../services/colegio/colegio.service';
+import { BoletinService } from 'src/app/services/boletin/boletin.service';
 
 @Component({
   selector: 'app-mostrarboletines',
@@ -10,7 +12,7 @@ import { Url } from '../../../models/url';
 })
 export class MostrarboletinesComponent implements OnInit {
 
-  constructor( private http: HttpClient ) { }
+  constructor( private http: HttpClient, private colegioService:ColegioService, private boletinService:BoletinService ) { }
 
   url=Url;
   mostrar1=false;
@@ -31,7 +33,7 @@ export class MostrarboletinesComponent implements OnInit {
 
   ngOnInit( ) {
 
-    this.retornardivisiones();
+    this.cargaranos();
   }
 
 
@@ -51,10 +53,10 @@ export class MostrarboletinesComponent implements OnInit {
     this.mostrar3 = !this.mostrar3 ;
     this.mostrar4 = !this.mostrar4 ;
   }
-
-  retornardivisiones(){
+// ======================================================
+cargaranos(){
     this.bandera=true;
-    this.http.get(`${this.url}/colegio/anios/divisiones`)
+    this.colegioService.obtenerAnios()
     .subscribe( data=> {
     this.anio=data;
     this.bandera=false;
@@ -62,11 +64,11 @@ export class MostrarboletinesComponent implements OnInit {
    } );
  
   }
-
+// ======================================================
   cargardivisiones(a:any){
     this.mostrar1=!this.mostrar1;
     this.bandera=true;
-    this.http.get(`${this.url}/colegio/divisiones/${a.numero}`)
+    this.colegioService.obtenerDivisiones(a.numero)
     .subscribe( data=> {
     this.divisiones=data;
     this.bandera=false;
@@ -76,11 +78,11 @@ export class MostrarboletinesComponent implements OnInit {
     
 
   }
-
+// ======================================================
   cargaralumnos(d:any){
     this.mostrar2=!this.mostrar2;
     this.bandera=true;
-    this.http.get(`${this.url}/colegio/alumnos/${d.id}`)
+    this.colegioService.obtenerAlumnos(d.id)
    .subscribe( data=> {
    this.alumnos=data;
    this.bandera=false;
@@ -89,16 +91,14 @@ export class MostrarboletinesComponent implements OnInit {
   
   }
 
-
+// ======================================================
   cargarmaterias(a:any){
     this.mostrar3=!this.mostrar3;
     this.bandera=true;
-    this.http.get(`${this.url}/boletin/display/${a.alumno.legajo}`)
+    this.boletinService.obtenerBoletin(a.alumno.legajo)
     .subscribe( data=> {
     this.boletin=data;
     this.notas=this.boletin.notas;
-
-
 
     this.trimestre1=this.boletin.boletin.trimestre1;
     this.trimestre2=this.boletin.boletin.trimestre2;

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { MateriaIndice } from 'src/app/models/materiasindice';
 import { Url } from '../../../models/url';
+import { ColegioService } from '../../../services/colegio/colegio.service';
+import { EvaluacionService } from '../../../services/evaluacion/evaluacion.service';
 
 @Component({
   selector: 'app-crearevaluacion',
@@ -23,14 +25,18 @@ export class CrearevaluacionComponent implements OnInit {
  
 
 
-  constructor( private http: HttpClient ) { }
+  constructor( private http: HttpClient, private colegioService:ColegioService, private evaluacionService:EvaluacionService ) { }
 
   ngOnInit() {
     this.legajo=localStorage.getItem( 'legajo' );
 
+    this.retornarMateriasProfesor();
+    this.retornarFolio();
 
-
-    this.http.get(`${this.url}/colegio/profesor/materias/${this.legajo}`)
+  }
+// ======================================================  
+  retornarMateriasProfesor(){
+    this.colegioService.obtenerMateriasProfesor(this.legajo)
     .subscribe( data=> {
     this.materias=data;
     for (let index = 0; index < this.materias.length; index++) {
@@ -42,39 +48,23 @@ export class CrearevaluacionComponent implements OnInit {
         };
       }
    } );
-
-
-   
-
-
-
-   this.http.get(`${this.url}/evaluacion/folio`)
-   .subscribe( data=> {
-   this.folio=data;
-  } );
-
   }
-
+// ======================================================
+  retornarFolio(){
+    this.evaluacionService.obtenerFolio()
+    .subscribe( data=> {
+    this.folio=data;
+   } );
+  }
+// ======================================================
   capturar(mat:any){
     this.indice=mat; 
   }
-
+// ======================================================
   enviarevaluacion(evalu:any){
-    this.http.post(`${this.url}/evaluacion/create`,
-    {
-    fecha:evalu.value.fecha,
-    folio:this.folio,
-    temas:evalu.value.temas,
-    titulo:evalu.value.titulo,
-    legajoProfesor:this.legajo,
-    division:this.materiasindice[this.indice].division,
-    anio:this.materiasindice[this.indice].anio,
-    materia:this.materiasindice[this.indice].nombremateria
-    }).subscribe((data:any)=>{
+    this.evaluacionService.crearEvaluacion(evalu.value.fecha,this.folio,evalu.value.temas,evalu.value.titulo,this.legajo,this.materiasindice[this.indice].division,this.materiasindice[this.indice].anio,this.materiasindice[this.indice].nombremateria)
+   .subscribe((data:any)=>{
     });
-
-    
-
   }
-
+// ======================================================
 }

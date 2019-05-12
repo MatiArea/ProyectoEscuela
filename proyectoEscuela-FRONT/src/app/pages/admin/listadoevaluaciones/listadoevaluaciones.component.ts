@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import * as CanvasJS from 'canvasjs-2.3.1/canvasjs.min';
 import { Url } from '../../../models/url';
+import { ColegioService } from '../../../services/colegio/colegio.service';
+import { EvaluacionService } from '../../../services/evaluacion/evaluacion.service';
 
 
 @Component({
@@ -11,7 +13,7 @@ import { Url } from '../../../models/url';
 })
 export class ListadoEvaluacionesComponent implements OnInit {
 
-  constructor( private http: HttpClient ) { }
+  constructor( private http: HttpClient, private colegioService:ColegioService, private evaluacionService:EvaluacionService ) { }
 
   url=Url;
   mostrar1=false;
@@ -39,7 +41,7 @@ export class ListadoEvaluacionesComponent implements OnInit {
     this.retornarmaterias();
 
   }
-///////////////////////////////////////////////////////////////////
+
 
   cambiar1(){
     this.mostrar2 = !this.mostrar2 ;
@@ -55,10 +57,10 @@ export class ListadoEvaluacionesComponent implements OnInit {
     this.mostrar2 = !this.mostrar2 ;
     this.mostrar3 = !this.mostrar3 ;   
   }
-
+// ======================================================
   retornarmaterias(){
     this.bandera=true;
-    this.http.get(`${this.url}/colegio/profesor/materias/${this.legajo}`)
+    this.colegioService.obtenerMateriasProfesor(this.legajo)
     .subscribe( data=> {
     this.materias=data;
     this.bandera=false;
@@ -66,11 +68,11 @@ export class ListadoEvaluacionesComponent implements OnInit {
     });
     
   }
-
+// ======================================================
   cargarevaluaciones(m:any){
     this.mostrar1=!this.mostrar1;
     this.bandera=true;
-    this.http.get(`${this.url}/evaluacion/todas/cargadas/${m.materia.nombre}/${this.legajo}/${m.materia.anio.numero}/${m.division.nombre}`)
+    this.evaluacionService.obtenerEvaluacionesCargadas(m.materia.nombre,this.legajo,m.materia.anio.numero,m.division.nombre)
     .subscribe( data=> {
     this.evaluaciones=data;
     this.bandera=false;
@@ -78,12 +80,12 @@ export class ListadoEvaluacionesComponent implements OnInit {
     });
 
   }
-
+// ======================================================
   cargarnotas(m:any){
     this.mostrar2=!this.mostrar2;
     this.mostrar3=!this.mostrar3;
     this.aprobados=0;this.desaprobados=0;
-    this.http.get(`${this.url}/evaluacion/display/${m.folio}`)
+    this.evaluacionService.obtenerNotasEvaluacion(m.folio)
     .subscribe( data=> {
     this.evaluacion=data;
     this.notas=this.evaluacion.notas;

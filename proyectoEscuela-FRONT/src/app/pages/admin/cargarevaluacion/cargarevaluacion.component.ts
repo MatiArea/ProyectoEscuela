@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Notas } from 'src/app/models/notas';
 import { Url } from '../../../models/url';
+import { ColegioService } from '../../../services/colegio/colegio.service';
+import { EvaluacionService } from '../../../services/evaluacion/evaluacion.service';
+import { NotificacionService } from '../../../services/notificacion/notificacion.service';
 
 @Component({
   selector: 'app-cargarevaluacion',
@@ -14,7 +17,7 @@ export class CargarEvaluacionComponent implements OnInit {
   mostrar2=false;
   mostrar3=false;
 
-  constructor( private http: HttpClient ) { }
+  constructor( private http: HttpClient, private colegioService:ColegioService, private evaluacionService:EvaluacionService, private notificacionService:NotificacionService ) { }
 
   url=Url;
   legajo:any;
@@ -52,42 +55,34 @@ export class CargarEvaluacionComponent implements OnInit {
     this.mostrar3 = !this.mostrar3 ;   
    }
 
-
+// ======================================================
   retornarmaterias(){
     this.bandera=true;
-    this.http.get(`${this.url}/colegio/profesor/materias/${this.legajo}`)
+    this.colegioService.obtenerMateriasProfesor(this.legajo)
     .subscribe( data=> {
     this.materias=data;
     this.bandera=false;
     this.mostrar1=!this.mostrar1;
     });
   }
-  
-  
-  
-  
-  
+ // ======================================================  
    cargarmateria(m:any){
     this.mostrar1=!this.mostrar1;
     this.bandera=true;
     this.materia=m;
-    this.http.get(`${this.url}/evaluacion/cargarNotas/${m.materia.nombre}/${this.legajo}/${m.materia.anio.numero}/${m.division.nombre}`)
+    this.evaluacionService.obtenerEvaluaciones(m.materia.nombre,this.legajo,m.materia.anio.numero,m.division.nombre)
     .subscribe( data=> {
     this.evaluaciones=data;
     this.bandera=false;
     this.mostrar2=!this.mostrar2;
     });
    }
-
-   
-   
-   
-   
+// ======================================================   
    cargaralumnos(e:any){
     this.mostrar2=!this.mostrar2;
     this.bandera=true;
     this.folio=e.folio;
-    this.http.get(`${this.url}/colegio/alumnos/${this.materia.materia.anio.numero}/${this.materia.division.nombre}`)
+    this.colegioService.obtenerAlumnosPorAnioYDiv(this.materia.materia.anio.numero,this.materia.division.nombre)
     .subscribe( data=> {
     this.alumnos=data;
     this.bandera=false;
@@ -95,16 +90,8 @@ export class CargarEvaluacionComponent implements OnInit {
     });
 
    }
-
-   
-   
-   
-   
-   
-   
-   cargarnotas(e:any){
-  
-    
+// ======================================================   
+   cargarnotas(e:any){   
   
     for (let index = 0; index < this.alumnos.length; index++) {
      
@@ -113,32 +100,10 @@ export class CargarEvaluacionComponent implements OnInit {
         nota: e._directives[index].viewModel
     };
   }
-
-
-  this.http.post(`${this.url}/evaluacion/cargarNotas/insert`,
-  {
-    folioEvaluacion:this.folio,
-    notas:this.notas
-  }).subscribe((data:any)=>{
-    
-  });
-
-
-  this.http.put(`${this.url}/evaluacion/cargarNotas/update/${this.folio}`,this.folio)
-    .subscribe((data:any)=>{
-      
-    });
-  
-
-    this.http.post(`${this.url}/notificaciones/evaluacion/enviar/division`,
-    {
-      legajo:this.legajo,
-      division:this.materia.division.nombre,
-      anio:this.materia.materia.anio.numero,
-      folio:this.folio,
-      fecha:this.fechaactual
-    }).subscribe((data:any)=>{
-    });
+  this.evaluacionService.cargarNotas(this.folio,this.notas).subscribe((data:any)=>{});
+  this.evaluacionService.actualizarEvaluacion(this.folio).subscribe((data:any)=>{});  
+  this.notificacionService.evaluacionDivision(this.legajo,this.materia.division.nombre,this.materia.materia.anio.numero,this.folio,this.fechaactual).subscribe((data:any)=>{});
 
    }
+// ======================================================
 }

@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { NotasBol } from '../../../models/notaboletin';
 import { Url } from '../../../models/url';
-
+import { BoletinService } from '../../../services/boletin/boletin.service';
+import { ColegioService } from 'src/app/services/colegio/colegio.service';
+import { NotificacionService } from '../../../services/notificacion/notificacion.service';
 
 @Component({
   selector: 'app-cargarboletin',
@@ -37,9 +39,9 @@ export class CargarBoletinComponent implements OnInit {
   bandera:boolean;
 
   
-  constructor( private http: HttpClient ) { }
+  constructor( private http: HttpClient, private boletinService: BoletinService, private colegioService:ColegioService, private notificacionService:NotificacionService ) { }
   
-  
+   
 
   ngOnInit() {
 
@@ -73,50 +75,46 @@ export class CargarBoletinComponent implements OnInit {
 
 
 
-
+// ======================================================
   cargaranos(){
     this.bandera=true;
-    this.http.get(`${this.url}/colegio/anios/divisiones`)
+    this.colegioService.obtenerAnios()
     .subscribe( data=> {
     this.anio=data;
     this.bandera=false;
     this.mostrar1=!this.mostrar1;
-   } );
+   });
   }
-
+// ======================================================
   cargardivisiones(a:any){
     this.mostrar1 = !this.mostrar1 ;
     this.bandera=true;
-    this.http.get(`${this.url}/colegio/divisiones/${a.numero}`)
+    this.colegioService.obtenerDivisiones(a.numero)
     .subscribe( data=> {
     this.divisiones=data;
     this.bandera=false;
-    this.mostrar2 = !this.mostrar2 ;
- 
-   } );
-    
-
+    this.mostrar2 = !this.mostrar2 ; 
+   });
   }
-
+// ======================================================
   cargaralumnos(d:any){
     this.mostrar2 = !this.mostrar2 ;
     this.bandera=true;
-    this.http.get(`${this.url}/colegio/alumnos/${d.id}`)
+    this.colegioService.obtenerAlumnos(d.id)
    .subscribe( data=> {
      this.alumnos=data;
      this.bandera=false;
     this.mostrar3 = !this.mostrar3 ;
-
-  } );    
-  
+   });  
   }
-
+// ======================================================
   cargarmaterias(a:any){
     this.mostrar3 = !this.mostrar3 ;
     this.bandera=true;
     this.alumno=a;
-    this.http.get(`${this.url}/boletin/materias/alumno/${a.codigo}`)
+    this.boletinService.obtenerMaterias(a.codigo)
    .subscribe( data=> {
+
    this.boletin=data;
    this.trimestre1=this.boletin.boletin.trimestre1;
    this.trimestre2=this.boletin.boletin.trimestre2;
@@ -132,11 +130,9 @@ export class CargarBoletinComponent implements OnInit {
     this.bandera=false;
     this.mostrar4 = !this.mostrar4 ;
 
-  } );  
-
+  });
   }
-
-
+// ======================================================
   trimestre(b:number){
     this.mostrar4 = !this.mostrar4 ;
 
@@ -148,46 +144,23 @@ export class CargarBoletinComponent implements OnInit {
       this.trimestreactual=3;
     }
     this.mostrar5 = !this.mostrar5 ;
-
   }
-
+// ======================================================
   cargarboletin(b:any){
    for (let index = 0; index < this.boletin.materias.length; index++) {
     this.notasboletin[index] = {
       idMateria: this.boletin.materias[index].id,
       nota: b._directives[index].viewModel
-  };
-   
-  }
+  };   
+  }    
+  this.boletinService.cargarBoletin(this.boletin,this.trimestreactual,this.notasboletin).subscribe((data:any)=>{});  
 
-    
+  this.boletinService.actualizarTriBoletin(this.boletin.boletin.id,this.trimestreactual).subscribe((data:any)=>{});
 
-  this.http.post(`${this.url}/boletin/notas/insert`,
-  {
-    idBoletin:this.boletin.boletin.id,
-    trimestre:this.trimestreactual,
-    notas:this.notasboletin
-  }).subscribe((data:any)=>{
-  });
-
-  
-  this.http.get(`${this.url}/boletin/update/${this.boletin.boletin.id}/${this.trimestreactual}` )
-    .subscribe((data:any)=>{
-    });
-
-
-    this.http.post(`${this.url}/notificaciones/boletin/enviar/alumno`,
-    {
-      legajoAlumno:this.alumno.alumno.legajo,
-      dniPreceptor:this.dni,
-      fecha:this.fechaactual,
-      trimestre:this.trimestreactual
-    }).subscribe((data:any)=>{
-    });
-  
+  this.notificacionService.boletin(this.alumno.alumno.legajo,this.dni,this.fechaactual,this.trimestreactual).subscribe((data:any)=>{});    
 
   }
-
+// ======================================================
  
 
 

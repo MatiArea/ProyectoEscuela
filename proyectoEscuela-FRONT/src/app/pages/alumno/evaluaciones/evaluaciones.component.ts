@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Url } from '../../../models/url';
+import { ColegioService } from '../../../services/colegio/colegio.service';
+import { EvaluacionService } from '../../../services/evaluacion/evaluacion.service';
 
 @Component({
   selector: 'app-evaluaciones',
@@ -9,7 +11,7 @@ import { Url } from '../../../models/url';
 })
 export class EvaluacionesComponent implements OnInit {
 
-  constructor( private http: HttpClient ) { }
+  constructor( private http: HttpClient, private colegioService:ColegioService, private evaluacionService:EvaluacionService ) { }
 
   url=Url;
  
@@ -39,7 +41,7 @@ export class EvaluacionesComponent implements OnInit {
   retornarmaterias(){
     this.bandera=true;
     this.legajo=localStorage.getItem( 'legajo' );
-    return this.http.get(`${this.url}/colegio/alumno/materias/${this.legajo}`)
+    this.colegioService.obtenerMateriasAlumno(this.legajo)
   .subscribe( data=> {
     this.materias=data;
     this.bandera=false;
@@ -51,7 +53,7 @@ export class EvaluacionesComponent implements OnInit {
   cargarnotas(e:any){
     this.mostrar1 = !this.mostrar1;
     this.bandera=true;
-    this.http.get(`${this.url}/evaluacion/todas/alumno/${this.legajo}/${e.materia.nombre}`)
+    this.evaluacionService.obtenerEvaluacionesCargadasAlumno(this.legajo,e.materia.nombre)
     .subscribe( data=> {
     this.nota=data;
     this.bandera=false;

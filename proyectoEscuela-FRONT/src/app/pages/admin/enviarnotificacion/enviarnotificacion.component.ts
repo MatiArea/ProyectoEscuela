@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Url } from '../../../models/url';
+import { ColegioService } from '../../../services/colegio/colegio.service';
+import { NotificacionService } from '../../../services/notificacion/notificacion.service';
 
 
 @Component({
@@ -11,7 +13,7 @@ import { Url } from '../../../models/url';
 })
 export class EnviarnotificacionComponent implements OnInit {
 
-  constructor( private http: HttpClient ) { }
+  constructor( private http: HttpClient, private colegioService:ColegioService, private notificacionService:NotificacionService ) { }
 
   url=Url;
   anios:any;
@@ -23,40 +25,28 @@ export class EnviarnotificacionComponent implements OnInit {
   ngOnInit() {
     this.fecha.setMonth( this.fecha.getMonth() + 1 );
     this.fechaactual='' + this.fecha.getFullYear() + '/' + this.fecha.getMonth() + '/' + this.fecha.getDate();
-     return this.http.get(`${this.url}/colegio/anios`)
+    this.retornarAnios();
+  }
+// ======================================================
+  retornarAnios(){
+    this.http.get(`${this.url}/colegio/anios`)
     .subscribe( data=> {
     this.anios=data;
-   } );
-
+   });
   }
-
+// ======================================================
   getdivisiones(anio:any){
     
-    return this.http.get(`${this.url}/colegio/divisiones/${anio}`)
+    this.colegioService.obtenerDivisiones(anio)
     .subscribe( data=> {
     this.divisiones=data;
-   } );
-
+   });
   }
-
-
+// ======================================================
   enviarnot( not:NgForm ) {
     this.rol=localStorage.getItem( 'rol' );
     this.dni=localStorage.getItem( 'dni' );
-
     
-
-    this.http.post(`${this.url}/notificaciones/aviso/enviar/division`,
-    {
-    titulo:not.value.titulo,
-    descripcion:not.value.descripcion,
-    cuerpo:not.value.cuerpo,
-    fecha:this.fechaactual,
-    rollAutor:this.rol,
-    dniAutor:this.dni,
-    divisionID:not.value.division
-    }).subscribe((data:any)=>{
-    });
+    this.notificacionService.avisoDivision(not.value.titulo,not.value.descripcion,not.value.cuerpo,this.fechaactual,this.rol,this.dni,not.value.division).subscribe((data:any)=>{});
   }
-
 }
