@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, Button, Image, StyleSheet } from 'react-native';
+import  HeaderComponent  from '../../../components/header';
 
 class BoletinScreen extends React.Component {
   constructor(props) {
@@ -7,12 +8,14 @@ class BoletinScreen extends React.Component {
 
   }
 
+  abrirDrawer = () =>{
+    this.props.navigation.openDrawer();
+  }
+
 
   render() {
     return (
-      <View >
-       <Text>hola boletin</Text>
-      </View>
+      <HeaderComponent titulo="Boletin" abrirDrawer={this.abrirDrawer}/>
     );
   }
 }

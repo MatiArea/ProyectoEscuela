@@ -1,6 +1,6 @@
 import { RouterModule, Routes } from '@angular/router';
 import { LoginGuard } from 'src/app/guards/login.guard';
-import { RolAlumno } from 'src/app/guards/rolAlumno.guard';
+import { RolAlumno } from '../../guards/rolalumno.guard';
 
 import { PanelComponent } from './panel/panel.component';
 import { NotificacionesComponent } from './notificaciones/notificaciones.component';

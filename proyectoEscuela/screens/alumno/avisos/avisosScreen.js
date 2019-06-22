@@ -1,23 +1,23 @@
 
 import React from 'react';
-import {  Text, Image, StyleSheet,TouchableOpacity,  } from 'react-native';
-import { Container, Content, Card, CardItem, Body } from 'native-base';
+import { Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
 import  HeaderComponent  from '../../../components/header';
-class NotificacionScreen extends React.Component {
+import { Container, Header, Content, Card, CardItem, Body } from 'native-base';
+
+class AvisosScreen extends React.Component {
   constructor(props) {
     super(props);
+
   }
-     
+
   static navigationOptions = {
     drawerIcon: ({ tintColor }) => (
       <Image
-        source={require('../../../assets/notificacion.png')}
+        source={require('../../../assets/aviso.png')}
         style={[styles.icon]}
       />
     ),
   };
-
- 
 
   abrirDrawer = () =>{
     this.props.navigation.openDrawer();
@@ -27,19 +27,22 @@ class NotificacionScreen extends React.Component {
   render() {
     return (
     
-      <Container>
-        <HeaderComponent titulo="Notificaciones" abrirDrawer={this.abrirDrawer}/>
+        <Container>
+        <HeaderComponent titulo="Avisos" abrirDrawer={this.abrirDrawer}/>
         <Content>
             <Card>
                 <TouchableOpacity>
-                    <CardItem style={[styles.card]}>           
+                    <CardItem>           
                         <Body>                
                             <Text style={[styles.texto]}>
-                                16/06/2019
+                                Fecha:16/06/2019
                             </Text>
                             <Text style={[styles.texto]}>
-                                Se han subidos las notas...
-                            </Text>                        
+                                Título:Puto
+                            </Text>
+                            <Text style={[styles.texto]}>
+                                Descripción:El que lee
+                            </Text>                              
                         </Body>
                     </CardItem>
                 </TouchableOpacity>
@@ -49,11 +52,14 @@ class NotificacionScreen extends React.Component {
                     <CardItem>           
                         <Body>                
                             <Text style={[styles.texto]}>
-                                22/06/2019
+                                Fecha:16/06/2019
                             </Text>
                             <Text style={[styles.texto]}>
-                                Nuevo aviso del profesor...
-                            </Text>                        
+                                Título:Puto
+                            </Text>
+                            <Text style={[styles.texto]}>
+                                Descripción:El que lee
+                            </Text>                              
                         </Body>
                     </CardItem>
                 </TouchableOpacity>
@@ -70,11 +76,9 @@ const styles = StyleSheet.create({
     height: 24
   },
   texto:{
-      fontWeight:"bold",
+      fontWeight:"bold",      
       fontFamily:'sans-serif-light'
-  },
-  card:{
-    backgroundColor:'#E0F2F7'
   }
 });
-export default NotificacionScreen;
+
+export default AvisosScreen;

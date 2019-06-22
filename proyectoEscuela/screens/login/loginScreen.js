@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet,ImageBackground,TextInput,Dimensions,TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet,ImageBackground,TextInput,Dimensions,TouchableOpacity,ToastAndroid } from 'react-native';
 import fondo from '../../assets/fondo.jpg';
 import Icon from 'react-native-vector-icons/Ionicons'
 
@@ -9,7 +9,8 @@ class LoginScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      text: 'pepe',
+      usuario: '',
+      contrasenia:''
     };
   }
 
@@ -17,12 +18,16 @@ class LoginScreen extends React.Component {
     header: null
 }
 
-
-
-
-login(){ 
-      var usuario=this.refs.usuario.value;
-      console.log(usuario);
+login(){
+  if(this.state.usuario==='Ivan'){
+    this.props.navigation.navigate('Alumno');
+  }
+  if(this.state.usuario==='Matias'){
+    this.props.navigation.navigate('Profesor');
+  }
+  if(this.state.usuario==='Tincho'){
+    this.props.navigation.navigate('Preceptor');
+  }
 }
 
   render() {
@@ -31,12 +36,11 @@ login(){
         <View style={styles.inputContainer}>
           <Icon name={'ios-person'} size={28} color={'rgba(0,0,0,1)'} style={styles.inputIcon} />
           <TextInput
-            ref="usuario"
-            value={this.state.text}
-            onChangeText={(text) => this.setState({text})}
             style={styles.input}
             placeholder={'Usuario'}
             placeholderTextColor={'#ffffff'}
+            onChangeText={(text) => this.setState({usuario:text})}
+            value={this.state.usuario}
           />
         </View>
         <View style={styles.inputContainer}>
@@ -46,9 +50,11 @@ login(){
             secureTextEntry={true}
             placeholder={'Contraseña'}
             placeholderTextColor={'#ffffff'}
+            onChangeText={(text) => this.setState({contrasenia:text})}
+            value={this.state.contrasenia}
           />
         </View>
-        <TouchableOpacity style={styles.btnLogin} onPress={this.login()}>
+        <TouchableOpacity style={styles.btnLogin} onPress={() => {this.login()}}>
           <Text style={styles.text}>Ingresar</Text>
         </TouchableOpacity>
       </ImageBackground>

@@ -4,6 +4,8 @@ import  AlumnoDrawer  from './alumnoDrawer';
 import  ProfesorDrawer  from './profesorDrawer';
 import  PreceptorDrawer  from './preceptorDrawer';
 
+
+
 const Menu = createStackNavigator(
   {
     Login: {
@@ -20,7 +22,8 @@ const Menu = createStackNavigator(
     },
   },
   {
-    initialRouteName: 'Login',
+    headerMode: 'none',
+    initialRouteName: 'Profesor',
     mode: 'card', // 'card' or 'modal',
   },
 );
