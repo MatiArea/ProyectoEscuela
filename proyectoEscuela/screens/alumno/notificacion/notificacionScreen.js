@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
       fontFamily:'sans-serif-light'
   },
   card:{
-    backgroundColor:'#E0F2F7'
+    backgroundColor:'#B7E3E7'
   }
 });
 export default NotificacionScreen;

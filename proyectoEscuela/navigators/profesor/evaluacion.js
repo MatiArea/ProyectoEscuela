@@ -7,6 +7,27 @@ import  CargarEvaluacionScreen  from '../../screens/profesor/evaluacion/cargarEv
 import  ListarEvaluacionScreen  from '../../screens/profesor/evaluacion/listarEvaluacionScreen';
 import  HeaderComponent  from '../../components/header';
 
+const RootStack = createStackNavigator(
+  {
+    menu: {
+      screen: OpcionesScreen,
+    },
+    crearEvalu: {
+      screen: CrearEvaluacionScreen,
+    },
+    cargarEvalu: {
+        screen: CargarEvaluacionScreen,
+    },
+    listarEvalu: {
+        screen: ListarEvaluacionScreen,
+    },
+  },
+  {
+    initialRouteName: 'menu',
+    mode: 'card', // 'card' or 'modal'}
+    headerMode: 'none'
+  },
+);
 
 class EvaluacionStack extends React.Component {
   static navigationOptions = {
@@ -23,36 +44,7 @@ class EvaluacionStack extends React.Component {
   }
 
   render() {
-    return (
-    
-      <View >
-        <HeaderComponent titulo="Evaluación" abrirDrawer={this.abrirDrawer}/>
-        <View style={[styles.container]}>
-          <TouchableOpacity style={[styles.cuadrado]}>
-            <Image
-              style={[styles.foto]}
-              source={require('../../assets/evaluacion.png')}
-            />
-            <Text style={[styles.texto]}>Crear Evaluación</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={[styles.cuadrado]}>
-            <Image
-              style={[styles.foto]}
-              source={require('../../assets/cargarevaluacion.png')}
-            />
-            <Text style={[styles.texto]}>Cargar Evaluación</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={[styles.cuadrado]}>
-            <Image
-              style={[styles.foto]}
-              source={require('../../assets/listarevaluacion.png')}
-            />
-            <Text style={[styles.texto]}>Listar Evaluaciones</Text>
-          </TouchableOpacity>
-          
-        </View>
-      </View>
-    );
+    return <RootStack />;
   }
 };
 
@@ -96,25 +88,6 @@ const styles = StyleSheet.create({
   }
 });
 
-const EvaluacionStackNavigator = createStackNavigator(
-  {
-    menu: {
-      screen: OpcionesScreen,
-    },
-    opcion1: {
-      screen: CrearEvaluacionScreen,
-    },
-    opcion2: {
-        screen: CargarEvaluacionScreen,
-    },
-    opcion3: {
-        screen: ListarEvaluacionScreen,
-    },
-  },
-  {
-    initialRouteName: 'menu',
-    mode: 'card', // 'card' or 'modal'
-  },
-);
+
 
 export default EvaluacionStack;

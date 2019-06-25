@@ -23,7 +23,7 @@ const Menu = createStackNavigator(
   },
   {
     headerMode: 'none',
-    initialRouteName: 'Profesor',
+    initialRouteName: 'Login',
     mode: 'card', // 'card' or 'modal',
   },
 );
