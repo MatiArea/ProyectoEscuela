@@ -27,9 +27,6 @@ const AlumnoDrawer = createDrawerNavigator(
     Notificaciones: {
       screen: NotificacionStack,
     },
-    Avisos:{
-      screen:AvisosScreen,
-    },
     Notas: {
       screen: NotasStack,
     },

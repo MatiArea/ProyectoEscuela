@@ -87,7 +87,6 @@ class NotificacionScreen extends React.Component {
   render() {
 
     
-    console.log(this.state.notificaciones);
     
   
 
