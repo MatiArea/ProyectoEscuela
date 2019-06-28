@@ -1,7 +1,9 @@
 import React from 'react';
-import { View, Text, StyleSheet,ImageBackground,TextInput,Dimensions,TouchableOpacity,ToastAndroid } from 'react-native';
+import { View,Text, StyleSheet,ImageBackground,TextInput,Dimensions,TouchableOpacity,ToastAndroid,AsyncStorage } from 'react-native';
 import fondo from '../../assets/fondo.jpg';
 import Icon from 'react-native-vector-icons/Ionicons'
+import * as axios from 'axios';
+import {Url} from '../../url';
 
 const { width:WIDTH } = Dimensions.get('window');
 
@@ -18,17 +20,48 @@ class LoginScreen extends React.Component {
     header: null
 }
 
-login(){
-  if(this.state.usuario==='Ivan'){
-    this.props.navigation.navigate('Alumno');
+
+async login(){
+var usuario;
+  await axios.post(`${Url}/login`,
+  {
+    user: 'martinleon',
+    pass:'alumno1'
+  })
+  .then( res => {    
+    usuario=res.data;
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+ 
+  if( usuario.status===200 ){
+    await AsyncStorage.setItem('usuario', JSON.stringify(usuario));
+
+    if(usuario.roll==='Alumno'){
+      this.props.navigation.navigate('Alumno');
+    }
+    if(usuario.roll==='Profesor'){
+      this.props.navigation.navigate('Profesor');
+    }
+    if(usuario.roll==='Preceptor'){
+      this.props.navigation.navigate('Preceptor');
+    }
+  }else{
+    ToastAndroid.showWithGravityAndOffset(
+      'Usuario/Contrasena incorrectas',
+      ToastAndroid.LONG,
+      ToastAndroid.BOTTOM,
+      25,
+      50,
+    );
   }
-  if(this.state.usuario==='Matias'){
-    this.props.navigation.navigate('Profesor');
-  }
-  if(this.state.usuario==='Tincho'){
-    this.props.navigation.navigate('Preceptor');
-  }
+
+  
 }
+
+
+
 
   render() {
     return (

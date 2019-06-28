@@ -1,11 +1,18 @@
 
 import React from 'react';
-import {  Text, Image, StyleSheet,TouchableOpacity,  } from 'react-native';
+import {  Text, Image, StyleSheet,TouchableOpacity,AsyncStorage,View,ToastAndroid  } from 'react-native';
 import { Container, Content, Card, CardItem, Body } from 'native-base';
 import  HeaderComponent  from '../../../components/header';
+import * as axios from 'axios';
+import {Url} from '../../../url';
+
 class NotificacionScreen extends React.Component {
   constructor(props) {
     super(props);
+    this.state={
+      notificaciones:''
+    }
+    this.obtenerNotificaciones();
   }
      
   static navigationOptions = {
@@ -23,41 +30,75 @@ class NotificacionScreen extends React.Component {
     this.props.navigation.openDrawer();
   }
 
+
+  async obtenerNotificaciones(){
+
+    var notificaciones;
+    const usuario = await AsyncStorage.getItem('usuario');
+    const legajo = JSON.parse(usuario).legajo;
+    
+
+    await axios.get(`${Url}/notificaciones/all/${legajo}`,)
+    .then( res => {    
+      notificaciones=res.data;
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+    
+    this.setState({
+      notificaciones:notificaciones
+    })
+    
+     
+  }
+
+  async cambioScreen(id){
+   await AsyncStorage.setItem('idElemento',id.toString());
+  }
+
+  listarNotificaciones(){
+     var estado=this.state.notificaciones;
+    
+
+       if(estado){
+       return estado.map((elem,index)=>{
+          return(
+            <View key={index}>
+        <Card>
+          <TouchableOpacity onPress={() => {this.cambioScreen(elem.id)}}>
+            <CardItem>           
+              <Body>                
+                <Text style={[styles.texto]}>
+                  {elem.fecha}
+                </Text>
+                <Text style={[styles.texto]}>
+                  {elem.titulo}
+                </Text>                        
+              </Body>
+            </CardItem>
+          </TouchableOpacity>
+        </Card>
+        </View>
+          )
+        })}
+      }
   
   render() {
+
+    
+    console.log(this.state.notificaciones);
+    
+  
+
     return (
     
       <Container>
         <HeaderComponent titulo="Notificaciones" abrirDrawer={this.abrirDrawer}/>
         <Content>
-            <Card>
-                <TouchableOpacity>
-                    <CardItem style={[styles.card]}>           
-                        <Body>                
-                            <Text style={[styles.texto]}>
-                                16/06/2019
-                            </Text>
-                            <Text style={[styles.texto]}>
-                                Se han subidos las notas...
-                            </Text>                        
-                        </Body>
-                    </CardItem>
-                </TouchableOpacity>
-            </Card>
-            <Card>
-                <TouchableOpacity>
-                    <CardItem>           
-                        <Body>                
-                            <Text style={[styles.texto]}>
-                                22/06/2019
-                            </Text>
-                            <Text style={[styles.texto]}>
-                                Nuevo aviso del profesor...
-                            </Text>                        
-                        </Body>
-                    </CardItem>
-                </TouchableOpacity>
-            </Card>
+           {
+              this.listarNotificaciones()
+           }
         </Content>
       </Container>
     );

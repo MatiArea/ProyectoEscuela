@@ -1,5 +1,5 @@
 import { createDrawerNavigator,DrawerItems } from 'react-navigation';
-import  NotificacionScreen  from '../../screens/alumno/notificacion/notificacionScreen';
+import  NotificacionStack  from '../../navigators/alumno/notificaciones';
 import  NotasStack  from '../alumno/notas';
 import AvisosScreen from '../../screens/alumno/avisos/avisosScreen'
 import React from 'react';
@@ -25,7 +25,7 @@ const HeaderDrawer= (props) =>(
 const AlumnoDrawer = createDrawerNavigator(
   {
     Notificaciones: {
-      screen: NotificacionScreen,
+      screen: NotificacionStack,
     },
     Avisos:{
       screen:AvisosScreen,

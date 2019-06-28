@@ -23,7 +23,29 @@ class AvisosScreen extends React.Component {
     this.props.navigation.openDrawer();
   }
 
-  
+  async obtenerAvisos(){
+
+    var notificaciones;
+    const usuario = await AsyncStorage.getItem('usuario');
+    const legajo = JSON.parse(usuario).legajo;
+    
+
+    await axios.get(`${Url}/notificaciones/all/${legajo}`,)
+    .then( res => {    
+      notificaciones=res.data;
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+    
+    this.setState({
+      notificaciones:notificaciones
+    })
+    
+     
+  }
+
+
   render() {
     return (
     
