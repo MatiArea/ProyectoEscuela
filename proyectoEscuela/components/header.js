@@ -2,6 +2,7 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Header } from 'react-native-elements';
+import { DrawerActions } from 'react-navigation';
 
 class HeaderComponent extends React.Component {
   constructor(props) {
@@ -16,7 +17,7 @@ class HeaderComponent extends React.Component {
       <View >
         <Header
          backgroundColor='#2089DC'
-          leftComponent={{ icon: 'menu', color: '#fff',onPress:this.props.abrirDrawer }}
+          leftComponent={{ icon: 'menu', color: '#fff',onPress:this.props.abrirDrawer}}
           centerComponent={{ text: this.props.titulo, style: { color: '#fff',fontWeight:"bold",fontSize:20,fontFamily:'sans-serif-medium' } }}
         />
       </View>

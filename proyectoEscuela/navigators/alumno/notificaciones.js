@@ -34,14 +34,14 @@ export default class App extends React.Component {
   static navigationOptions = {
     drawerIcon: ({ tintColor }) => (
       <Image
-        source={require('../../assets/notas.png')}
+        source={require('../../assets/notificacion.png')}
         style={[styles.icon]}
       />
     ),
   };
 
   abrirDrawer = () =>{
-    this.props.navigation.openDrawer();
+    this.props.navigation.navigate('DrawerOpen');
   }
 
   render() {

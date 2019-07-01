@@ -45,7 +45,7 @@ export default class App extends React.Component {
   };
 
   abrirDrawer = () =>{
-    this.props.navigation.openDrawer();
+    this.props.navigation.navigate('DrawerOpen');
   }
 
   render() {

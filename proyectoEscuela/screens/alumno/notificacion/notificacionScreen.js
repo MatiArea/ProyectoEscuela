@@ -14,6 +14,7 @@ class NotificacionScreen extends React.Component {
       estado:0
     }
     this.abrirDrawer = this.abrirDrawer.bind(this);
+    this.contadorNotificaciones();
     this.obtenerNotificaciones();
   }
 
@@ -46,24 +47,39 @@ class NotificacionScreen extends React.Component {
     });
     
     this.setState({
-      notificaciones:notificaciones
+      notificaciones:notificaciones,
     })
     
-     
+  }
+
+  async contadorNotificaciones(){
+    var contadorNotificaciones;
+    var notificaciones;
+    const user = await AsyncStorage.getItem('usuario');
+    const legajo = JSON.parse(user).legajo;
+    await axios.get(`${Url}/notificaciones/panel/${legajo}`,)
+    .then( res => {    
+      notificaciones=res.data;
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+
+    contadorNotificaciones = notificaciones.length;
+    console.log(contadorNotificaciones);
+    await AsyncStorage.setItem('contadorNotificaciones', contadorNotificaciones.toString());
   }
 
   async cambioScreen(id){
    await AsyncStorage.setItem('id', id.toString() );
-   this.setState({
-    notificaciones:this.state.notificaciones,
-    estado:1
-  })
+   
    this.props.navigation.navigate('notificacion');
   }
 
   listarNotificaciones(){
 
     if(this.state.estado == 1){
+      this.contadorNotificaciones();
       this.obtenerNotificaciones();
     }
     
@@ -94,7 +110,7 @@ class NotificacionScreen extends React.Component {
       
   render() {
 
-    if(this.state.notificaciones == ""){
+    if(this.state.notificaciones == ''){
       return (
         <View>
         <HeaderComponent titulo="Notificaciones" abrirDrawer={this.abrirDrawer}/>
@@ -114,6 +130,7 @@ class NotificacionScreen extends React.Component {
         </View>
       );
     } else {
+      console.log('HOLA');
     return (
     
       <Container>

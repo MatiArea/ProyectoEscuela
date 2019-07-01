@@ -1,5 +1,5 @@
 import React from 'react';
-import { View,Text, StyleSheet,ImageBackground,TextInput,Dimensions,TouchableOpacity,ToastAndroid,AsyncStorage } from 'react-native';
+import { View,Text, StyleSheet,ImageBackground,TextInput,Dimensions,TouchableOpacity,ToastAndroid,AsyncStorage, Button } from 'react-native';
 import fondo from '../../assets/fondo.jpg';
 import Icon from 'react-native-vector-icons/Ionicons'
 import * as axios from 'axios';

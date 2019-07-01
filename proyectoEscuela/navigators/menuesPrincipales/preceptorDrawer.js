@@ -11,7 +11,7 @@ const HeaderDrawer= (props) =>(
       style={[styles.foto]}
       source={require('../../assets/fotoperfil.png')}
     />
-    <Text style={[styles.texto]} >Hola Ivan</Text>
+    <Text style={[styles.texto]} >{'Bienvenido!'}</Text>
     </View>
     <ScrollView>
       <DrawerItems {...props} />
