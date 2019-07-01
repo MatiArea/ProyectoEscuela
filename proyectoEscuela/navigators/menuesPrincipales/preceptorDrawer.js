@@ -1,6 +1,7 @@
 import { createDrawerNavigator,DrawerItems } from 'react-navigation';
 import  AvisoScreen  from '../../screens/preceptor/avisoScreen';
 import { View, Text, ScrollView, StyleSheet,Image } from 'react-native';
+import SalirComponent from '../../components/salir';
 import React from 'react';
 
 const HeaderDrawer= (props) =>(
@@ -25,7 +26,7 @@ const PreceptorDrawer = createDrawerNavigator(
       screen: AvisoScreen,
     },
     Salir: {
-      screen: ()=>{},
+      screen: SalirComponent,
     },
   },
   {

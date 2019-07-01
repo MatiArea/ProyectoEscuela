@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
-import { View, Text, Button, StyleSheet,SafeAreaView,AsyncStorage } from 'react-native';
+import { View, Text, Button, StyleSheet,SafeAreaView,AsyncStorage, TouchableOpacity} from 'react-native';
 import  HeaderComponent  from '../../../components/header';
+import { Container, Content, Card, CardItem, Body } from 'native-base';
 import Wizard from "react-native-wizard"
 import * as axios from 'axios';
 import {Url} from '../../../url';
@@ -10,7 +11,6 @@ class EvaluacionScreen extends React.Component {
     super(props);
 
   }
-
   state = {
     isLastStep  : false,
     isFirstStep : false,
@@ -18,7 +18,7 @@ class EvaluacionScreen extends React.Component {
   };
 
   abrirDrawer = () =>{
-    this.props.abrirDrawer();
+    this.props.navigation.navigate('DrawerOpen');
   }
 
 //////////////////////////////////// WIZARD ////////////////////////////////////
@@ -113,6 +113,11 @@ class Step1 extends Component {
      
   }
 
+ async guardarMateria(materia){
+  await AsyncStorage.setItem('nombreMateria', materia);
+  //cambiar el estado de la screen para re-renderizar el componente
+  } 
+
   listarMaterias(){
     var estado=this.state.materias;
     
@@ -121,15 +126,21 @@ class Step1 extends Component {
     return estado.map((elem,index)=>{
       return(
         <View key={index}>
-          <Text>{elem.materia.nombre}</Text>
+        <Card>
+          <TouchableOpacity onPress={() =>{this.guardarMateria(elem.materia.nombre)}}>
+            <CardItem>           
+              <Body>                
+                <Text style={{fontWeight: "bold", fontFamily:'sans-serif-light'}}>
+                  {elem.materia.nombre}
+                </Text>                       
+              </Body>
+            </CardItem>
+          </TouchableOpacity>
+        </Card>
         </View>
       )
     })}
   }
-
-
-
-
 
   render() {
     return (
@@ -137,11 +148,11 @@ class Step1 extends Component {
     );
   }
 }
+
 //////////////////////////////////// STEP 2 ////////////////////////////////////
 class Step2 extends Component {
   constructor(props) {
     super(props);
-    
     this.retornarEvaluaciones();
   }
 
@@ -154,7 +165,7 @@ class Step2 extends Component {
     var evaluaciones;
     const usuario = await AsyncStorage.getItem('usuario');
     const legajo = JSON.parse(usuario).legajo;
-    const materiaNombre = 'Matematicas';// VARIABLE DE PRUEBA    
+    const materiaNombre = await AsyncStorage.getItem('nombreMateria');    
 
     await axios.get(`${Url}/evaluacion/todas/alumno/${legajo}/${materiaNombre}`,)
     .then( res => {    
@@ -172,29 +183,48 @@ class Step2 extends Component {
   listarEvaluaciones(){
     var estado=this.state.evaluaciones;
     
-
     if(estado){
     return estado.map((elem,index)=>{
       return(
         <View key={index}>
-          <Text>Fecha {elem.evaluacion.fecha} Nota{elem.nota}</Text>
+        <Card>
+          <TouchableOpacity onPress={() =>{}}>
+            <CardItem>           
+              <Body>                
+              <Text style={{fontWeight: "bold", fontFamily:'sans-serif-light'}}>
+                  {`Fecha: ${elem.evaluacion.fecha}`}
+                </Text> 
+                <Text>
+                  {``}
+                </Text> 
+                <Text style={{fontWeight: "bold", fontFamily:'sans-serif-light'}}>
+                  {`Titulo: ${elem.evaluacion.titulo}`}
+                </Text>  
+                <Text>
+                  {``}
+                </Text> 
+                <Text style={{fontWeight: "bold", fontFamily:'sans-serif-light'}}>
+                  {`Temas: ${elem.evaluacion.temas}`}
+                </Text> 
+                <Text>
+                  {``}
+                </Text>  
+                <Text style={{fontWeight: "bold", fontFamily:'sans-serif-light'}}>
+                  {`Nota: ${elem.nota}`}
+                </Text>                  
+              </Body>
+            </CardItem>
+          </TouchableOpacity>
+        </Card>
         </View>
       )
     })}
   }
-
-
-
-
   render() {
     return (
         <View>{this.listarEvaluaciones()}</View>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  
-});
 
 export default EvaluacionScreen;

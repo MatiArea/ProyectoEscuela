@@ -6,8 +6,10 @@ import { Header } from 'react-native-elements';
 class HeaderComponent extends React.Component {
   constructor(props) {
     super(props);
-
   }
+
+
+  
   render() {
     return (
     

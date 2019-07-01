@@ -2,6 +2,7 @@ import { createDrawerNavigator,DrawerItems } from 'react-navigation';
 import  AvisoScreen  from '../../screens/preceptor/avisoScreen';
 import  EvaluacionStack  from '../profesor/evaluacion';
 import { View, Text, ScrollView, StyleSheet,Image } from 'react-native';
+import SalirComponent from '../../components/salir';
 import React from 'react';
 
 
@@ -30,7 +31,7 @@ const ProfesorDrawer = createDrawerNavigator(
       screen: EvaluacionStack,
     },
     Salir: {
-      screen: ()=>{},
+      screen: SalirComponent,
     }
   },
   {    

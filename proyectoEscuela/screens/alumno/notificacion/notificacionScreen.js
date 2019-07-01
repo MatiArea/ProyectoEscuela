@@ -10,11 +10,13 @@ class NotificacionScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state={
-      notificaciones:''
+      notificaciones:'', 
+      estado:0
     }
+    this.abrirDrawer = this.abrirDrawer.bind(this);
     this.obtenerNotificaciones();
   }
-     
+
   static navigationOptions = {
     drawerIcon: ({ tintColor }) => (
       <Image
@@ -24,12 +26,9 @@ class NotificacionScreen extends React.Component {
     ),
   };
 
- 
-
   abrirDrawer = () =>{
-    this.props.navigation.openDrawer();
+    this.props.navigation.navigate('DrawerOpen');
   }
-
 
   async obtenerNotificaciones(){
 
@@ -54,20 +53,28 @@ class NotificacionScreen extends React.Component {
   }
 
   async cambioScreen(id){
-   await AsyncStorage.setItem('idElemento',id.toString());
+   await AsyncStorage.setItem('id', id.toString() );
+   this.setState({
+    notificaciones:this.state.notificaciones,
+    estado:1
+  })
+   this.props.navigation.navigate('notificacion');
   }
 
   listarNotificaciones(){
-     var estado=this.state.notificaciones;
-    
 
+    if(this.state.estado == 1){
+      this.obtenerNotificaciones();
+    }
+    
+     var estado=this.state.notificaciones;
        if(estado){
        return estado.map((elem,index)=>{
           return(
             <View key={index}>
         <Card>
           <TouchableOpacity onPress={() => {this.cambioScreen(elem.id)}}>
-            <CardItem>           
+            <CardItem style={ elem.leida ? [styles.cardNone] : [styles.card] }>           
               <Body>                
                 <Text style={[styles.texto]}>
                   {elem.fecha}
@@ -84,16 +91,33 @@ class NotificacionScreen extends React.Component {
         })}
       }
   
+      
   render() {
 
-    
-    
-  
-
+    if(this.state.notificaciones == ""){
+      return (
+        <View>
+        <HeaderComponent titulo="Notificaciones" abrirDrawer={this.abrirDrawer}/>
+        <View>
+        <Card>
+          <TouchableOpacity onPress={() => {}}>
+            <CardItem>           
+              <Body>                
+                <Text style={[styles.texto]}>
+                  {'Cargando...'}
+                </Text>                        
+              </Body>
+            </CardItem>
+          </TouchableOpacity>
+        </Card>
+        </View>
+        </View>
+      );
+    } else {
     return (
     
       <Container>
-        <HeaderComponent titulo="Notificaciones" abrirDrawer={this.abrirDrawer}/>
+      <HeaderComponent titulo="Notificaciones" abrirDrawer={this.abrirDrawer}/>
         <Content>
            {
               this.listarNotificaciones()
@@ -101,6 +125,7 @@ class NotificacionScreen extends React.Component {
         </Content>
       </Container>
     );
+  }
   }
 }
 
@@ -115,6 +140,9 @@ const styles = StyleSheet.create({
   },
   card:{
     backgroundColor:'#B7E3E7'
+  }, 
+  cardNone: {
+    backgroundColor:'#FFFFFF'
   }
 });
 export default NotificacionScreen;

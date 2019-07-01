@@ -6,7 +6,7 @@ import  HeaderComponent  from '../../../components/header';
 class OpcionesScreen extends React.Component {
 
   abrirDrawer = () =>{
-    this.props.navigation.openDrawer();
+    this.props.navigation.navigate('DrawerOpen');
   }
 
   render() {

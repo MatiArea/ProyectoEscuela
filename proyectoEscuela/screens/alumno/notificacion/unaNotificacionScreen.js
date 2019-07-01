@@ -1,6 +1,6 @@
 
 import React from 'react';
-import {  Text, Image, StyleSheet,TouchableOpacity,AsyncStorage,View,ToastAndroid  } from 'react-native';
+import {  Text, Image, StyleSheet,TouchableOpacity,AsyncStorage,View,ToastAndroid, Button  } from 'react-native';
 import { Container, Content, Card, CardItem, Body } from 'native-base';
 import  HeaderComponent  from '../../../components/header';
 import * as axios from 'axios';
@@ -10,8 +10,10 @@ class UnaNotificacionScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state={
-      notificaciones:''
+      notificacion:'', 
     }
+    this.abrirDrawer = this.abrirDrawer.bind(this);
+    this.obtenerNotificacion();
   }
      
   static navigationOptions = {
@@ -23,19 +25,99 @@ class UnaNotificacionScreen extends React.Component {
     ),
   };
 
- 
-
   abrirDrawer = () =>{
-    this.props.navigation.openDrawer();
+    this.props.navigation.navigate('DrawerOpen');
   }
 
+  async obtenerNotificacion(){
+    const idnotificacion = await AsyncStorage.getItem('id');
+    var noti;
+    console.log(idnotificacion);
+
+    await axios.get(`${Url}/notificaciones/display/${idnotificacion}`,)
+    .then( res => {    
+      noti=res.data;
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+    
+    this.setState({
+      notificacion:noti
+    })
+
+    await axios.put(`${Url}/notificaciones/update/${idnotificacion}`, idnotificacion)
+    .then( res => {    
+      console.log(res);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+
+  }
 
   
-  render() {
+  render(){
 
-    return (
+    if(this.state.notificacion == ""){
+      return (
+        <View>
         <HeaderComponent titulo="Notificacion" abrirDrawer={this.abrirDrawer}/>
-    );
+        <View>
+        <Card>
+          <TouchableOpacity onPress={() => {}}>
+            <CardItem>           
+              <Body>                
+                <Text style={[styles.texto]}>
+                  {'Cargando...'}
+                </Text>                        
+              </Body>
+            </CardItem>
+          </TouchableOpacity>
+        </Card>
+        </View>
+        </View>
+      );
+    } else {
+    return (
+      <Container>
+        <HeaderComponent titulo="Notificacion" abrirDrawer={this.abrirDrawer}/>
+        <View>
+        <Card>
+          <TouchableOpacity onPress={() =>{}}>
+            <CardItem>           
+              <Body>                
+                <Text style={[styles.texto]}>
+                  {`Fecha: ${this.state.notificacion.fecha}`}
+                </Text>
+                <Text style={[styles.texto]}>
+                  {`Titulo: ${this.state.notificacion.titulo}`}
+                </Text> 
+                <Text style={[styles.texto]}>
+                  {``}
+                </Text> 
+                <Text style={[styles.texto]}>
+                {`Cuerpo:`}
+                </Text>    
+                <Text style={[styles.texto]}>
+                  {``}
+                </Text> 
+                <Text style={[styles.texto]}>
+                {this.state.notificacion.cuerpo}
+                </Text>                     
+              </Body>
+            </CardItem>
+          </TouchableOpacity>
+        </Card>
+        <Button
+        onPress={  () => {this.props.navigation.navigate('notificaciones')} }
+        title="Volver"
+        color="#2089DC"
+          />
+        </View>
+        </Container>
+        );
+      }
   }
 }
 
@@ -48,8 +130,5 @@ const styles = StyleSheet.create({
       fontWeight:"bold",
       fontFamily:'sans-serif-light'
   },
-  card:{
-    backgroundColor:'#B7E3E7'
-  }
 });
 export default UnaNotificacionScreen;

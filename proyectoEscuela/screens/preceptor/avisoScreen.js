@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import { View,Text, Image, StyleSheet,Icon,Dimensions } from 'react-native';
+import { View, Text, Button, Image, StyleSheet, ScrollView, AsyncStorage, TouchableOpacity } from 'react-native';
 import  HeaderComponent  from '../../components/header';
 import {  Container, Content,Button, Form, Item, Input, Label, Picker } from 'native-base';
+import * as axios from 'axios';
+import {Url} from '../../url';
 
 const { width:WIDTH } = Dimensions.get('window');
 
@@ -9,9 +11,17 @@ class AvisoScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      selected2: undefined
+      anioSelected:0,
+      divisionSelected:'',
+      titulo:'',
+      descripcion:'',
+      cuerpo:'',
+      anios:'',
+      divisiones:'', 
+      estado:0
     };
-
+    this.abrirDrawer = this.abrirDrawer.bind(this);
+    this.obtenerAnios();
   }
 
   static navigationOptions = {
@@ -24,23 +34,110 @@ class AvisoScreen extends React.Component {
   };
 
   abrirDrawer = () =>{
-    this.props.navigation.openDrawer();
+    this.props.navigation.navigate('DrawerOpen');
   }
 
-  onValueChange2(value) {
+  async obtenerAnios(){
+    var an;
+    await axios.get(`${Url}/colegio/anios`,)
+      .then( res => {    
+        an=res.data;
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+      //await AsyncStorage.setItem('anios', JSON.stringify(anios));
+
+      this.setState({
+        anioSelected: this.state.anio,
+        divisionSelected:this.state.division,
+        titulo:this.state.titulo,
+        descripcion:this.state.descripcion,
+        cuerpo:this.state.cuerpo,
+        anios:an,
+        divisiones:this.state.divisones, 
+        estado:this.state.estado
+      });
+  }
+
+  async obtenerDivisiones(anio){
+    var div;
+    await axios.get(`${Url}/colegio/divisiones/${anio}`,)
+      .then( res => {    
+        div=res.data;
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+      this.setState({
+        anioSelected: this.state.anioSelected,
+        divisionSelected:this.state.division,
+        titulo:this.state.titulo,
+        descripcion:this.state.descripcion,
+        cuerpo:this.state.cuerpo,
+        anios: this.state.anios,
+        divisiones: div, 
+        estado:2
+      });
+  }
+
+  onValueChangeAnio(value) {
     this.setState({
-      selected2: value
+      anioSelected: value,
+      divisionSelected:this.state.division,
+      titulo:this.state.titulo,
+      descripcion:this.state.descripcion,
+      cuerpo:this.state.cuerpo,
+      anios: this.state.anios,
+      divisiones: this.state.divisiones, 
+      estado:1
     });
+    console.log(this.state);
+  }
+
+  onValueChangeDivision(value) {
+    this.setState({
+      anioSelected: this.state.anio,
+      divisionSelected:value,
+      titulo:this.state.titulo,
+      descripcion:this.state.descripcion,
+      cuerpo:this.state.cuerpo,
+      anios: this.state.anios,
+      divisiones: this.state.divisiones, 
+      estado:3
+    });
+    console.log(this.state);
   }
 
    render() {
-    return (
-      <Container>
-        <HeaderComponent titulo="Enviar Aviso" abrirDrawer={this.abrirDrawer} />
-        <Content>
-          <Form>
-
-          <Item stackedLabel style={[styles.input]}>
+     if((this.state.estado == 0)&&(this.state.anios == '')){
+      return (
+        <View>
+        <HeaderComponent titulo="Envio de aviso" abrirDrawer={this.abrirDrawer}/>
+        <View>
+        <Card>
+          <TouchableOpacity onPress={() => {}}>
+            <CardItem>           
+              <Body>                
+                <Text style={[styles.texto]}>
+                  {'Cargando...'}
+                </Text>                        
+              </Body>
+            </CardItem>
+          </TouchableOpacity>
+        </Card>
+        </View>
+        </View>
+      );
+     } else if ((this.state.estado == 0)&&(this.state.anios != '')){
+      return (
+        <Container>
+          <HeaderComponent titulo="Enviar Aviso" abrirDrawer={this.abrirDrawer} />
+          <Content>
+            <Form>
+            <Item stackedLabel style={[styles.input]}>
               <Label style={[styles.label]}>Año</Label>
               <Item picker>
               <Picker
@@ -48,20 +145,90 @@ class AvisoScreen extends React.Component {
                 placeholder="Select your SIM"
                 placeholderStyle={{ color: "#bfc6ea" }}
                 placeholderIconColor="#007aff"
-                selectedValue={this.state.selected2}
-                onValueChange={this.onValueChange2.bind(this)}
+                selectedValue={'Seleccionar año...'}
+                onValueChange={this.onValueChangeAnio.bind(this)}
               >
-                <Picker.Item label="1" value="1" />
-                <Picker.Item label="2" value="2" />
-                <Picker.Item label="3" value="3" />
-                <Picker.Item label="4" value="4" />
-                <Picker.Item label="5" value="5" />
-              </Picker>
+              {
+                this.state.anios.map( (element, index) => (
+                  <Picker.Item label={element.numero} value={element.numero} />  
+                ))
+              }
+             </Picker>
             </Item>
-            </Item>          
+            </Item>  
+            </Form>
+        </Content>
+      </Container> 
+      );
+     } else if((this.state.estado == 1)&&(this.state.anios != '')){
+       this.obtenerDivisiones(this.state.anioSelected);
+      return (
+      <Container>
+      <HeaderComponent titulo="Enviar Aviso" abrirDrawer={this.abrirDrawer} />
+      <Content>
+        <Form>
+        <Item stackedLabel style={[styles.input]}>
+          <Label style={[styles.label]}>Año</Label>
+          <Item picker>
+          <Picker
+            mode="dropdown"
+            placeholder="Select your SIM"
+            placeholderStyle={{ color: "#bfc6ea" }}
+            placeholderIconColor="#007aff"
+            selectedValue={'Seleccionar año...'}
+            onValueChange={this.onValueChangeAnio.bind(this)}
+          >
+          {
+            this.state.anios.map( (element, index) => (
+              <Picker.Item label={element.numero} value={element.numero} />  
+            ))
+          }
+         </Picker>
+        </Item>
+        </Item>  
+        </Form>
+        <View>
+        <Card>
+          <TouchableOpacity onPress={() => {}}>
+            <CardItem>           
+              <Body>                
+                <Text style={[styles.texto]}>
+                  {'Cargando...'}
+                </Text>                        
+              </Body>
+            </CardItem>
+          </TouchableOpacity>
+        </Card>
+        </View>
+    </Content>
+        </Container> );
+     } else if((this.state.estado == 2)&&(this.state.anios != '')&&(this.state.divisiones != '')){
+       return (
+      <Container>
+      <HeaderComponent titulo="Enviar Aviso" abrirDrawer={this.abrirDrawer} />
+      <Content>
+        <Form>
+        <Item stackedLabel style={[styles.input]}>
+          <Label style={[styles.label]}>Año</Label>
+          <Item picker>
+          <Picker
+            mode="dropdown"
+            placeholder="Select your SIM"
+            placeholderStyle={{ color: "#bfc6ea" }}
+            placeholderIconColor="#007aff"
+            selectedValue={'Seleccionar año...'}
+            onValueChange={this.onValueChangeAnio.bind(this)}
+          >
+          {
+            this.state.anios.map( (element, index) => (
+              <Picker.Item label={element.numero} value={element.numero} />  
+            ))
+          }
+         </Picker>
+        </Item>
+        </Item> 
 
-
-            <Item stackedLabel style={[styles.input]}>
+        <Item stackedLabel style={[styles.input]}>
               <Label style={[styles.label]}>División</Label>
               <Item picker>            
               <Picker
@@ -70,17 +237,68 @@ class AvisoScreen extends React.Component {
                 placeholder="Select your SIM"
                 placeholderStyle={{ color: "#bfc6ea" }}
                 placeholderIconColor="#007aff"
-                selectedValue={this.state.selected2}
-                onValueChange={this.onValueChange2.bind(this)}
+                selectedValue={'Seleccione division...'}
+                onValueChange={this.onValueChangeDivision.bind(this)}
               >
-                <Picker.Item label="A" value="A" />
-                <Picker.Item label="B" value="B" />
+              {
+                 this.state.divisiones.map( (element, index) => (
+                   <Picker.Item label={element.nombre} value={element.nombre} />  
+                    ))
+              }
               </Picker>
             </Item>
-            </Item>
-            
+            </Item> 
+        </Form>
+    </Content>
+        </Container> );
+     } else if((this.state.estado == 3)&&(this.state.divisionSelected != '')) {
+      return (
+        <Container>
+        <HeaderComponent titulo="Enviar Aviso" abrirDrawer={this.abrirDrawer} />
+        <Content>
+          <Form>
+          <Item stackedLabel style={[styles.input]}>
+            <Label style={[styles.label]}>Año</Label>
+            <Item picker>
+            <Picker
+              mode="dropdown"
+              placeholder="Select your SIM"
+              placeholderStyle={{ color: "#bfc6ea" }}
+              placeholderIconColor="#007aff"
+              selectedValue={'Seleccionar año...'}
+              onValueChange={this.onValueChangeAnio.bind(this)}
+            >
+            {
+              this.state.anios.map( (element, index) => (
+                <Picker.Item label={element.numero} value={element.numero} />  
+              ))
+            }
+           </Picker>
+          </Item>
+          </Item> 
+  
+          <Item stackedLabel style={[styles.input]}>
+                <Label style={[styles.label]}>División</Label>
+                <Item picker>            
+                <Picker
+                  mode="dropdown"
+                  style={{ width: undefined }}
+                  placeholder="Select your SIM"
+                  placeholderStyle={{ color: "#bfc6ea" }}
+                  placeholderIconColor="#007aff"
+                  selectedValue={'Seleccione division...'}
+                  onValueChange={this.onValueChangeDivision.bind(this)}
+                >
+                {
+                   this.state.divisiones.map( (element, index) => (
+                     <Picker.Item label={element.nombre} value={element.nombre} />  
+                      ))
+                }
+                </Picker>
+              </Item>
+              </Item>
 
-            <Item stackedLabel style={[styles.input]} >
+              <Item stackedLabel style={[styles.input]} >
               <Label style={[styles.label]}>Título</Label>
               <Input />
             </Item>
@@ -91,19 +309,19 @@ class AvisoScreen extends React.Component {
             <Item stackedLabel style={[styles.input]} >
               <Label style={[styles.label]}>Cuerpo</Label>
               <Input />
-            </Item>
+            </Item> 
 
-          <View style={[styles.viewCenter]}>
-          <Button block success style={[styles.boton]}>
-            <Text style={[styles.label]}>Enviar</Text>
-          </Button>
+             <View style={[styles.viewCenter]}>
+             <Button
+        onPress={()=>{} }
+        title="Enviar"
+        color="#2089DC"
+          />
           </View>
-          
           </Form>
-        </Content>
-      </Container>
-      
-    );
+      </Content>
+          </Container> );
+     }
   }
 }
 

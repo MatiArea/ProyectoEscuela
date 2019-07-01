@@ -3,6 +3,7 @@ import { Image,StyleSheet,View,Text,TouchableOpacity } from 'react-native';
 import { createStackNavigator } from 'react-navigation';
 import  OpcionesScreen  from '../../screens/alumno/notas/opcionesScreen';
 import  EvaluacionScreen  from '../../screens/alumno/notas/evaluacionScreen';
+import  EvaluaScreen  from '../../screens/alumno/notas/evaluaScreen';
 import  BoletinScreen  from '../../screens/alumno/notas//boletinScreen';
 import  HeaderComponent  from '../../components/header';
 
@@ -12,7 +13,7 @@ const RootStack = createStackNavigator(
       screen: OpcionesScreen,
     },
     evaluacion: {
-      screen: EvaluacionScreen ,
+      screen: EvaluaScreen ,
     },
     boletin: {
       screen: BoletinScreen ,

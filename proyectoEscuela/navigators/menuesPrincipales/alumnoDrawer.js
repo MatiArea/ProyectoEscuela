@@ -1,9 +1,10 @@
 import { createDrawerNavigator,DrawerItems } from 'react-navigation';
 import  NotificacionStack  from '../../navigators/alumno/notificaciones';
 import  NotasStack  from '../alumno/notas';
-import AvisosScreen from '../../screens/alumno/avisos/avisosScreen'
+import AvisosScreen from '../../screens/alumno/avisos/avisosScreen';
 import React from 'react';
-import { View, Text, ScrollView, StyleSheet,Image } from 'react-native';
+import SalirComponent from '../../components/salir';
+import { View, Text, ScrollView, StyleSheet,Image, AsyncStorage } from 'react-native';
 
 
 const HeaderDrawer= (props) =>(
@@ -13,7 +14,7 @@ const HeaderDrawer= (props) =>(
       style={[styles.foto]}
       source={require('../../assets/fotoperfil.png')}
     />
-    <Text style={[styles.texto]} >Hola Ivan</Text>
+    <Text style={[styles.texto]} >{'Bienvenido!'}</Text>
     </View>
     <ScrollView>
       <DrawerItems {...props} />
@@ -31,7 +32,7 @@ const AlumnoDrawer = createDrawerNavigator(
       screen: NotasStack,
     },
     Salir: {
-      screen: ()=>{},
+      screen: SalirComponent,
     }
   },
   {
