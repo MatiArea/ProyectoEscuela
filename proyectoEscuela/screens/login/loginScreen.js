@@ -26,7 +26,7 @@ var usuario;
   await axios.post(`${Url}/login`,
   {
     user: this.state.usuario,
-    pass: this.usuario.contrasenia
+    pass: this.state.contrasenia
   })
   .then( res => {    
     usuario=res.data;

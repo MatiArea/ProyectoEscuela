@@ -1,17 +1,18 @@
 import React from 'react';
 import { View, Text, Button, Image, StyleSheet, AsyncStorage, TouchableOpacity,TextInput } from 'react-native';
-import {  Container, Card, CardItem, Body,Form, Item, Label  } from 'native-base';
+import {  Container, Card, CardItem, Body,Form, Item, Label, Spinner  } from 'native-base';
 import  HeaderComponent  from '../../../components/header';
 import * as axios from 'axios';
 import {Url} from '../../../url';
 import DatePicker from 'react-native-datepicker';
+import { Input } from 'react-native-elements';
 
 class CrearEvaluacionScreen extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      fecha:' ',
+      fecha:'2019/07/01',
       folio: ' ',
       temas:' ',
       titulo:' ',
@@ -126,18 +127,19 @@ class CrearEvaluacionScreen extends React.Component {
   }
 
   createEval(){
-    return( 
+    return(
+      <View> 
       <Form>
         <Item stackedLabel style={[styles.input]} >
           <Label style={[styles.label]}>Fecha</Label>
           <DatePicker
             style={{width: 200}}
-            date={"01/07/2019"} 
+            date={this.state.fecha} 
             mode="date" 
             placeholder="Seleccione una fecha"
-            format="DD-MM-YYYY"
-            minDate="31-12-2018"
-            maxDate="01-01-2020"
+            format="YYYY-MM-DD"
+            minDate="2018-12-31"
+            maxDate="2020-01-01"
             confirmBtnText="Aceptar"
             cancelBtnText="Cancelar"
             customStyles={{
@@ -156,9 +158,10 @@ class CrearEvaluacionScreen extends React.Component {
               fecha: date})}}
           />
         </Item>
+        
         <Item stackedLabel style={[styles.input]} >
           <Label style={[styles.label]}>Titulo</Label>
-          <TextInput
+          <Input
             style={styles.input}
             placeholder={'Titulo'}
             placeholderTextColor={'#ffffff'}
@@ -166,9 +169,10 @@ class CrearEvaluacionScreen extends React.Component {
             value={this.state.titulo}
           />
         </Item>
+      
         <Item stackedLabel style={[styles.input]} >
           <Label style={[styles.label]}>Temas</Label>
-          <TextInput
+          <Input
             style={styles.input}
             placeholder={'Temas'}
             placeholderTextColor={'#ffffff'}
@@ -176,14 +180,15 @@ class CrearEvaluacionScreen extends React.Component {
             value={this.state.temas}
           />
         </Item> 
-        <View style={[styles.viewCenter]}>
-          <Button 
-              onPress={()=>{this.saveNewEval()} }
-              title="Crear Evaluacion"
-              color="#2089DC"
-          />
-        </View>
       </Form>
+    
+      <Button 
+            style={{marginTop : 15}}
+            onPress={()=>{this.saveNewEval()} }
+            title="Crear Evaluacion"
+            color="#2089DC"
+        />
+      </View>
     );
   }
 
@@ -196,10 +201,8 @@ class CrearEvaluacionScreen extends React.Component {
         <Card>
           <TouchableOpacity onPress={() => {}}>
             <CardItem>           
-              <Body>                
-                <Text style={[styles.texto]}>
-                  {'Cargando...'}
-                </Text>                        
+            <Body style={{justifyContent:'center', flexDirection:'row'}}>                
+                <Spinner color='blue'/>                      
               </Body>
             </CardItem>
           </TouchableOpacity>
@@ -218,10 +221,8 @@ class CrearEvaluacionScreen extends React.Component {
         <Card>
           <TouchableOpacity onPress={() => {}}>
             <CardItem>           
-              <Body>                
-                <Text style={[styles.texto]}>
-                  {'Cargando...'}
-                </Text>                        
+            <Body style={{justifyContent:'center', flexDirection:'row'}}>                
+                <Spinner color='blue'/>                      
               </Body>
             </CardItem>
           </TouchableOpacity>
@@ -247,8 +248,8 @@ const styles = StyleSheet.create({
     justifyContent:'center',
   },
   input:{
-    borderBottomColor: '#2089DC',
-    borderBottomWidth: 2
+    borderBottomColor: '#FFFFFF',
+    borderBottomWidth: 2,
   },
   boton:{
     marginTop:20,

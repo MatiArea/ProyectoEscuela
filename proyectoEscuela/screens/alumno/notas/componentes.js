@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, Button, StyleSheet,SafeAreaView,AsyncStorage, TouchableOpacity} from 'react-native';
 import  HeaderComponent  from '../../../components/header';
-import { Container, Content, Card, CardItem, Body } from 'native-base';
+import { Container, Content, Card, CardItem, Body, Spinner } from 'native-base';
 import Wizard from "react-native-wizard"
 import * as axios from 'axios';
 import {Url} from '../../../url';
@@ -73,11 +73,9 @@ export class Materias extends React.Component {
           <Card>
             <TouchableOpacity onPress={() => {}}>
               <CardItem>           
-                <Body>                
-                  <Text style={{textAlign: 'center', fontWeight: '100'}}>
-                    {'Cargando...'}
-                  </Text>                        
-                </Body>
+              <Body style={{justifyContent:'center', flexDirection:'row'}}>                
+                <Spinner color='blue'/>                      
+              </Body>
               </CardItem>
             </TouchableOpacity>
           </Card>
@@ -193,11 +191,9 @@ export class Materias extends React.Component {
           <Card>
             <TouchableOpacity onPress={() => {}}>
               <CardItem>           
-                <Body>                
-                  <Text style={{textAlign: 'center', fontWeight: '100'}}>
-                    {'Cargando...'}
-                  </Text>                        
-                </Body>
+              <Body style={{justifyContent:'center', flexDirection:'row'}}>                
+                <Spinner color='blue'/>                      
+              </Body>
               </CardItem>
             </TouchableOpacity>
           </Card>

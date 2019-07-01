@@ -1,7 +1,7 @@
 
 import React from 'react';
 import {  Text, Image, StyleSheet,TouchableOpacity,AsyncStorage,View,ToastAndroid  } from 'react-native';
-import { Container, Content, Card, CardItem, Body } from 'native-base';
+import { Container, Content, Card, CardItem, Body, Spinner } from 'native-base';
 import  HeaderComponent  from '../../../components/header';
 import * as axios from 'axios';
 import {Url} from '../../../url';
@@ -48,6 +48,7 @@ class NotificacionScreen extends React.Component {
     
     this.setState({
       notificaciones:notificaciones,
+      estado:1
     })
     
   }
@@ -72,14 +73,15 @@ class NotificacionScreen extends React.Component {
 
   async cambioScreen(id){
    await AsyncStorage.setItem('id', id.toString() );
-   
-   this.props.navigation.navigate('notificacion');
+   this.setState({
+     estado:2
+   }, () =>{this.props.navigation.navigate('notificacion');}); 
   }
 
   listarNotificaciones(){
 
-    if(this.state.estado == 1){
-      this.contadorNotificaciones();
+    if(this.state.estado == 2){
+      //this.contadorNotificaciones();
       this.obtenerNotificaciones();
     }
     
@@ -110,7 +112,7 @@ class NotificacionScreen extends React.Component {
       
   render() {
 
-    if(this.state.notificaciones == ''){
+    if((this.state.notificaciones == '')&&(this.state.estado == 0)){
       return (
         <View>
         <HeaderComponent titulo="Notificaciones" abrirDrawer={this.abrirDrawer}/>
@@ -118,10 +120,27 @@ class NotificacionScreen extends React.Component {
         <Card>
           <TouchableOpacity onPress={() => {}}>
             <CardItem>           
-              <Body>                
-                <Text style={[styles.texto]}>
-                  {'Cargando...'}
-                </Text>                        
+              <Body style={{justifyContent:'center', flexDirection:'row'}}>                
+                <Spinner color='blue'/>                      
+              </Body>
+            </CardItem>
+          </TouchableOpacity>
+        </Card>
+        </View>
+        </View>
+      );
+    } else if((this.state.notificaciones == '')&&(this.state.estado == 1)){
+      return (
+        <View>
+        <HeaderComponent titulo="Notificaciones" abrirDrawer={this.abrirDrawer}/>
+        <View>
+        <Card>
+          <TouchableOpacity onPress={() => {}}>
+            <CardItem>           
+              <Body style={{justifyContent:'center', flexDirection:'row'}}>                
+                <Text>
+                  {'No tiene notificaciones cargadas aun...'}
+                </Text>                      
               </Body>
             </CardItem>
           </TouchableOpacity>
@@ -130,7 +149,6 @@ class NotificacionScreen extends React.Component {
         </View>
       );
     } else {
-      console.log('HOLA');
     return (
     
       <Container>

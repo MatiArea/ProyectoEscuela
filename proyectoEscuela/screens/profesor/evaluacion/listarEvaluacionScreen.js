@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, Button, Image, StyleSheet, AsyncStorage, TouchableOpacity,ScrollView } from 'react-native';
-import {  Container, Card, CardItem, Body, Item, Label  } from 'native-base';
+import {  Container, Card, CardItem, Body, Item, Label, Spinner  } from 'native-base';
 import  HeaderComponent  from '../../../components/header';
 import * as axios from 'axios';
 import {Url} from '../../../url';
@@ -188,11 +188,9 @@ render() {
           <Card>
             <TouchableOpacity onPress={() => {}}>
               <CardItem>           
-                <Body>                
-                  <Text style={[styles.texto]}>
-                    {'Cargando...'}
-                  </Text>                        
-                </Body>
+              <Body style={{justifyContent:'center', flexDirection:'row'}}>                
+                <Spinner color='blue'/>                      
+              </Body>
               </CardItem>
             </TouchableOpacity>
           </Card>
@@ -215,11 +213,9 @@ render() {
             <Card>
               <TouchableOpacity onPress={() => {}}>
                 <CardItem>           
-                  <Body>                
-                    <Text style={[styles.texto]}>
-                      {'Cargando...'}
-                    </Text>                        
-                  </Body>
+                <Body style={{justifyContent:'center', flexDirection:'row'}}>                
+                <Spinner color='blue'/>                      
+              </Body>
                 </CardItem>
               </TouchableOpacity>
             </Card>
@@ -242,11 +238,9 @@ render() {
             <Card>
               <TouchableOpacity onPress={() => {}}>
                 <CardItem>           
-                  <Body>                
-                    <Text style={[styles.texto]}>
-                      {'Cargando...'}
-                    </Text>                        
-                  </Body>
+                <Body style={{justifyContent:'center', flexDirection:'row'}}>                
+                <Spinner color='blue'/>                      
+              </Body>
                 </CardItem>
               </TouchableOpacity>
             </Card>

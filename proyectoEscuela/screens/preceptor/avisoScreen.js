@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, Button, Image, StyleSheet, ScrollView, AsyncStorage, TouchableOpacity, Dimensions  } from 'react-native';
 import  HeaderComponent  from '../../components/header';
-import {  Container, Content, Form, Item, Input, Label, Picker, Card, CardItem, Body } from 'native-base';
+import {  Container, Content, Form, Item, Input, Label, Picker, Card, CardItem, Body, Spinner } from 'native-base';
 import * as axios from 'axios';
 import {Url} from '../../url';
 
@@ -153,10 +153,8 @@ class AvisoScreen extends React.Component {
         <Card>
           <TouchableOpacity onPress={() => {}}>
             <CardItem>           
-              <Body>                
-                <Text style={[styles.texto]}>
-                  {'Cargando...'}
-                </Text>                        
+            <Body style={{justifyContent:'center', flexDirection:'row'}}>                
+                <Spinner color='blue'/>                      
               </Body>
             </CardItem>
           </TouchableOpacity>
@@ -227,10 +225,8 @@ class AvisoScreen extends React.Component {
         <Card>
           <TouchableOpacity onPress={() => {}}>
             <CardItem>           
-              <Body>                
-                <Text style={[styles.texto]}>
-                  {'Cargando...'}
-                </Text>                        
+            <Body style={{justifyContent:'center', flexDirection:'row'}}>                
+                <Spinner color='blue'/>                      
               </Body>
             </CardItem>
           </TouchableOpacity>

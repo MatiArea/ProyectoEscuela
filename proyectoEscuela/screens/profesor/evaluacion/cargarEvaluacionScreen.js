@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, Button, Image, StyleSheet, AsyncStorage, TouchableOpacity,ScrollView  } from 'react-native';
-import {  Container, Card, CardItem, Body,TextInput } from 'native-base';
+import {  Container, Card, CardItem, Body,Input, Spinner } from 'native-base';
 import  HeaderComponent  from '../../../components/header';
 import * as axios from 'axios';
 import {Url} from '../../../url';
@@ -17,6 +17,7 @@ class CargarEvaluacionScreen extends React.Component {
       evaluaciones: ' ',
       alumnos: ' ',
       notas: [ ],
+      nota: ' ',
       estado: 0,
     }
     this.getAllMat();
@@ -193,13 +194,13 @@ cargarNotas(){
               <Text>
                 Apellido: {elem.alumno.apellido}
               </Text>                   
-              {/* <TextInput
+              <Input
                 style={styles.input}
                 placeholder={'Nota'}
                 placeholderTextColor={'#ffffff'}
                 onChangeText={(text) => {this.saveNot(text,elem.codigo)}}
-                value={'A'}
-              />      */}
+                value={this.state.nota}
+              />
             </Body>
           </CardItem>
       </Card>
@@ -236,10 +237,8 @@ async saveNotEval(){
         <Card>
           <TouchableOpacity onPress={() => {}}>
             <CardItem>           
-              <Body>                
-                <Text style={[styles.texto]}>
-                  {'Cargando...'}
-                </Text>                        
+            <Body style={{justifyContent:'center', flexDirection:'row'}}>                
+                <Spinner color='blue'/>                      
               </Body>
             </CardItem>
           </TouchableOpacity>
@@ -260,10 +259,8 @@ async saveNotEval(){
         <Card>
           <TouchableOpacity onPress={() => {}}>
             <CardItem>           
-              <Body>                
-                <Text style={[styles.texto]}>
-                  {'Cargando...'}
-                </Text>                        
+            <Body style={{justifyContent:'center', flexDirection:'row'}}>                
+                <Spinner color='blue'/>                      
               </Body>
             </CardItem>
           </TouchableOpacity>
@@ -285,10 +282,8 @@ async saveNotEval(){
         <Card>
           <TouchableOpacity onPress={() => {}}>
             <CardItem>           
-              <Body>                
-                <Text style={[styles.texto]}>
-                  {'Cargando...'}
-                </Text>                        
+            <Body style={{justifyContent:'center', flexDirection:'row'}}>                
+                <Spinner color='blue'/>                      
               </Body>
             </CardItem>
           </TouchableOpacity>
