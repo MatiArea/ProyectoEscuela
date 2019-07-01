@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, Button, Image, StyleSheet, ScrollView, AsyncStorage, TouchableOpacity } from 'react-native';
 import  HeaderComponent  from '../../../components/header';
 import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
-import { Container, Content, Card, CardItem, Body } from 'native-base';
+import { Container, Content, Card, CardItem, Body, Spinner } from 'native-base';
 import * as axios from 'axios';
 import {Url} from '../../../url';
 
@@ -55,10 +55,8 @@ class BoletinScreen extends React.Component {
         <Card>
           <TouchableOpacity onPress={() => {}}>
             <CardItem>           
-              <Body>                
-                <Text style={[styles.texto]}>
-                  {'Cargando...'}
-                </Text>                        
+            <Body style={{justifyContent:'center', flexDirection:'row'}}>                
+                <Spinner color='blue'/>                      
               </Body>
             </CardItem>
           </TouchableOpacity>

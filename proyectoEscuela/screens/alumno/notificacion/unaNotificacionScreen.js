@@ -1,7 +1,7 @@
 
 import React from 'react';
 import {  Text, Image, StyleSheet,TouchableOpacity,AsyncStorage,View,ToastAndroid, Button  } from 'react-native';
-import { Container, Content, Card, CardItem, Body } from 'native-base';
+import { Container, Content, Card, CardItem, Body, Spinner } from 'native-base';
 import  HeaderComponent  from '../../../components/header';
 import * as axios from 'axios';
 import {Url} from '../../../url';
@@ -67,10 +67,8 @@ class UnaNotificacionScreen extends React.Component {
         <Card>
           <TouchableOpacity onPress={() => {}}>
             <CardItem>           
-              <Body>                
-                <Text style={[styles.texto]}>
-                  {'Cargando...'}
-                </Text>                        
+            <Body style={{justifyContent:'center', flexDirection:'row'}}>                
+                <Spinner color='blue'/>                      
               </Body>
             </CardItem>
           </TouchableOpacity>

@@ -12,7 +12,7 @@ const RootStack = createStackNavigator(
     menu: {
       screen: OpcionesScreen,
     },
-    crearEvalu: {
+    crearEvalu: {           
       screen: CrearEvaluacionScreen,
     },
     cargarEvalu: {
