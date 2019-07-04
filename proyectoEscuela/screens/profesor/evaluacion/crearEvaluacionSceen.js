@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, Button, Image, StyleSheet, AsyncStorage, TouchableOpacity,TextInput } from 'react-native';
-import {  Container, Card, CardItem, Body,Form, Item, Label, Spinner  } from 'native-base';
+import {  Container, Card, CardItem, Body,Form, Item, Label, Spinner, Content  } from 'native-base';
 import  HeaderComponent  from '../../../components/header';
 import * as axios from 'axios';
 import {Url} from '../../../url';
@@ -27,6 +27,16 @@ class CrearEvaluacionScreen extends React.Component {
     this.getAllMat();
 
   }
+
+  volverAtras(){
+    this.props.navigation.navigate('menu');
+}
+
+volverAtrasMaterias(){
+  this.setState({
+  estado:1
+  });
+}
 
   async getAllMat(){
 
@@ -128,7 +138,7 @@ class CrearEvaluacionScreen extends React.Component {
 
   createEval(){
     return(
-      <View> 
+      <View>
       <Form>
         <Item stackedLabel style={[styles.input]} >
           <Label style={[styles.label]}>Fecha</Label>
@@ -181,14 +191,19 @@ class CrearEvaluacionScreen extends React.Component {
           />
         </Item> 
       </Form>
-    
+      <Text>
+        {''}
+      </Text>
+      <Text>
+        {''}
+      </Text>  
       <Button 
             style={{marginTop : 15}}
             onPress={()=>{this.saveNewEval()} }
             title="Crear Evaluacion"
             color="#2089DC"
-        />
-      </View>
+        />   
+        </View>
     );
   }
 
@@ -196,7 +211,7 @@ class CrearEvaluacionScreen extends React.Component {
   render() {
     if((this.state.estado == 0 )&&(this.state.materias == ' ')){
       return(<View >
-        <HeaderComponent titulo="Crear Evaluación" abrirDrawer={this.abrirDrawer}/>
+        <HeaderComponent titulo="Listado de Materias" abrirDrawer={this.abrirDrawer}/>
         <View>
         <Card>
           <TouchableOpacity onPress={() => {}}>
@@ -211,8 +226,15 @@ class CrearEvaluacionScreen extends React.Component {
       </View>
       )}else if ((this.state.estado == 1)&&(this.state.materias != ' ')){
       return(<Container>
-          <HeaderComponent titulo="Crear Evaluación" abrirDrawer={this.abrirDrawer}/>
+        <Content>
+          <HeaderComponent titulo="Listado de Materias" abrirDrawer={this.abrirDrawer}/>
           {this.returnMat()}
+          </Content>
+          <Button
+        onPress={  () => {this.volverAtras()}}
+        title="Volver"
+        color="#2089DC"
+          />
       </Container>
       )} else if ((this.state.estado == 2)&&(this.state.materia == ' ')){
       return(<View >
@@ -231,8 +253,15 @@ class CrearEvaluacionScreen extends React.Component {
       </View>
       )} else if ((this.state.estado == 2)&&(this.state.materia != ' ')){
       return(<Container>
+        <Content>
          <HeaderComponent titulo="Crear Evaluación" abrirDrawer={this.abrirDrawer}/>
          {this.createEval()}
+         </Content>
+         <Button
+        onPress={  () => {this.volverAtrasMaterias()}}
+        title="Volver"
+        color="#2089DC"
+          />
       </Container>
       )}
   }

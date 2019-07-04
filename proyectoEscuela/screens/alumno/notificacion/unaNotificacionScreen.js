@@ -107,12 +107,12 @@ class UnaNotificacionScreen extends React.Component {
             </CardItem>
           </TouchableOpacity>
         </Card>
+        </View>
         <Button
         onPress={  () => {this.props.navigation.navigate('notificaciones')} }
         title="Volver"
         color="#2089DC"
           />
-        </View>
         </Container>
         );
       }

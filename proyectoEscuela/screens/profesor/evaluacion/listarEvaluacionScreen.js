@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, Button, Image, StyleSheet, AsyncStorage, TouchableOpacity,ScrollView } from 'react-native';
-import {  Container, Card, CardItem, Body, Item, Label, Spinner  } from 'native-base';
+import {  Container, Card, CardItem, Body, Item, Label, Spinner, Content  } from 'native-base';
 import  HeaderComponent  from '../../../components/header';
 import * as axios from 'axios';
 import {Url} from '../../../url';
@@ -9,15 +9,31 @@ class ListarEvaluacionScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      matSelected: ' ',
-      evalSelect: ' ',
-      evaluacion: ' ',
-      evaluaciones: ' ',
-      materias: ' ',
+      matSelected: '',
+      evalSelect: '',
+      evaluacion: '',
+      evaluaciones: '',
+      materias: '',
       estado: 0,
     }
     this.getAllMat();
   }
+
+  volverAtras(){
+    this.props.navigation.navigate('menu');
+}
+
+volverAtrasMaterias(){
+  this.setState({
+    estado: 0
+  });
+}
+
+volverAtrasEvaluaciones(){
+  this.setState({
+     estado:2
+  });
+}
 
   async getAllMat(){
 
@@ -36,8 +52,7 @@ class ListarEvaluacionScreen extends React.Component {
       
       this.setState({
         ...this.state,
-        materias:materias,
-        estado: 1,
+        materias:materias
       });
         
   }
@@ -46,7 +61,7 @@ class ListarEvaluacionScreen extends React.Component {
     this.setState({
       ...this.state,
       matSelected: value,
-      estado: 2,
+      estado: 1,
     });
     this.getAllEval();
   }
@@ -69,6 +84,7 @@ class ListarEvaluacionScreen extends React.Component {
     this.setState({ 
       ...this.state,
       evaluaciones:evaluaciones,
+      estado:2
     });
   }
 
@@ -180,10 +196,10 @@ returnOneEval(){
 }
 
 render() {
-    if((this.state.estado == 0)&&(this.state.materias == ' ')){
+    if((this.state.estado == 0)&&(this.state.materias == '')){
       return (
         <View >
-          <HeaderComponent titulo="Listado Evaluaciones" abrirDrawer={this.abrirDrawer}/>
+          <HeaderComponent titulo="Listado de Materias" abrirDrawer={this.abrirDrawer}/>
           <View>
           <Card>
             <TouchableOpacity onPress={() => {}}>
@@ -197,15 +213,20 @@ render() {
           </View> 
         </View>
       );
-    } else if ((this.state.estado == 1)&&(this.state.materias != ' ')){
+    } else if ((this.state.estado == 0)&&(this.state.materias != '')){
         return(
         <Container>
-          <HeaderComponent titulo="Listado Evaluaciones" abrirDrawer={this.abrirDrawer}/>
+          <HeaderComponent titulo="Listado de Materias" abrirDrawer={this.abrirDrawer}/>
           <ScrollView>
           {this.returnMat()}
+          <Button
+        onPress={  () => {this.volverAtras()}}
+        title="Volver"
+        color="#2089DC"
+          />
           </ScrollView>
         </Container>  
-        )} else if((this.state.estado == 2)&&(this.state.evaluaciones == ' ')){
+        )} else if(this.state.estado == 1){
         return (
           <View>
             <HeaderComponent titulo="Listado Evaluaciones" abrirDrawer={this.abrirDrawer}/>
@@ -222,18 +243,50 @@ render() {
             </View>
           </View>
         );
-    }else if((this.state.estado == 2)&&(this.state.evaluaciones != ' ')){
+    }else if((this.state.estado == 2)&&(this.state.evaluaciones == '')){
+      return(<Container>
+        <Content>
+      <HeaderComponent titulo="Listado Evaluaciones" abrirDrawer={this.abrirDrawer}/>
+      <View>
+      <Card>
+        <TouchableOpacity onPress={() => {}}>
+          <CardItem>           
+            <Body style={{justifyContent:'center', flexDirection:'row'}}>                
+              <Text>
+                {'No tiene evaluaciones cargadas de esta materia aun...'}
+              </Text>                      
+            </Body>
+          </CardItem>
+        </TouchableOpacity>
+      </Card>
+      </View>
+        </Content>
+        <Button
+        onPress={  () => {this.volverAtrasMaterias()}}
+        title="Volver"
+        color="#2089DC"
+          />
+        </Container>
+      );
+    }
+    else if((this.state.estado == 2)&&(this.state.evaluaciones != '')){
       return(
       <Container>
         <HeaderComponent titulo="Listado Evaluaciones" abrirDrawer={this.abrirDrawer}/>
         <ScrollView>
           {this.returnEval()}
         </ScrollView>
+        <Button
+        onPress={  () => {this.volverAtrasMaterias()}}
+        title="Volver"
+        color="#2089DC"
+          />
       </Container> 
-      )}else if ((this.state.estado == 3)&&(this.state.evaluacion == ' ')){
+      );
+    }else if ((this.state.estado == 3)&&(this.state.evaluacion == '')){
         return (
           <View>
-            <HeaderComponent titulo="Listado Evaluaciones" abrirDrawer={this.abrirDrawer}/>
+            <HeaderComponent titulo="Evaluacion - Notas" abrirDrawer={this.abrirDrawer}/>
             <View>
             <Card>
               <TouchableOpacity onPress={() => {}}>
@@ -247,15 +300,15 @@ render() {
             </View>
           </View>
         );
-      }else if ((this.state.estado == 3)&&(this.state.evaluacion != ' ')){
+      }else if ((this.state.estado == 3)&&(this.state.evaluacion != '')){
       return(
       <Container>
-          <HeaderComponent titulo="Listado Evaluaciones" abrirDrawer={this.abrirDrawer}/>
+          <HeaderComponent titulo="Evaluacion - Notas" abrirDrawer={this.abrirDrawer}/>
           <ScrollView>
           {this.returnOneEval()}
           </ScrollView>
           <Button 
-              onPress={()=>{this.props.navigation.navigate('menu');} }
+              onPress={()=>{this.volverAtrasEvaluaciones()} }
               title="Volver"
               color="#2089DC"
           />
