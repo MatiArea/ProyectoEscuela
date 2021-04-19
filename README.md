@@ -1,3 +1,3 @@
 # ProyectoEscuela
-Es un proyecto destinado a la comisión 57 de diseno de sistemas
+Es un proyecto destinado para la creacion de una aplicacion web y mobile para administrar colegios.
 expo r -c
